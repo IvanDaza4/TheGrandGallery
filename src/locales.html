@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es-AR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locales - Galería Urbana</title>
+    <meta name="description" content="Descubre más de 50 locales exclusivos en Galería Urbana. Encuentra moda, tecnología, decoración y más con nuestro buscador inteligente y mapa interactivo.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#0a0a0a',
+                        'surface-dark': '#1a1a1a',
+                        'surface-light': '#2a2a2a',
+                        'accent-gold': '#d4af37',
+                        'accent-gold-light': '#f0d878',
+                        'text-primary': '#f5f5f5',
+                        'text-secondary': '#a0a0a0',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-bg-dark text-text-primary">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
+        Saltar al contenido
+    </a>
+
+    <!-- Header (same as index.html) -->
+    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
+        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
+                    Galería Urbana
+                </a>
+                
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <ul class="hidden lg:flex items-center space-x-8">
+                    <li><a href="src/index.html" class="hover:text-accent-gold transition-colors">Inicio</a></li>
+                    <li><a href="src/servicios.html" class="hover:text-accent-gold transition-colors">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="text-accent-gold" aria-current="page">Locales</a></li>
+                    <li><a href="src/ofertas.html" class="hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    <li><a href="src/gastronomia.html" class="hover:text-accent-gold transition-colors">Gastronomía</a></li>
+                    <li><a href="src/contacto.html" class="hover:text-accent-gold transition-colors">Contacto</a></li>
+                    <li><a href="src/equipo.html" class="hover:text-accent-gold transition-colors">Equipo</a></li>
+                </ul>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
+                <ul class="space-y-4">
+                    <li><a href="src/index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
+                    <li><a href="src/servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="block text-accent-gold">Locales</a></li>
+                    <li><a href="src/ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    <li><a href="src/gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
+                    <li><a href="src/contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
+                    <li><a href="src/equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="container mx-auto px-4 py-4">
+            <ol class="flex items-center space-x-2 text-sm text-text-secondary">
+                <li><a href="index.html" class="hover:text-accent-gold">Inicio</a></li>
+                <li><span class="mx-2">/</span></li>
+                <li aria-current="page" class="text-text-primary">Locales</li>
+            </ol>
+        </nav>
+
+        <!-- Hero -->
+        <section class="py-16 px-4 bg-surface-dark">
+            <div class="container mx-auto max-w-6xl text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Nuestros Locales</h1>
+                <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+                    Descubre más de 50 marcas exclusivas. Usa nuestro buscador inteligente o explora el mapa interactivo para encontrar exactamente lo que buscás.
+                </p>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section id="buscador" class="py-12 px-4 bg-bg-dark border-b border-surface-light">
+            <div class="container mx-auto max-w-6xl">
+                <div class="bg-surface-dark p-6 rounded-xl">
+                    <!-- Search Bar -->
+                    <div class="mb-6">
+                        <label for="search-input" class="block text-sm font-semibold mb-2">Buscar local</label>
+                        <div class="relative">
+                            <input 
+                                type="search" 
+                                id="search-input" 
+                                placeholder="Ej: zapatería, tecnología, ropa..."
+                                class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-accent-gold"
+                                aria-label="Buscar locales por nombre o categoría">
+                            <svg class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="category-filter" class="block text-sm font-semibold mb-2">Categoría</label>
+                            <select id="category-filter" class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                                <option value="">Todas las categorías</option>
+                                <option value="moda">Moda</option>
+                                <option value="tecnologia">Tecnología</option>
+                                <option value="decoracion">Decoración</option>
+                                <option value="deportes">Deportes</option>
+                                <option value="belleza">Belleza</option>
+                                <option value="joyeria">Joyería</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="floor-filter" class="block text-sm font-semibold mb-2">Piso</label>
+                            <select id="floor-filter" class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                                <option value="">Todos los pisos</option>
+                                <option value="PB">Planta Baja</option>
+                                <option value="1">Primer Piso</option>
+                                <option value="2">Segundo Piso</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="status-filter" class="block text-sm font-semibold mb-2">Estado</label>
+                            <select id="status-filter" class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                                <option value="">Todos</option>
+                                <option value="open">Abiertos ahora</option>
+                                <option value="closed">Cerrados</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Sort and Clear -->
+                    <div class="flex flex-wrap gap-4 items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <label for="sort-select" class="text-sm font-semibold">Ordenar:</label>
+                            <select id="sort-select" class="bg-surface-light text-text-primary rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                                <option value="name-asc">A-Z</option>
+                                <option value="name-desc">Z-A</option>
+                                <option value="status">Abiertos primero</option>
+                            </select>
+                        </div>
+                        <button id="clear-filters" class="text-sm text-accent-gold hover:text-accent-gold-light transition-colors focus:outline-none focus:underline">
+                            Limpiar filtros
+                        </button>
+                    </div>
+
+                    <!-- Results count -->
+                    <div id="results-count" class="mt-4 text-sm text-text-secondary">
+                        Mostrando <span id="count-number">0</span> locales
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stores Grid -->
+        <section class="py-12 px-4">
+            <div class="container mx-auto max-w-6xl">
+                <div id="stores-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Stores will be dynamically inserted here -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="hidden text-center py-16">
+                    <svg class="w-24 h-24 mx-auto text-text-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-2">No encontramos locales</h3>
+                    <p class="text-text-secondary mb-4">Intenta con otros filtros o términos de búsqueda</p>
+                    <button id="clear-filters-empty" class="px-6 py-2 bg-accent-gold text-bg-dark rounded-lg hover:bg-accent-gold-light transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                        Limpiar filtros
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading-state" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-surface-dark rounded-xl p-6 skeleton h-64"></div>
+                    <div class="bg-surface-dark rounded-xl p-6 skeleton h-64"></div>
+                    <div class="bg-surface-dark rounded-xl p-6 skeleton h-64"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map -->
+        <section id="mapa" class="py-16 px-4 bg-surface-dark">
+            <div class="container mx-auto max-w-6xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Mapa Interactivo</h2>
+                <p class="text-center text-text-secondary mb-8">Haz clic en los locales para ver más información</p>
+                
+                <!-- Map Legend -->
+                <div class="bg-surface-light p-4 rounded-lg mb-6 flex flex-wrap gap-4 justify-center" role="region" aria-label="Leyenda del mapa">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Moda</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-purple-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Tecnología</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Decoración</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Deportes</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-pink-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Belleza</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Joyería</span>
+                    </div>
+                </div>
+
+                <!-- Map Container -->
+                <div class="bg-surface-light rounded-xl p-8 relative overflow-hidden" style="min-height: 600px;">
+                    <svg id="mall-map" viewBox="0 0 800 600" class="w-full h-auto" role="img" aria-label="Mapa interactivo de la galería comercial">
+                        <title>Mapa de Galería Urbana</title>
+                        <desc>Mapa interactivo mostrando la ubicación de todos los locales en la galería</desc>
+                        
+                        <!-- Floor layout -->
+                        <rect x="50" y="50" width="700" height="500" fill="#1a1a1a" stroke="#d4af37" stroke-width="2" rx="10"/>
+                        
+                        <!-- Store hotspots will be added dynamically -->
+                        <g id="map-hotspots"></g>
+                    </svg>
+
+                    <!-- Map Card (appears on hover/click) -->
+                    <div id="map-card" class="hidden absolute bg-surface-dark border border-accent-gold rounded-lg p-4 shadow-2xl z-10 max-w-xs" role="tooltip">
+                        <div id="map-card-content"></div>
+                    </div>
+                </div>
+
+                <!-- Keyboard accessible list -->
+                <details class="mt-6 bg-surface-light rounded-lg p-4">
+                    <summary class="cursor-pointer font-semibold hover:text-accent-gold focus:outline-none focus:text-accent-gold">
+                        Ver lista de locales del mapa (accesible por teclado)
+                    </summary>
+                    <ul id="map-list" class="mt-4 space-y-2 max-h-96 overflow-y-auto">
+                        <!-- List items will be added dynamically -->
+                    </ul>
+                </details>
+            </div>
+        </section>
+
+        <!-- Individual Sites Section -->
+        <section class="py-16 px-4">
+            <div class="container mx-auto max-w-6xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Desarrollos Individuales</h2>
+                <p class="text-center text-text-secondary mb-12">Cada miembro del equipo ha desarrollado un mini-sitio para un local específico</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="individual/local-1.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                        <h3 class="text-xl font-bold mb-2">Boutique Elegance</h3>
+                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: María González</p>
+                        <span class="text-accent-gold text-sm inline-flex items-center">
+                            Ver sitio
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a href="individual/local-2.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                        <h3 class="text-xl font-bold mb-2">Tech Hub</h3>
+                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Juan Pérez</p>
+                        <span class="text-accent-gold text-sm inline-flex items-center">
+                            Ver sitio
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a href="individual/local-3.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                        <h3 class="text-xl font-bold mb-2">Deco Home</h3>
+                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Ana Martínez</p>
+                        <span class="text-accent-gold text-sm inline-flex items-center">
+                            Ver sitio
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a href="individual/local-4.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                        <h3 class="text-xl font-bold mb-2">Sport Zone</h3>
+                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Carlos Rodríguez</p>
+                        <span class="text-accent-gold text-sm inline-flex items-center">
+                            Ver sitio
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <a href="individual/local-5.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
+                        <h3 class="text-xl font-bold mb-2">Beauty Studio</h3>
+                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Laura Fernández</p>
+                        <span class="text-accent-gold text-sm inline-flex items-center">
+                            Ver sitio
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
+                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Navegación</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
+                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
+                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Información</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
+                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
+                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
+                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Horarios</h4>
+                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
+                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
+                </div>
+            </div>
+            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
+                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="chatbot-container"></div>
+
+    <script src="script.js"></script>
+    <script src="locales.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

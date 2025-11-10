@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es-AR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Equipo - Galería Urbana</title>
+    <meta name="description" content="Conoce al equipo detrás de Galería Urbana. Desarrolladores apasionados comprometidos con la excelencia.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nuestro Equipo - Galería Urbana">
+    <meta property="og:description" content="El equipo talentoso detrás del proyecto Galería Urbana">
+    <meta property="og:type" content="website">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#0a0a0a',
+                        'surface-dark': '#1a1a1a',
+                        'surface-light': '#2a2a2a',
+                        'accent-gold': '#d4af37',
+                        'accent-gold-light': '#f0d878',
+                        'text-primary': '#f5f5f5',
+                        'text-secondary': '#a0a0a0',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Advanced animations for team page */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-fade-in-scale {
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-up {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .team-card {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+
+        .team-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            padding: 2px;
+            background: linear-gradient(135deg, #d4af37, #f0d878, #d4af37);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .team-card:hover::before {
+            opacity: 1;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #f0d878, #d4af37, #f0d878);
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+            padding: 4px;
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1a1a1a;
+        }
+
+        .role-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(240, 216, 120, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-tag {
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .social-link {
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.2) rotate(5deg);
+            color: #d4af37;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(42, 42, 42, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .parallax-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-bg-dark text-text-primary font-sans antialiased">
+    <!-- Skip to content -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
+        Saltar al contenido
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
+        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
+                    Galería Urbana
+                </a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Desktop menu -->
+                <ul class="hidden lg:flex items-center space-x-8">
+                    <li><a href="src/index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Inicio</a></li>
+                    <li><a href="src/servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
+                    <li><a href="src/ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
+                    <li><a href="src/gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Gastronomía</a></li>
+                    <li><a href="src/contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Contacto</a></li>
+                    <li><a href="src/equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold text-accent-gold" aria-current="page">Equipo</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
+                <ul class="space-y-4">
+                    <li><a href="src/index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
+                    <li><a href="src/servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
+                    <li><a href="src/ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    <li><a href="src/gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
+                    <li><a href="src/contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
+                    <li><a href="src/equipo.html" class="block hover:text-accent-gold transition-colors text-accent-gold">Equipo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="relative py-32 px-4 overflow-hidden">
+            <div class="parallax-bg"></div>
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-gradient-to-b from-accent-gold/5 via-bg-dark to-bg-dark"></div>
+                <div class="absolute top-20 left-10 w-96 h-96 bg-accent-gold/10 rounded-full blur-3xl animate-float"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-gold/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+            </div>
+            
+            <div class="container mx-auto max-w-6xl relative z-10">
+                <div class="text-center">
+                    <span class="inline-block px-6 py-2 bg-accent-gold/10 text-accent-gold rounded-full text-sm font-bold mb-8 border border-accent-gold/30 animate-fade-in-scale">
+                        CONOCE AL EQUIPO
+                    </span>
+                    <h1 class="text-6xl md:text-8xl font-bold mb-8 text-balance animate-slide-in-up">
+                        Mentes Brillantes
+                        <span class="block bg-gradient-to-r from-accent-gold via-accent-gold-light to-accent-gold bg-clip-text text-transparent">
+                            Resultados Extraordinarios
+                        </span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-text-secondary max-w-4xl mx-auto text-pretty leading-relaxed animate-slide-in-up" style="animation-delay: 0.2s;">
+                        Somos un equipo de desarrolladores apasionados comprometidos con crear experiencias digitales excepcionales. 
+                        Cada línea de código está respaldada por dedicación, innovación y trabajo en equipo.
+                    </p>
+                </div>
+
+                <!-- Team Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-20">
+                    <div class="stats-card p-8 rounded-2xl text-center">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">4</div>
+                        <div class="text-sm text-text-secondary font-medium">Miembros</div>
+                    </div>
+                    <div class="stats-card p-8 rounded-2xl text-center">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">100%</div>
+                        <div class="text-sm text-text-secondary font-medium">Dedicación</div>
+                    </div>
+                    <div class="stats-card p-8 rounded-2xl text-center">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">1</div>
+                        <div class="text-sm text-text-secondary font-medium">Objetivo</div>
+                    </div>
+                    <div class="stats-card p-8 rounded-2xl text-center">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">∞</div>
+                        <div class="text-sm text-text-secondary font-medium">Innovación</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Members Grid -->
+        <section class="py-24 px-4">
+            <div class="container mx-auto max-w-7xl">
+                <div class="grid md:grid-cols-2 gap-12">
+                    
+                    <!-- Team Member 1 -->
+                    <article class="team-card p-10 rounded-3xl">
+                        <div class="avatar-container mb-8">
+                            <div class="avatar-ring"></div>
+                            <img src="/placeholder.svg?height=200&width=200" 
+                                 alt="Foto de perfil de Miembro 1" 
+                                 class="avatar-image" 
+                                 loading="lazy" />
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-3xl font-bold mb-3">Juan Pérez</h3>
+                            <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
+                                Full Stack Developer
+                            </span>
+                        </div>
+
+                        <p class="text-text-secondary text-center mb-8 leading-relaxed">
+                            Especialista en arquitectura de sistemas y desarrollo backend. Apasionado por crear soluciones escalables y eficientes que impulsan el rendimiento de aplicaciones complejas.
+                        </p>
+
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-accent-gold mb-4 uppercase tracking-wider">Habilidades</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">React</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Node.js</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">PostgreSQL</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">TypeScript</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">AWS</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center gap-6">
+                            <a href="#" class="social-link text-2xl" aria-label="GitHub de Juan">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="LinkedIn de Juan">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="Portafolio de Juan">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Team Member 2 -->
+                    <article class="team-card p-10 rounded-3xl">
+                        <div class="avatar-container mb-8">
+                            <div class="avatar-ring"></div>
+                            <img src="/placeholder.svg?height=200&width=200" 
+                                 alt="Foto de perfil de Miembro 2" 
+                                 class="avatar-image" 
+                                 loading="lazy" />
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-3xl font-bold mb-3">María González</h3>
+                            <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
+                                Frontend Engineer
+                            </span>
+                        </div>
+
+                        <p class="text-text-secondary text-center mb-8 leading-relaxed">
+                            Experta en diseño de interfaces y experiencia de usuario. Transforma conceptos en experiencias visuales atractivas y funcionales que deleitan a los usuarios.
+                        </p>
+
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-accent-gold mb-4 uppercase tracking-wider">Habilidades</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">HTML/CSS</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">JavaScript</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Tailwind CSS</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Vue.js</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Figma</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center gap-6">
+                            <a href="#" class="social-link text-2xl" aria-label="GitHub de María">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="LinkedIn de María">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="Portafolio de María">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Team Member 3 -->
+                    <article class="team-card p-10 rounded-3xl">
+                        <div class="avatar-container mb-8">
+                            <div class="avatar-ring"></div>
+                            <img src="/placeholder.svg?height=200&width=200" 
+                                 alt="Foto de perfil de Miembro 3" 
+                                 class="avatar-image" 
+                                 loading="lazy" />
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-3xl font-bold mb-3">Carlos Rodríguez</h3>
+                            <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
+                                DevOps Engineer
+                            </span>
+                        </div>
+
+                        <p class="text-text-secondary text-center mb-8 leading-relaxed">
+                            Maestro de la automatización y optimización de infraestructura. Garantiza que nuestros sistemas funcionen sin problemas con alta disponibilidad y rendimiento óptimo.
+                        </p>
+
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-accent-gold mb-4 uppercase tracking-wider">Habilidades</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Docker</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Kubernetes</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">CI/CD</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Linux</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Terraform</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center gap-6">
+                            <a href="#" class="social-link text-2xl" aria-label="GitHub de Carlos">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="LinkedIn de Carlos">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="Portafolio de Carlos">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Team Member 4 -->
+                    <article class="team-card p-10 rounded-3xl">
+                        <div class="avatar-container mb-8">
+                            <div class="avatar-ring"></div>
+                            <img src="/placeholder.svg?height=200&width=200" 
+                                 alt="Foto de perfil de Miembro 4" 
+                                 class="avatar-image" 
+                                 loading="lazy" />
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-3xl font-bold mb-3">Ana Martínez</h3>
+                            <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
+                                UX/UI Designer
+                            </span>
+                        </div>
+
+                        <p class="text-text-secondary text-center mb-8 leading-relaxed">
+                            Creativa con pasión por el diseño centrado en el usuario. Convierte investigación y datos en experiencias intuitivas que conectan emocionalmente con las personas.
+                        </p>
+
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-accent-gold mb-4 uppercase tracking-wider">Habilidades</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Figma</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Sketch</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Adobe XD</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">Prototyping</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg text-sm font-medium">User Research</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center gap-6">
+                            <a href="#" class="social-link text-2xl" aria-label="Dribbble de Ana">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.628 0-12 5.373-12 12s5.372 12 12 12 12-5.373 12-12-5.372-12-12-12zm9.885 11.441c-2.575-.422-4.943-.445-7.103-.073-.244-.563-.497-1.125-.767-1.68 2.31-1 4.165-2.358 5.548-4.082 1.35 1.594 2.197 3.619 2.322 5.835zm-3.842-7.282c-1.205 1.554-2.868 2.783-4.986 3.68-1.016-1.861-2.178-3.676-3.488-5.438.779-.197 1.591-.314 2.431-.314 2.275 0 4.368.779 6.043 2.072zm-10.516-.993c1.331 1.742 2.511 3.538 3.537 5.381-2.43.715-5.331 1.082-8.684 1.105.692-2.835 2.601-5.193 5.147-6.486zm-5.44 8.834l.013-.256c3.849-.005 7.169-.448 9.95-1.322.233.475.456.952.67 1.432-3.38 1.057-6.165 3.222-8.337 6.48-1.432-1.719-2.296-3.927-2.296-6.334zm3.829 7.81c1.969-3.088 4.482-5.098 7.598-6.027.928 2.42 1.609 4.91 2.043 7.46-3.349 1.291-7.18.643-9.641-1.433zm11.586.43c-.438-2.353-1.08-4.653-1.92-6.897 1.876-.265 3.94-.196 6.199.196-.437 2.786-2.028 5.192-4.279 6.701z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="LinkedIn de Ana">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link text-2xl" aria-label="Portafolio de Ana">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Conclusion -->
+        <section class="py-24 px-4 bg-gradient-to-br from-surface-dark via-bg-dark to-surface-dark">
+            <div class="container mx-auto max-w-5xl">
+                <div class="bg-gradient-to-r from-accent-gold/10 via-accent-gold/5 to-transparent p-12 md:p-20 rounded-3xl border border-accent-gold/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl"></div>
+                    <div class="relative z-10">
+                        <div class="text-center mb-12">
+                            <svg class="w-20 h-20 mx-auto mb-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <h2 class="text-4xl md:text-6xl font-bold mb-8 text-balance">
+                                Juntos Somos
+                                <span class="block bg-gradient-to-r from-accent-gold to-accent-gold-light bg-clip-text text-transparent">
+                                    Imparables
+                                </span>
+                            </h2>
+                        </div>
+                        
+                        <div class="space-y-6 text-xl text-text-secondary leading-relaxed max-w-4xl mx-auto text-center">
+                            <p>
+                                Nuestro equipo no es solo un grupo de profesionales talentosos, es una familia unida por la pasión compartida 
+                                de crear experiencias digitales excepcionales. Cada miembro aporta su expertise única, pero es nuestra 
+                                colaboración y sinergia lo que nos hace verdaderamente especiales.
+                            </p>
+                            <p>
+                                Creemos firmemente que la innovación nace de la diversidad de pensamiento y la comunicación abierta. 
+                                Nos desafiamos mutuamente para alcanzar nuevas alturas, aprendemos constantemente y celebramos tanto 
+                                nuestros éxitos como nuestros aprendizajes.
+                            </p>
+                            <p class="text-accent-gold font-semibold text-2xl pt-6">
+                                "La excelencia individual construye el talento, pero la colaboración construye el éxito."
+                            </p>
+                        </div>
+
+                        <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="contacto.html" class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-xl hover:bg-accent-gold-light transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50 shadow-lg shadow-accent-gold/20">
+                                Únete a nosotros
+                            </a>
+                            <a href="index.html" class="inline-block px-8 py-4 bg-surface-light text-text-primary font-semibold rounded-xl hover:bg-surface-light/80 transition-all border border-accent-gold/30 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
+                                Ver nuestro trabajo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
+                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Navegación</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
+                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
+                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Información</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
+                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
+                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
+                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Horarios</h4>
+                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
+                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
+                </div>
+            </div>
+            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
+                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot-container"></div>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

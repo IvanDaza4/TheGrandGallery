@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es-AR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomía - Galería Urbana</title>
+    <meta name="description" content="Explora la mejor gastronomía en Galería Urbana: comida rápida, saludable, internacional y sin TACC. Descubre sabores únicos.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gastronomía - Galería Urbana">
+    <meta property="og:description" content="Variedad gastronómica para todos los gustos: comida rápida, saludable, internacional y más.">
+    <meta property="og:type" content="website">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#0a0a0a',
+                        'surface-dark': '#1a1a1a',
+                        'surface-light': '#2a2a2a',
+                        'accent-gold': '#d4af37',
+                        'accent-gold-light': '#f0d878',
+                        'text-primary': '#f5f5f5',
+                        'text-secondary': '#a0a0a0',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Custom animations for gastronomia */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.4s ease-out forwards;
+        }
+
+        .restaurant-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .menu-item {
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            transform: translateX(4px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #d4af37 0%, #f0d878 100%);
+            color: #0a0a0a;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .logo-container {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-section.expanded {
+            max-height: 2000px;
+        }
+
+        .category-badge {
+            backdrop-filter: blur(10px);
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-bg-dark text-text-primary font-sans antialiased">
+    <!-- Skip to content -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
+        Saltar al contenido
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
+        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
+                    Galería Urbana
+                </a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Desktop menu -->
+                <ul class="hidden lg:flex items-center space-x-8">
+                    <li><a href="src/index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Inicio</a></li>
+                    <li><a href="src/servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
+                    <li><a href="src/ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
+                    <li><a href="src/gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold text-accent-gold" aria-current="page">Gastronomía</a></li>
+                    <li><a href="src/contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Contacto</a></li>
+                    <li><a href="src/equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Equipo</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
+                <ul class="space-y-4">
+                    <li><a href="src/index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
+                    <li><a href="src/servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
+                    <li><a href="src/ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    <li><a href="src/gastronomia.html" class="block hover:text-accent-gold transition-colors text-accent-gold">Gastronomía</a></li>
+                    <li><a href="src/contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
+                    <li><a href="src/equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="relative py-32 px-4 overflow-hidden">
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-gradient-to-br from-accent-gold/10 via-bg-dark to-bg-dark"></div>
+                <div class="absolute top-20 left-10 w-72 h-72 bg-accent-gold/5 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div class="container mx-auto max-w-7xl relative z-10">
+                <div class="text-center mb-20">
+                    <span class="inline-block px-5 py-2 bg-accent-gold/10 text-accent-gold rounded-full text-sm font-bold mb-6 border border-accent-gold/30 animate-scale-in">
+                        EXPERIENCIA GASTRONÓMICA
+                    </span>
+                    <h1 class="text-6xl md:text-8xl font-bold mb-8 text-balance animate-fade-in-up">
+                        Sabores que
+                        <span class="block bg-gradient-to-r from-accent-gold to-accent-gold-light bg-clip-text text-transparent">Inspiran</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-text-secondary max-w-4xl mx-auto text-pretty leading-relaxed">
+                        Descubre una selección curada de restaurantes que ofrecen desde comida rápida hasta alta cocina internacional. 
+                        Cada bocado es una experiencia única en Galería Urbana.
+                    </p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                    <div class="bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl text-center border border-accent-gold/10 hover:border-accent-gold/30 transition-all">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">18+</div>
+                        <div class="text-sm text-text-secondary font-medium">Restaurantes</div>
+                    </div>
+                    <div class="bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl text-center border border-accent-gold/10 hover:border-accent-gold/30 transition-all">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">25+</div>
+                        <div class="text-sm text-text-secondary font-medium">Cocinas del mundo</div>
+                    </div>
+                    <div class="bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl text-center border border-accent-gold/10 hover:border-accent-gold/30 transition-all">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">100%</div>
+                        <div class="text-sm text-text-secondary font-medium">Calidad garantizada</div>
+                    </div>
+                    <div class="bg-surface-light/50 backdrop-blur-sm p-8 rounded-2xl text-center border border-accent-gold/10 hover:border-accent-gold/30 transition-all">
+                        <div class="text-5xl font-bold text-accent-gold mb-3">12h</div>
+                        <div class="text-sm text-text-secondary font-medium">Servicio diario</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="py-12 px-4 bg-surface-dark/50 backdrop-blur-sm sticky top-20 z-30 border-b border-surface-light">
+            <div class="container mx-auto max-w-7xl">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                        </svg>
+                        <h2 class="text-xl font-bold">Filtrar por categoría</h2>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center justify-center gap-3" id="filter-buttons">
+                        <button class="filter-btn active px-6 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/30" data-category="all">
+                            Todos
+                        </button>
+                        <button class="filter-btn px-6 py-3 bg-surface-light rounded-full font-semibold text-sm transition-all hover:scale-105 hover:bg-surface-light/80 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20" data-category="rapida">
+                            🍔 Comida Rápida
+                        </button>
+                        <button class="filter-btn px-6 py-3 bg-surface-light rounded-full font-semibold text-sm transition-all hover:scale-105 hover:bg-surface-light/80 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20" data-category="saludable">
+                            🥗 Saludable
+                        </button>
+                        <button class="filter-btn px-6 py-3 bg-surface-light rounded-full font-semibold text-sm transition-all hover:scale-105 hover:bg-surface-light/80 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20" data-category="internacional">
+                            🌍 Internacional
+                        </button>
+                        <button class="filter-btn px-6 py-3 bg-surface-light rounded-full font-semibold text-sm transition-all hover:scale-105 hover:bg-surface-light/80 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20" data-category="sin-tacc">
+                            🌾 Sin TACC
+                        </button>
+                    </div>
+
+                    <div class="text-sm text-text-secondary">
+                        <span id="restaurant-count">18</span> restaurantes
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurants Grid -->
+        <section class="py-24 px-4">
+            <div class="container mx-auto max-w-7xl">
+                <div id="restaurants-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Restaurant 1: Burger King -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="rapida">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Burger King" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Burger King</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Las hamburguesas a la parrilla más famosas del mundo. Sabor auténtico, ingredientes frescos y ese toque único que solo Burger King puede ofrecer.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Comida Rápida</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Hamburguesas</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="burger-king">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-burger-king">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Whopper</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Hamburguesa con carne a la parrilla, lechuga, tomate, cebolla, pepinillos y salsa especial</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Crispy Chicken</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Pollo crujiente con lechuga fresca y mayonesa</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">King Fries</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Papas fritas clásicas en tamaño grande</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$1.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Sundae de Chocolate</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Helado cremoso con salsa de chocolate</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$900</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 2: Green Garden -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="saludable sin-tacc">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Green Garden" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Green Garden</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Cocina saludable y consciente. Bowls, ensaladas frescas, smoothies y opciones veganas. Todo preparado con ingredientes orgánicos y locales.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Saludable</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Sin TACC</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Vegano</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="green-garden">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-green-garden">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Buddha Bowl</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Quinoa, aguacate, garbanzos, vegetales asados y tahini</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Ensalada Detox</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Mix verde, frutos rojos, nueces y aderezo de jengibre</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.900</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Green Smoothie</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Espinaca, banana, mango y leche de almendras</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$1.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Wrap Vegano</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Hummus, falafel, vegetales frescos en tortilla sin TACC</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 3: Sushi Tokyo -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="internacional sin-tacc">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Sushi Tokyo" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Sushi Tokyo</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Auténtica cocina japonesa en el corazón de la galería. Sushi fresco elaborado por chefs expertos, ramen tradicional y tempura crujiente.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Internacional</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Sin TACC</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Japonés</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="sushi-tokyo">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-sushi-tokyo">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Combo Tokyo (24 piezas)</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Variedad de rolls: California, Philadelphia y Spicy Tuna</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$6.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Ramen Tradicional</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Caldo de cerdo, huevo marinado, naruto y chashu</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$4.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Tempura Mix</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Langostinos y vegetales en rebozado ligero y crujiente</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Sashimi Premium</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Selección de pescados frescos: salmón, atún y pez mantequilla</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$5.500</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 4: Pizzería Napolitana -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="internacional rapida">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Pizzería Napolitana" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Pizzería Napolitana</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Pizza auténtica al estilo napolitano. Masa artesanal fermentada 48 horas, horno a leña y los mejores ingredientes importados de Italia.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Internacional</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Italiana</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Pizza</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="pizzeria-napolitana">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-pizzeria-napolitana">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Margherita D.O.P</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Salsa de tomate San Marzano, mozzarella de búfala y albahaca fresca</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Diavola</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Tomate, mozzarella, salami picante y aceite de chile</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$4.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Quattro Formaggi</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Mozzarella, gorgonzola, parmesano y fontina</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$4.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Tiramisu Casero</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Postre tradicional italiano con café y mascarpone</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 5: Taco Loco -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="internacional rapida sin-tacc">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Taco Loco" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Taco Loco</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Sabores auténticos de México. Tacos, burritos, quesadillas y nachos preparados con recetas tradicionales y los mejores ingredientes frescos.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Internacional</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Mexicana</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Sin TACC</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="taco-loco">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-taco-loco">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Tacos Al Pastor (3 unidades)</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Cerdo marinado, piña, cilantro y cebolla en tortillas de maíz</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Burrito Supreme</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Carne asada, frijoles, arroz, guacamole y queso</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Nachos Locos</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Chips de maíz, queso fundido, jalapeños y crema agria</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Margarita Frozen</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Clásica o de frutilla, servida con sal en el borde</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.500</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 6: Parrilla Don Juan -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="internacional sin-tacc">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Parrilla Don Juan" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Parrilla Don Juan</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                La mejor carne argentina. Cortes premium cocidos a la parrilla con carbón, acompañados de ensaladas frescas y papas rústicas.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Internacional</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Argentina</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Sin TACC</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="parrilla-don-juan">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-parrilla-don-juan">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Bife de Chorizo (400g)</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Corte premium argentino a punto, con guarnición</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$7.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Asado de Tira</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Clásico argentino jugoso y tierno</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$6.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Parrillada para 2</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Variedad de cortes: chorizo, morcilla, vacío y pollo</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$12.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Provoleta a la Parrilla</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Queso provolone gratinado con orégano</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.800</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Add more restaurants following the same pattern -->
+                    <!-- Restaurant 7: Coffee & Co -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="saludable rapida sin-tacc">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Coffee & Co" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Coffee & Co</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Café de especialidad y pastelería artesanal. Granos seleccionados, métodos de extracción profesionales y opciones veganas y sin TACC disponibles.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Café</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Saludable</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Sin TACC</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="coffee-co">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-coffee-co">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Flat White Signature</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Espresso doble con microespuma de leche texturizada</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$1.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Croissant de Almendras</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Croissant relleno de crema de almendras, horneado diariamente</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$1.600</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Avocado Toast (Sin TACC)</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Pan sin gluten, palta, huevo poché y microgreens</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Chai Latte Vegano</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Mezcla de especias con leche de avena orgánica</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$1.900</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 8: Thai House -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="internacional sin-tacc">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Thai House" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Thai House</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot closed" aria-label="Cerrado"></span>
+                                    <span class="text-sm text-red-400 font-semibold">Cerrado</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Auténtica cocina tailandesa. Curries aromáticos, pad thai tradicional y woks salteados con ese equilibrio perfecto de dulce, salado y picante.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Internacional</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Tailandés</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Sin TACC</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="thai-house">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-thai-house">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Pad Thai Clásico</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Fideos de arroz, camarones, tamarindo, maní y brotes de soja</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$4.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Curry Rojo Thai</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Pollo, leche de coco, bambú y albahaca tailandesa</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.900</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Tom Yum Goong</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Sopa picante y ácida con langostinos, limoncillo y galanga</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$3.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Mango Sticky Rice</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Arroz glutinoso con mango fresco y leche de coco</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.400</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Restaurant 9: Le Bistro -->
+                    <article class="restaurant-card bg-surface-light rounded-3xl overflow-hidden border border-accent-gold/10 hover:border-accent-gold/30" data-categories="internacional">
+                        <div class="p-8">
+                            <div class="logo-container rounded-2xl p-6 mb-6 flex items-center justify-center h-32">
+                                <img src="/placeholder.svg?height=80&width=200" alt="Logo de Le Bistro" class="max-h-20 w-auto" loading="lazy" />
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold">Le Bistro</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="status-dot open" aria-label="Abierto"></span>
+                                    <span class="text-sm text-green-400 font-semibold">Abierto</span>
+                                </div>
+                            </div>
+
+                            <p class="text-text-secondary mb-6 leading-relaxed">
+                                Alta cocina francesa con un toque contemporáneo. Platos refinados, técnicas clásicas y una cava de vinos seleccionados para maridar cada experiencia.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Internacional</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Francesa</span>
+                                <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Gourmet</span>
+                            </div>
+
+                            <button class="toggle-menu-btn w-full px-6 py-4 bg-accent-gold/10 hover:bg-accent-gold hover:text-bg-dark text-accent-gold rounded-xl font-semibold transition-all flex items-center justify-between group" data-restaurant="le-bistro">
+                                <span>Ver menú destacado</span>
+                                <svg class="w-5 h-5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="menu-section px-8 pb-8" id="menu-le-bistro">
+                            <div class="bg-surface-dark rounded-2xl p-6 border border-accent-gold/20">
+                                <h4 class="text-lg font-bold mb-4 flex items-center">
+                                    <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    Menú Destacado
+                                </h4>
+                                <div class="space-y-3">
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Coq au Vin</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Pollo braseado en vino tinto con champiñones y panceta</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$6.800</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Bouillabaisse</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Sopa de pescados mediterráneos con rouille y crostini</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$7.500</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Steak Frites</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Entrecôte con mantequilla de hierbas y papas fritas</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$8.200</span>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item p-4 rounded-lg">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h5 class="font-semibold text-text-primary">Crème Brûlée</h5>
+                                                <p class="text-sm text-text-secondary mt-1">Natillas de vainilla con costra caramelizada</p>
+                                            </div>
+                                            <span class="text-accent-gold font-bold ml-4">$2.800</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Empty state -->
+                <div id="empty-state" class="hidden text-center py-24">
+                    <svg class="w-24 h-24 mx-auto text-text-secondary mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-3">No hay restaurantes en esta categoría</h3>
+                    <p class="text-text-secondary mb-8">Intenta seleccionar otra categoría para ver más opciones</p>
+                    <button onclick="document.querySelector('[data-category=all]').click()" class="px-8 py-3 bg-accent-gold text-bg-dark font-semibold rounded-lg hover:bg-accent-gold-light transition-all">
+                        Ver todos los restaurantes
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 px-4 bg-gradient-to-br from-surface-dark via-bg-dark to-surface-dark">
+            <div class="container mx-auto max-w-5xl">
+                <div class="bg-gradient-to-r from-accent-gold/10 via-accent-gold/5 to-transparent p-12 md:p-20 rounded-3xl text-center border border-accent-gold/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl md:text-6xl font-bold mb-6">¿Hambre de algo especial?</h2>
+                        <p class="text-xl text-text-secondary mb-10 max-w-3xl mx-auto leading-relaxed">
+                            Descubre todos nuestros restaurantes, consulta horarios y reserva tu mesa. La mejor experiencia gastronómica te espera en Galería Urbana.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="locales.html" class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-xl hover:bg-accent-gold-light transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50 shadow-lg shadow-accent-gold/20">
+                                Ver todos los locales
+                            </a>
+                            <a href="contacto.html" class="inline-block px-8 py-4 bg-surface-light text-text-primary font-semibold rounded-xl hover:bg-surface-light/80 transition-all border border-accent-gold/30 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
+                                Contactar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
+                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Navegación</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
+                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
+                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Información</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
+                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
+                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
+                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Horarios</h4>
+                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
+                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
+                </div>
+            </div>
+            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
+                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot-container"></div>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="gastronomia.js"></script>
+</body>
+</html>

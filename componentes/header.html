@@ -1,0 +1,42 @@
+<header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
+        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
+                    Galería Urbana
+                </a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Desktop menu -->
+                <ul class="hidden lg:flex items-center space-x-8">
+                    <li><a href="index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold" aria-current="page">Inicio</a></li>
+                    <li><a href= "src/servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
+                    <li><a href="src/entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
+                    <li><a href="src/locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
+                    <li><a href="ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
+                    <li><a href="gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Gastronomía</a></li>
+                    <li><a href="contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Contacto</a></li>
+                    <li><a href="equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Equipo</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
+                <ul class="space-y-4">
+                    <li><a href="index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
+                    <li><a href="servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
+                    <li><a href="entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
+                    <li><a href="locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
+                    <li><a href="ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
+                    <li><a href="gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
+                    <li><a href="contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
+                    <li><a href="equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
