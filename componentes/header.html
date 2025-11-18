@@ -1,42 +1,366 @@
-<header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
-        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
-                    Galería Urbana
-                </a>
-                
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-                <!-- Desktop menu -->
-                <ul class="hidden lg:flex items-center space-x-8">
-                    <li><a href="index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold" aria-current="page">Inicio</a></li>
-                    <li><a href= "src/servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
-                    <li><a href="src/entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
-                    <li><a href="src/locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
-                    <li><a href="ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
-                    <li><a href="gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Gastronomía</a></li>
-                    <li><a href="contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Contacto</a></li>
-                    <li><a href="equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Equipo</a></li>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glass morphism effect for header */
+        .header-blur {
+            background: rgba(248, 248, 248, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Scrolled state with enhanced blur */
+        .header-scrolled {
+            background: rgba(248, 248, 248, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Navigation link hover effect */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D4AF37, #CD7F32);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* CTA button with luxury styling */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: #D4AF37;
+            color: #0F0F0F;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Mobile menu animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+
+        /* Mobile menu link styling */
+        .mobile-nav-link {
+            position: relative;
+            padding-left: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s ease;
+        }
+
+        .mobile-nav-link:hover::before {
+            width: 12px;
+        }
+
+        .mobile-nav-link:hover {
+            padding-left: 24px;
+            color: #D4AF37;
+        }
+
+        /* Menu button animation */
+        .menu-btn {
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background-color: rgba(212, 175, 55, 0.15);
+        }
+
+        .menu-btn.active .menu-icon-top {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-btn.active .menu-icon-middle {
+            opacity: 0;
+        }
+
+        .menu-btn.active .menu-icon-bottom {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .menu-icon-line {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Logo animation */
+        .logo {
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .logo:hover {
+            color: #D4AF37;
+            letter-spacing: 0.08em;
+        }
+
+        /* Gold accent shine effect */
+        @keyframes shine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .shine-effect {
+            background: linear-gradient(90deg, #0F0F0F 40%, #D4AF37 50%, #0F0F0F 60%);
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-luxury-light">
+
+    <!-- Professional Header Component -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 header-blur transition-all duration-300">
+        <nav class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-between h-20 md:h-24">
+                
+                <!-- Logo Area -->
+                <a href="../index.html" class="logo text-xl md:text-2xl lg:text-3xl font-heading font-bold text-luxury-dark tracking-tight flex items-center gap-3">
+                    <span class="hidden md:inline shine-effect">THE GRAND GALLERY</span>
+                    <span class="md:hidden text-luxury-dark">TGG</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <ul class="hidden lg:flex items-center gap-8 xl:gap-10">
+                    <li>
+                        <a href="../index.html" class="nav-link text-sm font-medium text-luxury-dark tracking-wide uppercase">
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/entretenimientos.html" class="nav-link text-sm font-medium text-luxury-dark tracking-wide uppercase">
+                            Entretenimiento
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/equipo.html" class="nav-link text-sm font-medium text-luxury-dark tracking-wide uppercase">
+                            Equipo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/gastronomia.html" class="nav-link text-sm font-medium text-luxury-dark tracking-wide uppercase">
+                            Gastronomía
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/locales.html" class="nav-link text-sm font-medium text-luxury-dark tracking-wide uppercase">
+                            Locales
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/servicios.html" class="nav-link text-sm font-medium text-luxury-dark tracking-wide uppercase">
+                            Servicios
+                        </a>
+                    </li>
                 </ul>
+
+                <!-- CTA Button (Desktop) -->
+                <a href="/src/contacto.html" class="hidden lg:flex items-center gap-2 px-6 py-3 bg-luxury-dark border-2 border-luxury-gold text-luxury-gold text-sm font-semibold rounded tracking-wider uppercase cta-button">
+                    <span>Contacto</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg menu-btn" aria-label="Toggle Menu" aria-expanded="false">
+                    <div class="w-6 h-5 flex flex-col justify-between">
+                        <span class="menu-icon-line menu-icon-top w-full h-0.5 bg-luxury-dark rounded"></span>
+                        <span class="menu-icon-line menu-icon-middle w-full h-0.5 bg-luxury-dark rounded"></span>
+                        <span class="menu-icon-line menu-icon-bottom w-full h-0.5 bg-luxury-dark rounded"></span>
+                    </div>
+                </button>
             </div>
 
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
-                <ul class="space-y-4">
-                    <li><a href="index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
-                    <li><a href="servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
-                    <li><a href="entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                    <li><a href="locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
-                    <li><a href="ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    <li><a href="gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
-                    <li><a href="contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
-                    <li><a href="equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="mobile-menu lg:hidden border-t border-luxury-gold/20">
+                <ul class="py-6 space-y-1">
+                    <li>
+                        <a href="index.html" class="mobile-nav-link block py-3 text-sm font-medium text-luxury-dark uppercase tracking-wide">
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/entretenimientos.html" class="mobile-nav-link block py-3 text-sm font-medium text-luxury-dark uppercase tracking-wide">
+                            Entretenimiento
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/equipo.html" class="mobile-nav-link block py-3 text-sm font-medium text-luxury-dark uppercase tracking-wide">
+                            Equipo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/gastronomia.html" class="mobile-nav-link block py-3 text-sm font-medium text-luxury-dark uppercase tracking-wide">
+                            Gastronomía
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/locales.html" class="mobile-nav-link block py-3 text-sm font-medium text-luxury-dark uppercase tracking-wide">
+                            Locales
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/src/servicios.html" class="mobile-nav-link block py-3 text-sm font-medium text-luxury-dark uppercase tracking-wide">
+                            Servicios
+                        </a>
+                    </li>
+                    <li class="pt-4">
+                        <a href="/src/contacto.html" class="block w-full px-6 py-3 bg-luxury-dark border-2 border-luxury-gold text-luxury-gold text-sm font-semibold rounded text-center tracking-wider uppercase cta-button">
+                            Contacto
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
+
+    
+
+    <!-- JavaScript for Interactive Functionality -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            const isActive = mobileMenu.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isActive);
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Enhanced blur effect on scroll
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Prevent menu overflow issues
+        document.addEventListener('DOMContentLoaded', () => {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        });
+    </script>
+
+</body>
+</html>

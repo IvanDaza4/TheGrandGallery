@@ -26,6 +26,17 @@
                         'accent-gold-light': '#f0d878',
                         'text-primary': '#f5f5f5',
                         'text-secondary': '#a0a0a0',
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    
                     }
                 }
             }
@@ -151,53 +162,10 @@
 </head>
 <body class="bg-bg-dark text-text-primary font-sans antialiased">
     <!-- Skip to content -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
-        Saltar al contenido
-    </a>
+    
 
     <!-- Header -->
-    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
-        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
-                    Galería Urbana
-                </a>
-                
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
-                <!-- Desktop menu -->
-                <ul class="hidden lg:flex items-center space-x-8">
-                    <li><a href="../index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Inicio</a></li>
-                    <li><a href="./servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
-                    <li><a href="./entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
-                    <li><a href="./locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
-                    <li><a href="./ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
-                    <li><a href="./gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Gastronomía</a></li>
-                    <li><a href="./contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold text-accent-gold" aria-current="page">Contacto</a></li>
-                    <li><a href="./equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Equipo</a></li>
-                </ul>
-            </div>
-
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
-                <ul class="space-y-4">
-                    <li><a href="../index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
-                    <li><a href="./servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
-                    <li><a href="./entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                    <li><a href="./locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
-                    <li><a href="./ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    <li><a href="./gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
-                    <li><a href="./contacto.html" class="block hover:text-accent-gold transition-colors text-accent-gold">Contacto</a></li>
-                    <li><a href="./equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div id="header-container"></div>
 
     <!-- Main Content -->
     <main id="main-content">
@@ -731,49 +699,19 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
-                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Navegación</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
-                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
-                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Información</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
-                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
-                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
-                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Horarios</h4>
-                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
-                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
-                </div>
-            </div>
-            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
-                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
+    
+    <div id =footer-container></div>>
     <!-- Chatbot -->
     <div id="chatbot-container"></div>
 
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
+    <script>
+        // Cargar footer
+        fetch('/componentes/footer.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
     <script>
         // Contact form functionality
         let currentContactType = 'consulta';
@@ -853,6 +791,13 @@
         // Set max date for lost object date picker to today
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('fecha-perdida').setAttribute('max', today);
+    </script>
+    <script>
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
     </script>
 </body>
 </html>

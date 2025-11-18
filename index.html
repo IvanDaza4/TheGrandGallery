@@ -1,300 +1,621 @@
 <!DOCTYPE html>
-<html lang="es-AR" dir="ltr">
+<html lang="es-AR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería Urbana - Centro Comercial Premium</title>
-    <meta name="description" content="Descubre Galería Urbana, el centro comercial premium con más de 50 locales, entretenimiento, gastronomía y servicios exclusivos en un ambiente moderno y elegante.">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Galería Urbana - Centro Comercial Premium">
-    <meta property="og:description" content="Descubre Galería Urbana, el centro comercial premium con más de 50 locales, entretenimiento, gastronomía y servicios exclusivos.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://galeria-urbana.com">
-    
-    <!-- Tailwind CSS -->
+    <title>The Grand Gallery - Centro Comercial de Lujo</title>
+    <meta name="description"
+        content="The Grand Gallery, un destino de compras exclusivo con las mejores marcas internacionales, gastronomía de alta gama y experiencias únicas.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        'bg-dark': '#0a0a0a',
-                        'surface-dark': '#1a1a1a',
-                        'surface-light': '#2a2a2a',
-                        'accent-gold': '#d4af37',
-                        'accent-gold-light': '#f0d878',
-                        'text-primary': '#f5f5f5',
-                        'text-secondary': '#a0a0a0',
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .luxury-gradient {
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 50%, #0F0F0F 100%);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-lift {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 15, 15, 0.9) 100%);
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.7;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+    </style>
 </head>
-<body class="bg-bg-dark text-text-primary font-sans antialiased">
-    <!-- Skip to content -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
-        Saltar al contenido
-    </a>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
-        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
-                    Galería Urbana
+<body class="bg-luxury-light text-luxury-dark antialiased">
+
+    <!-- Header Navigation -->
+   <div id="header-container"></div>
+
+
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="/video/PlazaComercial.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-luxury-dark/70 via-luxury-dark/50 to-luxury-dark/70"></div>
+
+        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto py-32">
+            <div class="mb-6">
+                <span
+                    class="inline-block px-4 py-1.5 bg-luxury-gold/20 backdrop-blur-sm border border-luxury-gold/30 text-luxury-gold text-xs font-semibold rounded-full uppercase tracking-widest">
+                    Experiencia Premium
+                </span>
+            </div>
+            <h1
+                class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-6 leading-tight tracking-tight">
+                Descubrí las<br>
+                <span class="text-luxury-gold">Últimas Novedades</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/90 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
+                Un destino exclusivo donde el lujo, la elegancia y las mejores marcas se encuentran para ofrecerte una
+                experiencia única.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#promociones"
+                    class="inline-block px-8 py-4 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
+                    Explorar Promociones
                 </a>
-                
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
-                <!-- Desktop menu -->
-                <ul class="hidden lg:flex items-center space-x-8">
-                    <li><a href="./index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold" aria-current="page">Inicio</a></li>
-                    <li><a href="./src/servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
-                    <li><a href="./src/entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
-                    <li><a href="./src/locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
-                    <li><a href="./src/ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
-                    <li><a href="./src/gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Gastronomía</a></li>
-                    <li><a href="./src/contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Contacto</a></li>
-                    <li><a href="./src/equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Equipo</a></li>
-                </ul>
-            </div>
-
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
-                <ul class="space-y-4">
-                    <li><a href="./index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
-                    <li><a href="./src/servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
-                    <li><a href="./src/entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                    <li><a href="./src/locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
-                    <li><a href="./src/ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    <li><a href="./src/gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
-                    <li><a href="./src/contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
-                    <li><a href="./src/equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="relative h-screen flex items-center justify-center overflow-hidden">
-            <!-- Background Video -->
-            <video 
-                id="hero-video"
-                autoplay 
-                muted 
-                loop 
-                playsinline
-                class="absolute inset-0 w-full h-full object-cover opacity-70"
-                aria-label="Video de presentación de Galería Urbana">
-                <source src="./video/PlazaComercial.mp4" type="video/mp4">
-                <track kind="subtitles" src="subtitles-es.vtt" srclang="es-AR" label="Español">
-                Tu navegador no soporta video HTML5.
-            </video>
-            
-            <div class="absolute inset-0 bg-gradient-to-b from-bg-dark/50 via-bg-dark/30 to-bg-dark"></div>
-            
-            <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-balance">
-                    Galería Urbana
-                    <span class="block text-2xl md:text-3xl text-accent-gold mt-4">Tu destino de compras y entretenimiento premium</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-text-secondary mb-8 text-pretty">
-                    Más de 50 locales exclusivos, gastronomía de primer nivel y experiencias únicas en el corazón de la ciudad
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="locales.html" class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-lg hover:bg-accent-gold-light transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
-                        Conocé los locales
-                    </a>
-                    <a href="#funcionalidades" class="inline-block px-8 py-4 bg-surface-light text-text-primary font-semibold rounded-lg hover:bg-surface-dark transition-all border border-accent-gold/30 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
-                        Descubrir más
-                    </a>
-                </div>
-                
-                <!-- Video Controls -->
-                <div class="mt-8 flex justify-center gap-4">
-                    <button id="video-restart" class="px-4 py-2 bg-surface-dark/80 rounded hover:bg-surface-light transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Reiniciar video">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                        </svg>
-                    </button>
-                    <button id="video-toggle" class="px-4 py-2 bg-surface-dark/80 rounded hover:bg-surface-light transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Pausar video">
-                        <svg id="pause-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <svg id="play-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Funcionalidades Section -->
-        <section id="funcionalidades" class="py-24 px-4 bg-surface-dark">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">¿Qué puedo hacer aquí?</h2>
-                <p class="text-center text-text-secondary mb-16 text-lg">Descubre todas las posibilidades que Galería Urbana tiene para vos</p>
-                
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Feature 1 -->
-                    <div class="bg-surface-light p-8 rounded-xl hover:transform hover:scale-105 transition-all duration-200 hover:shadow-2xl hover:shadow-accent-gold/10 focus-within:ring-2 focus-within:ring-accent-gold">
-                        <div class="w-16 h-16 bg-accent-gold/10 rounded-lg flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Buscar locales</h3>
-                        <p class="text-text-secondary mb-6">Encuentra rápidamente el local que buscás con nuestro buscador inteligente y filtros avanzados</p>
-                        <a href="locales.html#buscador" class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors focus:outline-none focus:underline">
-                            Ir al buscador
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-
-                    <!-- Feature 2 -->
-                    <div class="bg-surface-light p-8 rounded-xl hover:transform hover:scale-105 transition-all duration-200 hover:shadow-2xl hover:shadow-accent-gold/10 focus-within:ring-2 focus-within:ring-accent-gold">
-                        <div class="w-16 h-16 bg-accent-gold/10 rounded-lg flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Explorar el mapa</h3>
-                        <p class="text-text-secondary mb-6">Navega por nuestro mapa interactivo y descubre la ubicación exacta de cada local en la galería</p>
-                        <a href="locales.html#mapa" class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors focus:outline-none focus:underline">
-                            Ver mapa
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-
-                    <!-- Feature 3 -->
-                    <div class="bg-surface-light p-8 rounded-xl hover:transform hover:scale-105 transition-all duration-200 hover:shadow-2xl hover:shadow-accent-gold/10 focus-within:ring-2 focus-within:ring-accent-gold">
-                        <div class="w-16 h-16 bg-accent-gold/10 rounded-lg flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Ver ofertas</h3>
-                        <p class="text-text-secondary mb-6">No te pierdas las mejores promociones y descuentos exclusivos de nuestros locales comerciales</p>
-                        <a href="ofertas.html" class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors focus:outline-none focus:underline">
-                            Ver ofertas
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quick Access Section -->
-        <section class="py-24 px-4">
-            <div class="container mx-auto max-w-6xl">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Descubre nuestros locales</h2>
-                        <p class="text-text-secondary text-lg mb-8">
-                            Más de 50 marcas exclusivas te esperan. Desde moda y tecnología hasta decoración y servicios especializados. 
-                            Encuentra exactamente lo que buscás en menos de 20 segundos.
-                        </p>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-accent-gold mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Búsqueda inteligente con corrección de errores</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-accent-gold mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Filtros por categoría, ubicación y estado</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-accent-gold mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Información en tiempo real de horarios</span>
-                            </li>
-                        </ul>
-                        <a href="locales.html" class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-lg hover:bg-accent-gold-light transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
-                            Explorar locales
-                        </a>
-                    </div>
-                    <div class="relative">
-                        <img 
-                            src="/placeholder.svg?height=600&width=800" 
-                            alt="Interior de Galería Urbana mostrando locales comerciales premium"
-                            class="rounded-xl shadow-2xl"
-                            loading="lazy"
-                        >
-                        <div class="absolute -bottom-6 -left-6 bg-accent-gold text-bg-dark p-6 rounded-lg shadow-xl">
-                            <div class="text-4xl font-bold">50+</div>
-                            <div class="text-sm font-semibold">Locales exclusivos</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
-                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Navegación</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
-                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
-                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Información</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
-                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
-                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
-                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Horarios</h4>
-                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
-                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
-                </div>
-            </div>
-            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
-                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
+                <a href="#locales"
+                    class="inline-block px-8 py-4 bg-transparent border-2 border-white text-white text-sm font-bold rounded-sm hover:bg-white hover:text-luxury-dark transition-all uppercase tracking-widest">
+                    Ver Locales
+                </a>
             </div>
         </div>
-    </footer>
 
-    <!-- Chatbot -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Featured Banner -->
+    <section class="py-4 bg-luxury-dark">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center gap-6 text-center flex-wrap">
+                <span class="text-luxury-gold text-sm font-semibold uppercase tracking-widest">Descuentos
+                    Especiales</span>
+                <span class="text-white text-2xl md:text-3xl font-heading font-bold">10%, 15% y 20%</span>
+                <span class="text-white/80 text-sm font-light">En marcas seleccionadas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Novedades y Promociones Section -->
+    <section id="promociones" class="py-24 luxury-gradient">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <span
+                    class="inline-block px-4 py-1.5 bg-luxury-gold/20 border border-luxury-gold/30 text-luxury-gold text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
+                    Ofertas Exclusivas
+                </span>
+                <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4 leading-tight">
+                    Novedades y Promociones
+                </h2>
+                <p class="text-white/70 text-lg font-light max-w-2xl mx-auto">
+                    Aprovechá nuestras ofertas exclusivas y beneficios especiales
+                </p>
+            </div>
+
+            <div class="max-w-7xl mx-auto space-y-6">
+
+                <!-- Tarjeta principal 3x2 con imagen de zapatillas -->
+                <div
+                    class="group max-w-6xl w-full bg-luxury-gray rounded-2xl overflow-hidden shadow-2xl hover-lift cursor-pointer fade-in">
+                    <div class="h-2 md:h-3 gold-gradient"></div>
+
+                    <div
+                        class="p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+
+                        <div class="flex-1 w-full md:w-auto">
+                            <span
+                                class="inline-block px-4 py-1.5 md:px-5 md:py-2 bg-luxury-gold text-luxury-dark text-xs md:text-sm font-bold rounded-full mb-4 md:mb-6 uppercase tracking-widest">
+                                OFERTA
+                            </span>
+
+                            <h2
+                                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black text-luxury-gold mb-3 md:mb-4 leading-none">
+                                3X2 EN<br>
+                                PRIMERAS<br>
+                                MARCAS
+                            </h2>
+
+                            <p
+                                class="text-luxury-cream/80 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 md:mb-8">
+                                NIKE, ADIDAS, PUMA, Y MÁS...<br>
+                                INTER...
+                            </p>
+
+                            <div
+                                class="flex items-center text-luxury-gold text-base md:text-lg font-semibold cursor-pointer">
+                                <span class="mr-2">¡Compra 2 y llévate 3!</span>
+                                <svg class="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="flex-shrink-0 w-full md:w-auto flex justify-center">
+                            <img src="/imgs/zapatillas.png" alt="Zapatillas Nike"
+                                class="w-64 sm:w-72 md:w-80 lg:w-96 h-auto object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-300">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Grid con las otras 2 tarjetas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Tarjeta 2: Parking Gratis -->
+                    <div
+                        class="group relative overflow-hidden rounded-2xl bg-luxury-gray hover-lift cursor-pointer fade-in">
+                        <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+                        <div class="p-6 sm:p-8 h-72 sm:h-80 flex flex-col justify-between">
+                            <div>
+                                <span
+                                    class="inline-block px-3 py-1 bg-luxury-gold text-luxury-dark text-xs font-bold rounded-full mb-4 sm:mb-6 uppercase tracking-wider">
+                                    Nueva
+                                </span>
+                                <h3
+                                    class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white mb-3 sm:mb-4 leading-tight">
+                                    2 Horas Parking Gratis
+                                </h3>
+                                <p class="text-white/70 text-sm font-light leading-relaxed">
+                                    Por compras superiores a $50.000 en tiendas participantes
+                                </p>
+                            </div>
+                            <div
+                                class="flex items-center text-luxury-gold text-sm font-semibold uppercase tracking-wide group-hover:gap-2 transition-all">
+                                Ver más
+                                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Descuento adicional -->
+                    <div
+                        class="group relative overflow-hidden rounded-2xl bg-luxury-gray hover-lift cursor-pointer fade-in">
+                        <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+                        <div class="p-6 sm:p-8 h-72 sm:h-80 flex flex-col justify-between">
+                            <div>
+                                <span
+                                    class="inline-block px-3 py-1 bg-luxury-gold text-luxury-dark text-xs font-bold rounded-full mb-4 sm:mb-6 uppercase tracking-wider">
+                                    Hot
+                                </span>
+                                <h3
+                                    class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white mb-3 sm:mb-4 leading-tight">
+                                    15% Descuento Extra
+                                </h3>
+                                <p class="text-white/70 text-sm font-light leading-relaxed">
+                                    En toda la colección de invierno con tu tarjeta del centro comercial
+                                </p>
+                            </div>
+                            <div
+                                class="flex items-center text-luxury-gold text-sm font-semibold uppercase tracking-wide group-hover:gap-2 transition-all">
+                                Ver más
+                                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Newsletter CTA -->
+            <div
+                class="relative overflow-hidden rounded-sm glass-effect border border-luxury-gold/20 p-8 md:p-12 text-center fade-in">
+                <div class="absolute inset-0 shimmer opacity-20"></div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl md:text-4xl font-heading font-bold text-white mb-4">
+                        Suscribite y Recibí Ofertas Exclusivas
+                    </h3>
+                    <p class="text-white/70 mb-8 max-w-2xl mx-auto">
+                        Sé el primero en enterarte de nuestras promociones, eventos especiales y novedades
+                    </p>
+                    <button
+                        class="px-8 py-3 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
+                        Suscribirme
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="h-px bg-gradient-to-r from-transparent via-luxury-gold to-transparent"></div>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-24 bg-luxury-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <span
+                    class="inline-block px-4 py-1.5 bg-luxury-dark text-white text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
+                    Comodidades
+                </span>
+                <h2 class="text-4xl md:text-6xl font-heading font-bold text-luxury-dark mb-4 leading-tight">
+                    Nuestros Servicios
+                </h2>
+                <p class="text-luxury-dark/70 text-lg font-light max-w-2xl mx-auto">
+                    Facilities diseñadas para brindarte la mejor experiencia
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- Servicio 1 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/estacionamiento.png" alt="Estacionamiento"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">01</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Estacionamiento
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/wifi_free.png" alt="Wi-Fi"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">02</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Wi-Fi Gratis
+                        </h3>
+                    </div>
+                </div>
+
+                
+
+                <!-- Servicio 4 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/guardarropas.png" alt="Guardarropa"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">04</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Guardarropa
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/cambiador.png" alt="Cambiador"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">05</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Cambiador de Bebés
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/atencioncliente.png" alt="Atención"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">06</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Atención al Cliente
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Servicio 7 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/medico.png" alt="Centro Médico"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">07</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Centro Médico
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Servicio 8 -->
+                <div
+                    class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
+                    <img src="/imgs/cajero.png" alt="Cajeros"
+                        class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
+                    </div>
+                    <div class="relative h-full p-6 flex flex-col justify-end">
+                        <span class="text-luxury-gold text-xs font-bold mb-2 tracking-widest uppercase">08</span>
+                        <h3 class="text-xl md:text-2xl font-heading font-bold text-white">
+                            Cajeros Automáticos
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locales Section -->
+    <section id="locales" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div>
+                    <span
+                        class="inline-block px-4 py-1.5 bg-luxury-dark text-white text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
+                        Descubrí
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-luxury-dark mb-6 leading-tight">
+                        Nuestros Locales
+                    </h2>
+                    <p class="text-luxury-dark/70 text-lg font-light mb-8 leading-relaxed">
+                        Explorá nuestro directorio con más de 100 marcas premium de moda, tecnología, gastronomía y
+                        entretenimiento.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span
+                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Moda</span>
+                        <span
+                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Tecnología</span>
+                        <span
+                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Gastronomía</span>
+                        <span
+                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Belleza</span>
+                    </div>
+                    <a href="#"
+                        class="inline-block px-8 py-3 bg-luxury-dark text-white text-sm font-bold rounded-sm hover:bg-luxury-gold hover:text-luxury-dark transition-all uppercase tracking-widest">
+                        Ver Directorio
+                    </a>
+                </div>
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-luxury-gold/10 rounded-sm"></div>
+                    <img src="/placeholder.svg?height=500&width=600" alt="Mapa del shopping"
+                        class="relative rounded-sm shadow-2xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 luxury-gradient relative overflow-hidden">
+        <div class="absolute inset-0 shimmer opacity-10"></div>
+        <div class="container mx-auto px-4 text-center relative z-10 fade-in">
+            <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+                The Grand Gallery
+            </h2>
+            <p class="text-xl md:text-2xl text-luxury-gold font-heading font-semibold mb-8">
+                Tu Destino de Lujo
+            </p>
+            <p class="text-white/80 text-lg font-light mb-12 max-w-3xl mx-auto leading-relaxed">
+                Visitanos y experimentá el más alto nivel en compras, gastronomía y entretenimiento. Un espacio donde la
+                elegancia y la exclusividad se encuentran.
+            </p>
+            <a href="#contacto"
+                class="inline-block px-8 py-4 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
+                Planificá tu Visita
+            </a>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-24 bg-luxury-light">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
+                <div>
+                    <span
+                        class="inline-block px-4 py-1.5 bg-luxury-dark text-white text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
+                        Ubicación
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-luxury-dark mb-8 leading-tight">
+                        Cómo Llegar
+                    </h2>
+
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 bg-luxury-gold rounded-sm flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-luxury-dark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-luxury-dark mb-1">Dirección</h4>
+                                <p class="text-luxury-dark/70">Av. Principal 1234, Buenos Aires</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 bg-luxury-gold rounded-sm flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-luxury-dark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-luxury-dark mb-1">Horarios</h4>
+                                <p class="text-luxury-dark/70">Lunes a Domingo: 10:00 - 22:00hs</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 bg-luxury-gold rounded-sm flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-luxury-dark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-luxury-dark mb-1">Teléfono</h4>
+                                <p class="text-luxury-dark/70">(011) 1234-5678</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#"
+                        class="inline-block px-8 py-3 bg-luxury-dark text-white text-sm font-bold rounded-sm hover:bg-luxury-gold hover:text-luxury-dark transition-all uppercase tracking-widest">
+                        Ver en Google Maps
+                    </a>
+                </div>
+
+                <div class="relative h-96 md:h-full min-h-96">
+                    <div class="absolute -inset-4 bg-luxury-gold/10 rounded-sm"></div>
+                    <img src="/imgs/ubicacion.png" alt="Mapa de ubicación"
+                        class="relative rounded-sm shadow-2xl w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+   <div id =footer-container></div>>
+
     <div id="chatbot-container"></div>
 
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
+    <script>
+        fetch('/componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
+    </script>
+    <script>
+    // Cargar footer
+    fetch('/componentes/footer.html')
+        .then(res => res.text())
+        .then(html => document.getElementById('footer-container').innerHTML = html);
+</script>
 </body>
+
 </html>

@@ -17,14 +17,15 @@ class Chatbot {
 
     container.innerHTML = `
             <div id="chatbot-wrapper" class="fixed bottom-6 right-6 z-50">
+
                 <!-- Chat Button -->
                 <button 
                     id="chatbot-toggle" 
-                    class="w-16 h-16 bg-accent-gold rounded-full shadow-2xl hover:bg-accent-gold-light transition-all transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-accent-gold/50"
+                    class="w-16 h-16 bg-luxury-gold rounded-full shadow-2xl hover:bg-white hover:text-luxury-dark transition-all transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-luxury-gold/40"
                     aria-label="Abrir asistente virtual"
                     aria-expanded="false"
                     aria-controls="chatbot-window">
-                    <svg class="w-8 h-8 mx-auto text-bg-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-8 h-8 mx-auto text-luxury-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
                     </svg>
                 </button>
@@ -32,85 +33,92 @@ class Chatbot {
                 <!-- Chat Window -->
                 <div 
                     id="chatbot-window" 
-                    class="hidden absolute bottom-20 right-0 w-96 max-w-[calc(100vw-3rem)] bg-surface-dark rounded-2xl shadow-2xl border border-surface-light overflow-hidden"
+                    class="hidden absolute bottom-20 right-0 w-96 max-w-[calc(100vw-3rem)] bg-luxury-gray rounded-xl shadow-2xl border border-luxury-gold/20 overflow-hidden backdrop-blur-xl"
                     role="dialog"
                     aria-labelledby="chatbot-title"
                     aria-modal="true">
-                    
+
                     <!-- Header -->
-                    <div class="bg-accent-gold p-4 flex items-center justify-between">
+                    <div class="bg-luxury-gold p-4 flex items-center justify-between">
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-bg-dark rounded-full flex items-center justify-center mr-3">
-                                <svg class="w-6 h-6 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-10 h-10 bg-luxury-dark rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-6 h-6 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <h2 id="chatbot-title" class="font-bold text-bg-dark">Asistente Virtual</h2>
-                                <p class="text-xs text-bg-dark/70">Estamos aquí para ayudarte</p>
+                                <h2 id="chatbot-title" class="font-heading font-bold text-luxury-dark text-lg">Asistente Virtual</h2>
+                                <p class="text-xs text-luxury-dark/70">Siempre a tu disposición</p>
                             </div>
                         </div>
                         <button 
                             id="chatbot-close" 
-                            class="w-8 h-8 flex items-center justify-center rounded hover:bg-bg-dark/10 transition-colors focus:outline-none focus:ring-2 focus:ring-bg-dark"
+                            class="w-8 h-8 flex items-center justify-center rounded hover:bg-luxury-dark/10 transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-dark"
                             aria-label="Cerrar asistente">
-                            <svg class="w-5 h-5 text-bg-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-luxury-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
                     </div>
 
-                    <!-- Messages Container -->
-                    <div id="chatbot-messages" class="h-96 overflow-y-auto p-4 space-y-4" role="log" aria-live="polite" aria-atomic="false">
-                        <!-- Welcome message -->
+                    <!-- Messages -->
+                    <div id="chatbot-messages" class="h-96 overflow-y-auto p-4 space-y-4" role="log" aria-live="polite">
+
+                        <!-- Welcome -->
                         <div class="flex items-start">
-                            <div class="bg-surface-light rounded-lg p-3 max-w-[80%]">
-                                <p class="text-sm">¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?</p>
-                                <span class="text-xs text-text-secondary mt-1 block">${this.getCurrentTime()}</span>
+                            <div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-lg p-3 max-w-[80%] text-white shadow-lg">
+                                <p class="text-sm">¡Hola! Soy tu asistente virtual en The Grand Gallery. ¿En qué puedo ayudarte hoy?</p>
+                                <span class="text-xs text-white/40 mt-1 block">${this.getCurrentTime()}</span>
                             </div>
                         </div>
 
-                        <!-- FAQ Buttons -->
+                        <!-- FAQ -->
                         <div class="space-y-2" id="faq-buttons">
-                            <p class="text-xs text-text-secondary mb-2">Preguntas frecuentes:</p>
-                            <button class="faq-btn w-full text-left bg-surface-light hover:bg-accent-gold/10 border border-accent-gold/30 rounded-lg p-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold" data-question="horarios">
+                            <p class="text-xs text-white/40 mb-2">Preguntas frecuentes:</p>
+
+                            <button class="faq-btn w-full text-left bg-white/5 hover:bg-white/10 border border-luxury-gold/30 rounded-lg p-3 text-sm text-white transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-gold" data-question="horarios">
                                 ¿Cuáles son los horarios?
                             </button>
-                            <button class="faq-btn w-full text-left bg-surface-light hover:bg-accent-gold/10 border border-accent-gold/30 rounded-lg p-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold" data-question="estacionamiento">
+
+                            <button class="faq-btn w-full text-left bg-white/5 hover:bg-white/10 border border-luxury-gold/30 rounded-lg p-3 text-sm text-white transition-colors" data-question="estacionamiento">
                                 ¿Tienen estacionamiento?
                             </button>
-                            <button class="faq-btn w-full text-left bg-surface-light hover:bg-accent-gold/10 border border-accent-gold/30 rounded-lg p-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold" data-question="ubicacion">
+
+                            <button class="faq-btn w-full text-left bg-white/5 hover:bg-white/10 border border-luxury-gold/30 rounded-lg p-3 text-sm text-white transition-colors" data-question="ubicacion">
                                 ¿Dónde están ubicados?
                             </button>
-                            <button class="faq-btn w-full text-left bg-surface-light hover:bg-accent-gold/10 border border-accent-gold/30 rounded-lg p-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold" data-question="ofertas">
+
+                            <button class="faq-btn w-full text-left bg-white/5 hover:bg-white/10 border border-luxury-gold/30 rounded-lg p-3 text-sm text-white transition-colors" data-question="ofertas">
                                 ¿Qué ofertas tienen?
                             </button>
                         </div>
                     </div>
 
-                    <!-- Input Area -->
-                    <div class="p-4 border-t border-surface-light">
+                    <!-- Input -->
+                    <div class="p-4 border-t border-white/10 bg-luxury-gray/90">
                         <form id="chatbot-form" class="flex gap-2">
                             <input 
                                 type="text" 
                                 id="chatbot-input" 
-                                placeholder="Escribe tu mensaje..."
+                                placeholder="Escribí tu mensaje..."
                                 maxlength="500"
-                                class="flex-1 bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold"
-                                aria-label="Mensaje para el asistente virtual">
+                                class="flex-1 bg-white/10 text-white rounded-lg px-4 py-2 placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-luxury-gold"
+                                aria-label="Mensaje">
+
                             <button 
                                 type="submit" 
-                                class="bg-accent-gold text-bg-dark px-4 py-2 rounded-lg hover:bg-accent-gold-light transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold"
+                                class="bg-luxury-gold text-luxury-dark px-4 py-2 rounded-lg hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-luxury-gold"
                                 aria-label="Enviar mensaje">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                                 </svg>
                             </button>
                         </form>
-                        <p class="text-xs text-text-secondary mt-2">Máximo 500 caracteres</p>
+                        <p class="text-xs text-white/40 mt-2">Máximo 500 caracteres</p>
                     </div>
                 </div>
             </div>
+
         `
   }
 

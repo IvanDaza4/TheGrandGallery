@@ -26,6 +26,17 @@
                         'accent-gold-light': '#f0d878',
                         'text-primary': '#f5f5f5',
                         'text-secondary': '#a0a0a0',
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    
                     }
                 }
             }
@@ -194,48 +205,7 @@
     </a>
 
     <!-- Header -->
-    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
-        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
-                    Galería Urbana
-                </a>
-                
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
-                <!-- Desktop menu -->
-                <ul class="hidden lg:flex items-center space-x-8">
-                    <li><a href="../index.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Inicio</a></li>
-                    <li><a href="./servicios.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Servicios</a></li>
-                    <li><a href="./entretenimientos.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Entretenimientos</a></li>
-                    <li><a href="./locales.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Locales</a></li>
-                    <li><a href="./ofertas.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Ofertas</a></li>
-                    <li><a href="./gastronomia.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Gastronomía</a></li>
-                    <li><a href="./contacto.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold">Contacto</a></li>
-                    <li><a href="./equipo.html" class="hover:text-accent-gold transition-colors focus:outline-none focus:text-accent-gold text-accent-gold" aria-current="page">Equipo</a></li>
-                </ul>
-            </div>
-
-            <!-- Mobile menu -->
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
-                <ul class="space-y-4">
-                    <li><a href="../index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
-                    <li><a href="./servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
-                    <li><a href="./entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                    <li><a href="./locales.html" class="block hover:text-accent-gold transition-colors">Locales</a></li>
-                    <li><a href="./ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    <li><a href="./gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
-                    <li><a href="./contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
-                    <li><a href="./equipo.html" class="block hover:text-accent-gold transition-colors text-accent-gold">Equipo</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div id="header-container"></div>
 
     <!-- Main Content -->
     <main id="main-content">
@@ -253,9 +223,9 @@
                     <span class="inline-block px-6 py-2 bg-accent-gold/10 text-accent-gold rounded-full text-sm font-bold mb-8 border border-accent-gold/30 animate-fade-in-scale">
                         CONOCE AL EQUIPO
                     </span>
-                    <h1 class="text-6xl md:text-8xl font-bold mb-8 text-balance animate-slide-in-up">
+                    <h1 class="text-6xl font-heading md:text-8xl font-bold mb-8 text-balance animate-slide-in-up">
                         Mentes Brillantes
-                        <span class="block bg-gradient-to-r from-accent-gold via-accent-gold-light to-accent-gold bg-clip-text text-transparent">
+                        <span class="block font-heading  bg-gradient-to-r from-accent-gold via-accent-gold-light to-accent-gold bg-clip-text text-transparent">
                             Resultados Extraordinarios
                         </span>
                     </h1>
@@ -303,9 +273,9 @@
                         </div>
                         
                         <div class="text-center mb-6">
-                            <h3 class="text-3xl font-bold mb-3">Juan Pérez</h3>
+                            <h3 class="text-3xl font-heading font-bold mb-3">Ivan Daza</h3>
                             <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
-                                Full Stack Developer
+                                Frontend Engineer
                             </span>
                         </div>
 
@@ -325,17 +295,17 @@
                         </div>
 
                         <div class="flex justify-center gap-6">
-                            <a href="#" class="social-link text-2xl" aria-label="GitHub de Juan">
+                            <a href="#" class="social-link text-2xl" aria-label="GitHub de Ivan">
                                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                                 </svg>
                             </a>
-                            <a href="#" class="social-link text-2xl" aria-label="LinkedIn de Juan">
+                            <a href="#" class="social-link text-2xl" aria-label="LinkedIn de Ivan">
                                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                                 </svg>
                             </a>
-                            <a href="#" class="social-link text-2xl" aria-label="Portafolio de Juan">
+                            <a href="#" class="social-link text-2xl" aria-label="Portafolio de Ivan">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                                 </svg>
@@ -354,7 +324,7 @@
                         </div>
                         
                         <div class="text-center mb-6">
-                            <h3 class="text-3xl font-bold mb-3">María González</h3>
+                            <h3 class="text-3xl font-bold font-heading mb-3">María González</h3>
                             <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
                                 Frontend Engineer
                             </span>
@@ -405,7 +375,7 @@
                         </div>
                         
                         <div class="text-center mb-6">
-                            <h3 class="text-3xl font-bold mb-3">Carlos Rodríguez</h3>
+                            <h3 class="text-3xl font-bold font-heading mb-3">Carlos Rodríguez</h3>
                             <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
                                 DevOps Engineer
                             </span>
@@ -456,7 +426,7 @@
                         </div>
                         
                         <div class="text-center mb-6">
-                            <h3 class="text-3xl font-bold mb-3">Ana Martínez</h3>
+                            <h3 class="text-3xl font-bold font-heading mb-3">Ana Martínez</h3>
                             <span class="role-badge px-5 py-2 rounded-full text-sm font-bold text-accent-gold">
                                 UX/UI Designer
                             </span>
@@ -510,9 +480,9 @@
                             <svg class="w-20 h-20 mx-auto mb-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                             </svg>
-                            <h2 class="text-4xl md:text-6xl font-bold mb-8 text-balance">
+                            <h2 class="text-4xl md:text-6xl font-heading font-bold mb-8 text-balance">
                                 Juntos Somos
-                                <span class="block bg-gradient-to-r from-accent-gold to-accent-gold-light bg-clip-text text-transparent">
+                                <span class="block font-heading bg-gradient-to-r from-accent-gold to-accent-gold-light bg-clip-text text-transparent">
                                     Imparables
                                 </span>
                             </h2>
@@ -549,47 +519,25 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
-                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Navegación</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
-                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
-                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Información</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
-                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
-                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
-                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Horarios</h4>
-                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
-                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
-                </div>
-            </div>
-            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
-                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
+    
+    <div id =footer-container></div>>
     <!-- Chatbot -->
     <div id="chatbot-container"></div>
 
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
+    <script>
+        // Cargar footer
+        fetch('/componentes/footer.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
+    <script>
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
+    </script>
 </body>
 </html>

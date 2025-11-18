@@ -1,377 +1,781 @@
+
+
 <!DOCTYPE html>
 <html lang="es-AR" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locales - Galería Urbana</title>
-    <meta name="description" content="Descubre más de 50 locales exclusivos en Galería Urbana. Encuentra moda, tecnología, decoración y más con nuestro buscador inteligente y mapa interactivo.">
+    <meta name="description" content="Descubre más de 50 locales exclusivos en Galería Urbana. Encuentra moda, tecnología, decoración y más con nuestro buscador inteligente.">
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        'bg-dark': '#0a0a0a',
-                        'surface-dark': '#1a1a1a',
-                        'surface-light': '#2a2a2a',
-                        'accent-gold': '#d4af37',
-                        'accent-gold-light': '#f0d878',
-                        'text-primary': '#f5f5f5',
-                        'text-secondary': '#a0a0a0',
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Unified color palette */
+            --color-primary: #D4AF37;
+            --color-primary-light: #F0D878;
+            --color-bg-dark: #0F0F0F;
+            --color-bg-light: #1A1A1A;
+            --color-text-primary: #F5F5F5;
+            --color-text-secondary: #B8B8B8;
+            --color-accent: #2A2A2A;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg-dark);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+        }
+
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Filter Button Styles */
+        .filter-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: var(--color-bg-dark);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Store Card Styles */
+        .store-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .store-card:hover::before {
+            opacity: 1;
+        }
+
+        .store-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Badge Styles */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-open {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22C55E;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        .status-closed {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        /* Category Badge */
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cat-moda { background: rgba(59, 130, 246, 0.2); color: #3B82F6; border: 1px solid rgba(59, 130, 246, 0.4); }
+        .cat-tecnologia { background: rgba(168, 85, 247, 0.2); color: #A855F7; border: 1px solid rgba(168, 85, 247, 0.4); }
+        .cat-decoracion { background: rgba(34, 197, 94, 0.2); color: #22C55E; border: 1px solid rgba(34, 197, 94, 0.4); }
+        .cat-deportes { background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .cat-belleza { background: rgba(236, 72, 153, 0.2); color: #EC4899; border: 1px solid rgba(236, 72, 153, 0.4); }
+        .cat-joyeria { background: rgba(234, 179, 8, 0.2); color: #EAB308; border: 1px solid rgba(234, 179, 8, 0.4); }
+
+        /* Search Bar */
+        .search-input {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            outline: none;
+        }
+
+        /* Floor Filter Buttons */
+        .floor-btn {
+            padding: 8px 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            background: transparent;
+            color: var(--color-text-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .floor-btn:hover {
+            border-color: var(--color-primary);
+        }
+
+        .floor-btn.active {
+            background: var(--color-primary);
+            color: var(--color-bg-dark);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Development Cards */
+        .dev-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(15, 15, 15, 0.9) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dev-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .dev-card:hover::after {
+            opacity: 1;
+        }
+
+        .dev-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--color-primary);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(15, 15, 15, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Map Tooltip */
+        .map-tooltip {
+            background: rgba(15, 15, 15, 0.95);
+            border: 1px solid var(--color-primary);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+
+    </style>
 </head>
-<body class="bg-bg-dark text-text-primary">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
-        Saltar al contenido
-    </a>
-
-    <!-- Header (same as index.html) -->
-    <header class="sticky top-0 z-40 bg-surface-dark/95 backdrop-blur-sm border-b border-surface-light">
-        <nav class="container mx-auto px-4 py-4" aria-label="Navegación principal">
-            <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold text-accent-gold hover:text-accent-gold-light transition-colors">
-                    Galería Urbana
-                </a>
-                
-                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded hover:bg-surface-light focus:outline-none focus:ring-2 focus:ring-accent-gold" aria-label="Abrir menú" aria-expanded="false">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
-                <ul class="hidden lg:flex items-center space-x-8">
-                    <li><a href="../index.html" class="hover:text-accent-gold transition-colors">Inicio</a></li>
-                    <li><a href="./servicios.html" class="hover:text-accent-gold transition-colors">Servicios</a></li>
-                    <li><a href="./entretenimientos.html" class="hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                    <li><a href="./locales.html" class="text-accent-gold" aria-current="page">Locales</a></li>
-                    <li><a href="./ofertas.html" class="hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    <li><a href="./gastronomia.html" class="hover:text-accent-gold transition-colors">Gastronomía</a></li>
-                    <li><a href="./contacto.html" class="hover:text-accent-gold transition-colors">Contacto</a></li>
-                    <li><a href="./equipo.html" class="hover:text-accent-gold transition-colors">Equipo</a></li>
-                </ul>
-            </div>
-
-            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-surface-light pt-4">
-                <ul class="space-y-4">
-                    <li><a href="../index.html" class="block hover:text-accent-gold transition-colors">Inicio</a></li>
-                    <li><a href="./servicios.html" class="block hover:text-accent-gold transition-colors">Servicios</a></li>
-                    <li><a href="./entretenimientos.html" class="block hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                    <li><a href="./locales.html" class="block text-accent-gold">Locales</a></li>
-                    <li><a href="./ofertas.html" class="block hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    <li><a href="./gastronomia.html" class="block hover:text-accent-gold transition-colors">Gastronomía</a></li>
-                    <li><a href="./contacto.html" class="block hover:text-accent-gold transition-colors">Contacto</a></li>
-                    <li><a href="./equipo.html" class="block hover:text-accent-gold transition-colors">Equipo</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+<body>
+    
+    <div id="header-container"></div>
 
     <main id="main-content">
-        <!-- Breadcrumbs -->
-        <nav aria-label="breadcrumb" class="container mx-auto px-4 py-4">
-            <ol class="flex items-center space-x-2 text-sm text-text-secondary">
-                <li><a href="index.html" class="hover:text-accent-gold">Inicio</a></li>
-                <li><span class="mx-2">/</span></li>
-                <li aria-current="page" class="text-text-primary">Locales</li>
-            </ol>
-        </nav>
 
-        <!-- Hero -->
-        <section class="py-16 px-4 bg-surface-dark">
-            <div class="container mx-auto max-w-6xl text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">Nuestros Locales</h1>
-                <p class="text-xl text-text-secondary max-w-3xl mx-auto">
-                    Descubre más de 50 marcas exclusivas. Usa nuestro buscador inteligente o explora el mapa interactivo para encontrar exactamente lo que buscás.
+        <!-- Hero Section -->
+        <section class="hero-section py-24 px-4 mt-20 relative">
+            <div class="container mx-auto max-w-6xl text-center relative z-10">
+                <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-[#D4AF37] via-[#F0D878] to-[#D4AF37] bg-clip-text text-transparent">
+                    Nuestros Locales
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    Descubre más de 50 marcas exclusivas en Galería Urbana
                 </p>
             </div>
         </section>
 
-        <!-- Search and Filters -->
-        <section id="buscador" class="py-12 px-4 bg-bg-dark border-b border-surface-light">
+        <!-- Search and Filters Section -->
+        <section class="py-12 px-4 bg-[#0F0F0F]">
             <div class="container mx-auto max-w-6xl">
-                <div class="bg-surface-dark p-6 rounded-xl">
-                    <!-- Search Bar -->
-                    <div class="mb-6">
-                        <label for="search-input" class="block text-sm font-semibold mb-2">Buscar local</label>
-                        <div class="relative">
-                            <input 
-                                type="search" 
-                                id="search-input" 
-                                placeholder="Ej: zapatería, tecnología, ropa..."
-                                class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-accent-gold"
-                                aria-label="Buscar locales por nombre o categoría">
-                            <svg class="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <!-- Search Bar -->
+                <div class="mb-8">
+                    <div class="relative max-w-2xl mx-auto">
+                        <input 
+                            type="search" 
+                            id="search-input" 
+                            placeholder="Buscar por nombre o categoría..."
+                            class="search-input w-full text-white rounded-xl px-6 py-4 pl-14 text-lg"
+                            aria-label="Buscar locales">
+                        <svg class="w-6 h-6 absolute left-5 top-1/2 transform -translate-y-1/2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="mb-6">
+                    <h3 class="text-sm font-semibold text-gray-400 mb-3 text-center uppercase tracking-wider">Filtrar por Categoría</h3>
+                    <div class="flex flex-wrap gap-3 justify-center" id="category-filters">
+                        <button class="filter-btn active px-6 py-3 rounded-full border-2 border-[#D4AF37] text-white font-semibold flex items-center gap-2" data-category="all">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
                             </svg>
-                        </div>
-                    </div>
-
-                    <!-- Filters -->
-                    <div class="grid md:grid-cols-3 gap-4 mb-4">
-                        <div>
-                            <label for="category-filter" class="block text-sm font-semibold mb-2">Categoría</label>
-                            <select id="category-filter" class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                                <option value="">Todas las categorías</option>
-                                <option value="moda">Moda</option>
-                                <option value="tecnologia">Tecnología</option>
-                                <option value="decoracion">Decoración</option>
-                                <option value="deportes">Deportes</option>
-                                <option value="belleza">Belleza</option>
-                                <option value="joyeria">Joyería</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="floor-filter" class="block text-sm font-semibold mb-2">Piso</label>
-                            <select id="floor-filter" class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                                <option value="">Todos los pisos</option>
-                                <option value="PB">Planta Baja</option>
-                                <option value="1">Primer Piso</option>
-                                <option value="2">Segundo Piso</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="status-filter" class="block text-sm font-semibold mb-2">Estado</label>
-                            <select id="status-filter" class="w-full bg-surface-light text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                                <option value="">Todos</option>
-                                <option value="open">Abiertos ahora</option>
-                                <option value="closed">Cerrados</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Sort and Clear -->
-                    <div class="flex flex-wrap gap-4 items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <label for="sort-select" class="text-sm font-semibold">Ordenar:</label>
-                            <select id="sort-select" class="bg-surface-light text-text-primary rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                                <option value="name-asc">A-Z</option>
-                                <option value="name-desc">Z-A</option>
-                                <option value="status">Abiertos primero</option>
-                            </select>
-                        </div>
-                        <button id="clear-filters" class="text-sm text-accent-gold hover:text-accent-gold-light transition-colors focus:outline-none focus:underline">
-                            Limpiar filtros
+                            Todos
+                        </button>
+                        <button class="filter-btn px-6 py-3 rounded-full border-2 border-gray-600 text-white font-semibold hover:border-[#D4AF37] flex items-center gap-2" data-category="moda">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" clip-rule="evenodd"/>
+                            </svg>
+                            Moda
+                        </button>
+                        <button class="filter-btn px-6 py-3 rounded-full border-2 border-gray-600 text-white font-semibold hover:border-[#D4AF37] flex items-center gap-2" data-category="tecnologia">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                            </svg>
+                            Tecnología
+                        </button>
+                        <button class="filter-btn px-6 py-3 rounded-full border-2 border-gray-600 text-white font-semibold hover:border-[#D4AF37] flex items-center gap-2" data-category="decoracion">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                            </svg>
+                            Decoración
+                        </button>
+                        <button class="filter-btn px-6 py-3 rounded-full border-2 border-gray-600 text-white font-semibold hover:border-[#D4AF37] flex items-center gap-2" data-category="deportes">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z"/>
+                            </svg>
+                            Deportes
+                        </button>
+                        <button class="filter-btn px-6 py-3 rounded-full border-2 border-gray-600 text-white font-semibold hover:border-[#D4AF37] flex items-center gap-2" data-category="belleza">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"/>
+                            </svg>
+                            Belleza
+                        </button>
+                        <button class="filter-btn px-6 py-3 rounded-full border-2 border-gray-600 text-white font-semibold hover:border-[#D4AF37] flex items-center gap-2" data-category="joyeria">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            Joyería
                         </button>
                     </div>
+                </div>
 
-                    <!-- Results count -->
-                    <div id="results-count" class="mt-4 text-sm text-text-secondary">
-                        Mostrando <span id="count-number">0</span> locales
-                    </div>
+                <!-- Results Count -->
+                <div class="text-center text-gray-400 text-sm">
+                    Mostrando <span id="results-count" class="text-[#D4AF37] font-semibold">0</span> locales
                 </div>
             </div>
         </section>
 
         <!-- Stores Grid -->
-        <section class="py-12 px-4">
+        <section class="py-12 px-4 bg-[#0F0F0F]">
             <div class="container mx-auto max-w-6xl">
                 <div id="stores-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Stores will be dynamically inserted here -->
+                    <!-- Stores will be dynamically inserted -->
                 </div>
 
                 <!-- Empty State -->
                 <div id="empty-state" class="hidden text-center py-16">
-                    <svg class="w-24 h-24 mx-auto text-text-secondary mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
                     <h3 class="text-2xl font-bold mb-2">No encontramos locales</h3>
-                    <p class="text-text-secondary mb-4">Intenta con otros filtros o términos de búsqueda</p>
-                    <button id="clear-filters-empty" class="px-6 py-2 bg-accent-gold text-bg-dark rounded-lg hover:bg-accent-gold-light transition-colors focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                        Limpiar filtros
+                    <p class="text-gray-400 mb-6">Intenta con otros términos de búsqueda</p>
+                    <button id="reset-filters" class="px-8 py-3 bg-[#D4AF37] text-[#0F0F0F] rounded-full font-semibold hover:bg-[#F0D878] transition-colors">
+                        Ver todos los locales
                     </button>
-                </div>
-
-                <!-- Loading State -->
-                <div id="loading-state" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-surface-dark rounded-xl p-6 skeleton h-64"></div>
-                    <div class="bg-surface-dark rounded-xl p-6 skeleton h-64"></div>
-                    <div class="bg-surface-dark rounded-xl p-6 skeleton h-64"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Interactive Map -->
-        <section id="mapa" class="py-16 px-4 bg-surface-dark">
+        <!-- NEW: Interactive Map Section with floor filters exclusive to map -->
+        <section id="mapa" class="py-16 px-4 bg-gradient-to-b from-[#0F0F0F] to-[#1A1A1A]">
             <div class="container mx-auto max-w-6xl">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Mapa Interactivo</h2>
-                <p class="text-center text-text-secondary mb-8">Haz clic en los locales para ver más información</p>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold mb-2 text-center">Mapa Interactivo</h2>
+                <p class="text-center text-gray-400 mb-8 text-lg">Filtra por piso y pasa el mouse sobre los locales</p>
+                
+                <!-- Floor Filter ONLY for Map -->
+                <div class="mb-8">
+                    <h3 class="text-sm font-semibold text-gray-400 mb-3 text-center uppercase tracking-wider">Filtrar por Piso</h3>
+                    <div class="flex flex-wrap gap-3 justify-center" id="map-floor-filters">
+                        <button class="floor-btn active" data-floor="all">Todos los Pisos</button>
+                        <button class="floor-btn" data-floor="PB">Planta Baja</button>
+                        <button class="floor-btn" data-floor="1">Primer Piso</button>
+                        <button class="floor-btn" data-floor="2">Segundo Piso</button>
+                    </div>
+                </div>
                 
                 <!-- Map Legend -->
-                <div class="bg-surface-light p-4 rounded-lg mb-6 flex flex-wrap gap-4 justify-center" role="region" aria-label="Leyenda del mapa">
-                    <div class="flex items-center">
-                        <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-                        <span class="text-sm">Moda</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-4 h-4 bg-purple-500 rounded-full mr-2"></div>
-                        <span class="text-sm">Tecnología</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-                        <span class="text-sm">Decoración</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
-                        <span class="text-sm">Deportes</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-4 h-4 bg-pink-500 rounded-full mr-2"></div>
-                        <span class="text-sm">Belleza</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
-                        <span class="text-sm">Joyería</span>
+                <div class="bg-[#1A1A1A] p-6 rounded-xl mb-8 border border-[#D4AF37]/20">
+                    <h3 class="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider text-center">Leyenda de Categorías</h3>
+                    <div class="flex flex-wrap gap-4 justify-center">
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+                            <span class="text-sm">Moda</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-purple-500 rounded-full"></div>
+                            <span class="text-sm">Tecnología</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                            <span class="text-sm">Decoración</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                            <span class="text-sm">Deportes</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-pink-500 rounded-full"></div>
+                            <span class="text-sm">Belleza</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                            <span class="text-sm">Joyería</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Map Container -->
-                <div class="bg-surface-light rounded-xl p-8 relative overflow-hidden" style="min-height: 600px;">
-                    <svg id="mall-map" viewBox="0 0 800 600" class="w-full h-auto" role="img" aria-label="Mapa interactivo de la galería comercial">
-                        <title>Mapa de Galería Urbana</title>
-                        <desc>Mapa interactivo mostrando la ubicación de todos los locales en la galería</desc>
-                        
-                        <!-- Floor layout -->
-                        <rect x="50" y="50" width="700" height="500" fill="#1a1a1a" stroke="#d4af37" stroke-width="2" rx="10"/>
-                        
-                        <!-- Store hotspots will be added dynamically -->
-                        <g id="map-hotspots"></g>
-                    </svg>
+                <div class="bg-[#1A1A1A] rounded-2xl p-8 border-2 border-[#D4AF37]/30 overflow-x-auto" style="min-height: 600px;">
+                    <div class="flex gap-8 justify-center items-start min-w-[900px]" id="mall-map-container">
+                        <!-- Map will be rendered here -->
+                    </div>
+                    
+                    <!-- Tooltip -->
+                    <div id="map-tooltip" class="map-tooltip hidden fixed rounded-xl p-4 pointer-events-none z-50" style="max-width: 280px;">
+                        <div id="tooltip-content"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 px-4 bg-[#0F0F0F]">
+            <div class="container mx-auto max-w-6xl">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold mb-4 text-center">Desarrollos Individuales</h2>
+                <p class="text-center text-gray-400 mb-12 text-lg">Cada miembro del equipo ha desarrollado un mini-sitio para un local específico</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Using original links from the code -->
+                    <a href="https://ivandaza4.github.io/Local_Comercial/" target="_blank" rel="noopener noreferrer" class="dev-card rounded-2xl p-8 block group">
+                        <div class="relative z-10">
+                            <!-- Replaced emoji with SVG icon -->
+                            <svg class="w-12 h-12 mb-4 text-[#D4AF37] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                                <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"/>
+                            </svg>
+                            <h3 class="text-2xl font-heading font-bold mb-3 group-hover:text-[#D4AF37] transition-colors">RaceMax</h3>
+                            <p class="text-gray-400 text-sm mb-2">Desarrollado por</p>
+                            <p class="text-lg font-semibold mb-6">Ivan Daza</p>
+                            <span class="inline-flex items-center text-[#D4AF37] font-semibold group-hover:gap-3 gap-2 transition-all">
+                                Ver sitio web
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
 
-                    <!-- Map Card (appears on hover/click) -->
-                    <div id="map-card" class="hidden absolute bg-surface-dark border border-accent-gold rounded-lg p-4 shadow-2xl z-10 max-w-xs" role="tooltip">
-                        <div id="map-card-content"></div>
+                    <!-- Maintaining original links -->
+                    <a href="individual/local-2.html" target="_blank" rel="noopener noreferrer" class="dev-card rounded-2xl p-8 block group">
+                        <div class="relative z-10">
+                            <svg class="w-12 h-12 mb-4 text-[#D4AF37] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                            </svg>
+                            <h3 class="text-2xl font-heading font-bold mb-3 group-hover:text-[#D4AF37] transition-colors">Tech Hub</h3>
+                            <p class="text-gray-400 text-sm mb-2">Desarrollado por</p>
+                            <p class="text-lg font-semibold mb-6">Juan Pérez</p>
+                            <span class="inline-flex items-center text-[#D4AF37] font-semibold group-hover:gap-3 gap-2 transition-all">
+                                Ver sitio web
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="individual/local-3.html" target="_blank" rel="noopener noreferrer" class="dev-card rounded-2xl p-8 block group">
+                        <div class="relative z-10">
+                            <svg class="w-12 h-12 mb-4 text-[#D4AF37] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+                            </svg>
+                            <h3 class="text-2xl font-heading font-bold mb-3 group-hover:text-[#D4AF37] transition-colors">Deco Home</h3>
+                            <p class="text-gray-400 text-sm mb-2">Desarrollado por</p>
+                            <p class="text-lg font-semibold mb-6">Ana Martínez</p>
+                            <span class="inline-flex items-center text-[#D4AF37] font-semibold group-hover:gap-3 gap-2 transition-all">
+                                Ver sitio web
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="individual/local-4.html" target="_blank" rel="noopener noreferrer" class="dev-card rounded-2xl p-8 block group">
+                        <div class="relative z-10">
+                            <svg class="w-12 h-12 mb-4 text-[#D4AF37] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z"/>
+                            </svg>
+                            <h3 class="text-2xl font-heading font-bold mb-3 group-hover:text-[#D4AF37] transition-colors">Sport Zone</h3>
+                            <p class="text-gray-400 text-sm mb-2">Desarrollado por</p>
+                            <p class="text-lg font-semibold mb-6">Carlos Rodríguez</p>
+                            <span class="inline-flex items-center text-[#D4AF37] font-semibold group-hover:gap-3 gap-2 transition-all">
+                                Ver sitio web
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="individual/local-5.html" target="_blank" rel="noopener noreferrer" class="dev-card rounded-2xl p-8 block group">
+                        <div class="relative z-10">
+                            <svg class="w-12 h-12 mb-4 text-[#D4AF37] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"/>
+                            </svg>
+                            <h3 class="text-2xl font-heading font-bold mb-3 group-hover:text-[#D4AF37] transition-colors">Beauty Studio</h3>
+                            <p class="text-gray-400 text-sm mb-2">Desarrollado por</p>
+                            <p class="text-lg font-semibold mb-6">Laura Fernández</p>
+                            <span class="inline-flex items-center text-[#D4AF37] font-semibold group-hover:gap-3 gap-2 transition-all">
+                                Ver sitio web
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <div id =footer-container></div>>
+
+    <!-- Chatbot -->
+        <div id="chatbot-container"></div>
+    </main>
+
+    <script>
+        const stores = [
+            { id: 1, name: "RaceMax", category: "deportes", floor: "PB", status: "open", description: "Tienda especializada en deportes de motor" },
+            { id: 2, name: "Tech Hub", category: "tecnologia", floor: "1", status: "open", description: "Lo último en tecnología y gadgets" },
+            { id: 3, name: "Deco Home", category: "decoracion", floor: "2", status: "open", description: "Decoración moderna para tu hogar" },
+            { id: 4, name: "Sport Zone", category: "deportes", floor: "PB", status: "closed", description: "Equipamiento deportivo de alta calidad" },
+            { id: 5, name: "Beauty Studio", category: "belleza", floor: "1", status: "open", description: "Productos de belleza y cosmética" },
+            { id: 6, name: "Luxury Jewels", category: "joyeria", floor: "2", status: "open", description: "Joyería exclusiva y elegante" },
+            { id: 7, name: "Fashion Gallery", category: "moda", floor: "1", status: "open", description: "Las últimas tendencias en moda" },
+            { id: 8, name: "Urban Style", category: "moda", floor: "PB", status: "open", description: "Ropa urbana y streetwear" },
+            { id: 9, name: "Home Smart", category: "tecnologia", floor: "2", status: "open", description: "Domótica y hogar inteligente" },
+            { id: 10, name: "Artisan Deco", category: "decoracion", floor: "1", status: "closed", description: "Decoración artesanal única" },
+            { id: 11, name: "Gym Essentials", category: "deportes", floor: "2", status: "open", description: "Todo para tu entrenamiento" },
+            { id: 12, name: "Perfume Palace", category: "belleza", floor: "PB", status: "open", description: "Fragancias exclusivas" },
+            { id: 13, name: "Elegance", category: "moda", floor: "1", status: "open", description: "Moda elegante y sofisticada" },
+            { id: 14, name: "Game Zone", category: "tecnologia", floor: "PB", status: "open", description: "Videojuegos y consolas" },
+            { id: 15, name: "Crystal", category: "joyeria", floor: "1", status: "open", description: "Joyas de cristal premium" },
+            { id: 16, name: "Nail Studio", category: "belleza", floor: "2", status: "closed", description: "Manicura y pedicura" },
+            { id: 17, name: "Runner Pro", category: "deportes", floor: "1", status: "open", description: "Todo para running" },
+            { id: 18, name: "Vintage Home", category: "decoracion", floor: "PB", status: "open", description: "Decoración vintage" }
+        ];
+
+        const categoryColors = {
+            moda: '#3B82F6',
+            tecnologia: '#A855F7',
+            decoracion: '#22C55E',
+            deportes: '#EF4444',
+            belleza: '#EC4899',
+            joyeria: '#EAB308'
+        };
+
+        let currentCategory = 'all';
+        let currentMapFloor = 'all';
+        let searchTerm = '';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderStores();
+            renderMap();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            document.querySelectorAll('#map-floor-filters .floor-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#map-floor-filters .floor-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentMapFloor = this.dataset.floor;
+                    renderMap();
+                });
+            });
+
+            // Category filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    renderStores();
+                });
+            });
+
+            // Search input
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', function(e) {
+                searchTerm = e.target.value.toLowerCase();
+                renderStores();
+            });
+
+            // Reset filters
+            document.getElementById('reset-filters')?.addEventListener('click', function() {
+                currentCategory = 'all';
+                currentMapFloor = 'all';
+                searchTerm = '';
+                document.getElementById('search-input').value = '';
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('#map-floor-filters .floor-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('[data-category="all"]').classList.add('active');
+                document.querySelector('#map-floor-filters [data-floor="all"]').classList.add('active');
+                renderStores();
+                renderMap();
+            });
+        }
+
+        function filterStores() {
+            return stores.filter(store => {
+                const matchesCategory = currentCategory === 'all' || store.category === currentCategory;
+                const matchesSearch = store.name.toLowerCase().includes(searchTerm) || 
+                                     store.category.toLowerCase().includes(searchTerm) ||
+                                     store.description.toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+        }
+
+        function filterMapStores() {
+            // Separate filtering for map - only uses floor filter
+            return stores.filter(store => {
+                return currentMapFloor === 'all' || store.floor === currentMapFloor;
+            });
+        }
+
+        function renderStores() {
+            const filteredStores = filterStores();
+            const grid = document.getElementById('stores-grid');
+            const emptyState = document.getElementById('empty-state');
+            const resultsCount = document.getElementById('results-count');
+
+            resultsCount.textContent = filteredStores.length;
+
+            if (filteredStores.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filteredStores.map(store => `
+                <div class="store-card rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <h3 class="text-xl font-bold">${store.name}</h3>
+                        <span class="status-badge ${store.status === 'open' ? 'status-open' : 'status-closed'}">
+                            ${store.status === 'open' ? '● Abierto' : '● Cerrado'}
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">${store.description}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="category-badge cat-${store.category}">${store.category}</span>
+                        <span class="text-sm text-gray-400">Piso ${store.floor}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMap() {
+            const container = document.getElementById('mall-map-container');
+            const tooltip = document.getElementById('map-tooltip');
+            const tooltipContent = document.getElementById('tooltip-content');
+            const filteredStores = filterMapStores();
+
+            // Divide stores into left and right sides
+            const storesPerSide = Math.ceil(filteredStores.length / 2);
+            const leftStores = filteredStores.slice(0, storesPerSide);
+            const rightStores = filteredStores.slice(storesPerSide);
+
+            container.innerHTML = `
+                <!-- Left side stores -->
+                <div class="grid grid-cols-3 gap-3">
+                    ${leftStores.map(store => `
+                        <div class="map-hotspot bg-[#1A1A1A] border-2 rounded-lg p-4 text-center cursor-pointer hover:scale-110 transition-all"
+                             style="border-color: ${categoryColors[store.category]}; min-width: 100px; min-height: 90px; display: flex; flex-direction: column; justify-content: center;"
+                             data-store-id="${store.id}">
+                            <div class="font-bold text-sm mb-1">${store.name}</div>
+                            <div class="text-xs text-gray-400">${store.category}</div>
+                            <div class="text-xs text-[#D4AF37] mt-1">Piso ${store.floor}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Central Corridor -->
+                <div class="relative" style="width: 100px; min-height: 400px;">
+                    <div class="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] via-[#2A2A2A] to-[#1A1A1A] rounded-lg border-2 border-dashed border-[#D4AF37] flex items-center justify-center">
+                        <div class="text-[#D4AF37] font-bold text-xs transform -rotate-90 whitespace-nowrap flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                            PASILLO CENTRAL
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Keyboard accessible list -->
-                <details class="mt-6 bg-surface-light rounded-lg p-4">
-                    <summary class="cursor-pointer font-semibold hover:text-accent-gold focus:outline-none focus:text-accent-gold">
-                        Ver lista de locales del mapa (accesible por teclado)
-                    </summary>
-                    <ul id="map-list" class="mt-4 space-y-2 max-h-96 overflow-y-auto">
-                        <!-- List items will be added dynamically -->
-                    </ul>
-                </details>
-            </div>
-        </section>
-
-        <!-- Individual Sites Section -->
-        <section class="py-16 px-4">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">Desarrollos Individuales</h2>
-                <p class="text-center text-text-secondary mb-12">Cada miembro del equipo ha desarrollado un mini-sitio para un local específico</p>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <a href="individual/local-1.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                        <h3 class="text-xl font-bold mb-2">Boutique Elegance</h3>
-                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: María González</p>
-                        <span class="text-accent-gold text-sm inline-flex items-center">
-                            Ver sitio
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <a href="individual/local-2.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                        <h3 class="text-xl font-bold mb-2">Tech Hub</h3>
-                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Juan Pérez</p>
-                        <span class="text-accent-gold text-sm inline-flex items-center">
-                            Ver sitio
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <a href="individual/local-3.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                        <h3 class="text-xl font-bold mb-2">Deco Home</h3>
-                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Ana Martínez</p>
-                        <span class="text-accent-gold text-sm inline-flex items-center">
-                            Ver sitio
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <a href="individual/local-4.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                        <h3 class="text-xl font-bold mb-2">Sport Zone</h3>
-                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Carlos Rodríguez</p>
-                        <span class="text-accent-gold text-sm inline-flex items-center">
-                            Ver sitio
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <a href="individual/local-5.html" target="_blank" rel="noopener noreferrer" class="bg-surface-dark rounded-xl p-6 hover:transform hover:scale-105 transition-all card-hover focus:outline-none focus:ring-2 focus:ring-accent-gold">
-                        <h3 class="text-xl font-bold mb-2">Beauty Studio</h3>
-                        <p class="text-text-secondary text-sm mb-4">Desarrollado por: Laura Fernández</p>
-                        <span class="text-accent-gold text-sm inline-flex items-center">
-                            Ver sitio
-                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                        </span>
-                    </a>
+                <!-- Right side stores -->
+                <div class="grid grid-cols-3 gap-3">
+                    ${rightStores.map(store => `
+                        <div class="map-hotspot bg-[#1A1A1A] border-2 rounded-lg p-4 text-center cursor-pointer hover:scale-110 transition-all"
+                             style="border-color: ${categoryColors[store.category]}; min-width: 100px; min-height: 90px; display: flex; flex-direction: column; justify-content: center;"
+                             data-store-id="${store.id}">
+                            <div class="font-bold text-sm mb-1">${store.name}</div>
+                            <div class="text-xs text-gray-400">${store.category}</div>
+                            <div class="text-xs text-[#D4AF37] mt-1">Piso ${store.floor}</div>
+                        </div>
+                    `).join('')}
                 </div>
-            </div>
-        </section>
-    </main>
+            `;
 
-    <!-- Footer -->
-    <footer class="bg-surface-dark border-t border-surface-light py-12 px-4">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold text-accent-gold mb-4">Galería Urbana</h3>
-                    <p class="text-text-secondary text-sm">Tu destino premium de compras y entretenimiento</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Navegación</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="servicios.html" class="text-text-secondary hover:text-accent-gold transition-colors">Servicios</a></li>
-                        <li><a href="entretenimientos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Entretenimientos</a></li>
-                        <li><a href="locales.html" class="text-text-secondary hover:text-accent-gold transition-colors">Locales</a></li>
-                        <li><a href="ofertas.html" class="text-text-secondary hover:text-accent-gold transition-colors">Ofertas</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Información</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="acerca-de.html" class="text-text-secondary hover:text-accent-gold transition-colors">Acerca de</a></li>
-                        <li><a href="equipo.html" class="text-text-secondary hover:text-accent-gold transition-colors">Equipo</a></li>
-                        <li><a href="contacto.html" class="text-text-secondary hover:text-accent-gold transition-colors">Contacto</a></li>
-                        <li><a href="terminos.html" class="text-text-secondary hover:text-accent-gold transition-colors">Términos y Privacidad</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Horarios</h4>
-                    <p class="text-text-secondary text-sm mb-2">Lunes a Sábado: 10:00 - 22:00</p>
-                    <p class="text-text-secondary text-sm">Domingos: 12:00 - 21:00</p>
-                </div>
-            </div>
-            <div class="border-t border-surface-light pt-8 text-center text-text-secondary text-sm">
-                <p>&copy; 2025 Galería Urbana. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
+            // Add hover events
+            container.querySelectorAll('.map-hotspot').forEach(hotspot => {
+                hotspot.addEventListener('mouseenter', function(e) {
+                    const storeId = parseInt(this.dataset.storeId);
+                    const store = stores.find(s => s.id === storeId);
+                    
+                    tooltipContent.innerHTML = `
+                        <h4 class="text-lg font-bold mb-2 text-[#D4AF37]">${store.name}</h4>
+                        <p class="text-sm text-gray-300 mb-2">${store.description}</p>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="category-badge cat-${store.category}">${store.category}</span>
+                            <span class="text-xs text-gray-400">Piso ${store.floor}</span>
+                        </div>
+                        <span class="status-badge ${store.status === 'open' ? 'status-open' : 'status-closed'}">
+                            ${store.status === 'open' ? '● Abierto' : '● Cerrado'}
+                        </span>
+                    `;
+                    
+                    tooltip.classList.remove('hidden');
+                    this.classList.add('active');
+                });
 
-    <div id="chatbot-container"></div>
+                hotspot.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = (e.clientX + 15) + 'px';
+                    tooltip.style.top = (e.clientY + 15) + 'px';
+                });
 
-    <script src="script.js"></script>
-    <script src="locales.js"></script>
-    <script src="chatbot.js"></script>
+                hotspot.addEventListener('mouseleave', function() {
+                    tooltip.classList.add('hidden');
+                    this.classList.remove('active');
+                });
+            });
+        }
+    </script>
+    
+
+    <script src="../script.js"></script>
+    <script src="../chatbot.js"></script>
+    <script>
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
+    </script>
+    <script>
+    // Cargar footer
+    fetch('/componentes/footer.html')
+        .then(res => res.text())
+        .then(html => document.getElementById('footer-container').innerHTML = html);
+</script>
 </body>
 </html>
