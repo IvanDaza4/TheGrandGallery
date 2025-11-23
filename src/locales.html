@@ -562,9 +562,15 @@
                     </div>
 
                     <!-- Tooltip -->
-                    <div id="map-tooltip" class="map-tooltip hidden fixed rounded-xl p-4 pointer-events-none z-50"
-                        style="max-width: 280px;">
-                        <div id="tooltip-content"></div>
+                    <div class="bg-[#1A1A1A] rounded-2xl p-8 border-2 border-[#D4AF37]/30 overflow-x-auto"
+                        style="min-height: 600px;">
+                        <div class="flex gap-8 justify-center items-start min-w-[900px]" id="mall-map-container"></div>
+
+                        <!-- Tooltip -->
+                        <div id="map-tooltip" class="map-tooltip hidden fixed rounded-xl p-4 pointer-events-none z-50"
+                            style="max-width: 280px;">
+                            <div id="tooltip-content"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1030,6 +1036,57 @@
             .then(res => res.text())
             .then(html => document.getElementById('footer-container').innerHTML = html);
     </script>
+
+    <script>
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+
+                // ✅ ACTIVAR EL MENÚ MOBILE DESPUÉS DE CARGAR EL HEADER
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const header = document.getElementById('header');
+
+                if (mobileMenuBtn && mobileMenu) {
+                    mobileMenuBtn.addEventListener('click', () => {
+                        const isActive = mobileMenu.classList.toggle('active');
+                        mobileMenuBtn.classList.toggle('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', isActive);
+                    });
+
+                    // Cerrar al hacer click en links
+                    mobileMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        });
+                    });
+
+                    // Blur al hacer scroll
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 50) {
+                            header.classList.add('header-scrolled');
+                        } else {
+                            header.classList.remove('header-scrolled');
+                        }
+                    });
+
+                    // Reset en desktop
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 1024) {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+    </script>
+
 </body>
 
 </html>

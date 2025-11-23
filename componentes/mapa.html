@@ -1,0 +1,28 @@
+<section id="mapa" class="py-16 px-4 bg-gradient-to-b from-[#0F0F0F] to-[#1A1A1A]">
+    <div class="container mx-auto max-w-6xl">
+        <h2 class="text-4xl md:text-5xl font-heading font-bold mb-2 text-center">Mapa Interactivo</h2>
+        <p class="text-center text-gray-400 mb-8 text-lg">Filtra por piso y pasa el mouse sobre los locales</p>
+
+        <!-- Filtros -->
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-3 justify-center" id="map-floor-filters">
+                <button class="floor-btn active" data-floor="all">Todos</button>
+                <button class="floor-btn" data-floor="PB">Planta Baja</button>
+                <button class="floor-btn" data-floor="1">Primer Piso</button>
+                <button class="floor-btn" data-floor="2">Segundo Piso</button>
+            </div>
+        </div>
+
+        <!-- MAPA -->
+        <div class="bg-[#1A1A1A] rounded-2xl p-8 border-2 border-[#D4AF37]/30 overflow-x-auto"
+            style="min-height: 600px;">
+            <div class="flex gap-8 justify-center items-start min-w-[900px]" id="mall-map-container"></div>
+
+            <!-- Tooltip -->
+            <div id="map-tooltip" class="map-tooltip hidden fixed rounded-xl p-4 pointer-events-none z-50"
+                style="max-width: 280px;">
+                <div id="tooltip-content"></div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas Exclusivas - The Grand Gallery</title>
+    <meta name="description"
+        content="Descubre las mejores ofertas y promociones exclusivas en The Grand Gallery. Código de descuento del 30% de bienvenida.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Toast de "¡Copiado!" */
+        .copy-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1A1A1A;
+            /* luxury-gray */
+            color: #D4AF37;
+            /* luxury-gold */
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            font-size: 14px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.4s ease;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .luxury-gradient {
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 50%, #0F0F0F 100%);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hover-lift {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .modal-overlay {
+            animation: fadeInOverlay 0.3s ease;
+        }
+
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        .code-copy {
+            transition: all 0.3s ease;
+        }
+
+        .code-copy:hover {
+            transform: scale(1.05);
+        }
+
+        .code-copy.copied {
+            background-color: rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-luxury-light text-luxury-dark antialiased">
+
+    <!-- Header Navigation -->
+    <div id="header-container"></div>
+
+    <!-- Modal de Código de Descuento -->
+    <div id="discountModal"
+        class="modal-overlay fixed inset-0 bg-luxury-dark/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div
+            class="modal-content bg-luxury-gray rounded-2xl max-w-md w-full p-8 md:p-12 border border-luxury-gold/30 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+
+            <!-- Botón Cerrar -->
+            <button onclick="closeDiscountModal()"
+                class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-luxury-gold hover:bg-luxury-gold/10 rounded-full transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <div class="text-center mb-8">
+                <span
+                    class="inline-block px-4 py-2 bg-luxury-gold/20 border border-luxury-gold/30 text-luxury-gold text-xs font-bold rounded-full uppercase tracking-widest mb-4">
+                    Bienvenida Exclusiva
+                </span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-luxury-gold mb-3">
+                    30% OFF
+                </h2>
+                <p class="text-white/80 text-sm font-light">
+                    En tu primera compra en The Grand Gallery
+                </p>
+            </div>
+
+            <!-- Código de Descuento -->
+            <div class="bg-luxury-dark/50 border border-luxury-gold/20 rounded-lg p-6 mb-8">
+                <p class="text-white/60 text-xs uppercase tracking-widest mb-3 font-semibold">
+                    Tu Código de Descuento
+                </p>
+                <div class="flex items-center justify-between gap-3">
+                    <code
+                        class="text-luxury-gold text-2xl md:text-3xl font-bold tracking-widest select-all">BIENVENIDA30</code>
+                    <button onclick="copyToClipboard('BIENVENIDA30', this)"
+                        class="code-copy flex-shrink-0 p-3 bg-luxury-gold/20 hover:bg-luxury-gold/30 border border-luxury-gold/50 rounded-lg transition-all">
+                        <svg class="w-5 h-5 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Información y Botón -->
+            <div class="mb-6">
+                <p class="text-white/70 text-sm font-light mb-4">
+                    ✓ Válido para compras mayores a $10.000<br>
+                    ✓ Aplicable en tiendas participantes<br>
+                    ✓ No acumulable con otras promociones
+                </p>
+            </div>
+
+            <button onclick="closeDiscountModal()"
+                class="w-full py-3 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
+                Listo, ¡Voy a Comprar!
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Section - Ofertas -->
+    <section class="relative pt-24 mt-20 pb-16 luxury-gradient">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span
+                    class="inline-block px-4 py-1.5 bg-luxury-gold/20 backdrop-blur-sm border border-luxury-gold/30 text-luxury-gold text-xs font-semibold rounded-full uppercase tracking-widest">
+                    Ofertas Exclusivas
+                </span>
+                <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-4 mt-4 leading-tight">
+                    Promociones<br>
+                    <span class="text-luxury-gold">Imperdibles</span>
+                </h1>
+                <p class="text-lg text-white/80 max-w-2xl mx-auto font-light">
+                    Descuentos especiales en las mejores marcas del centro comercial
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Banner -->
+    <section class="py-4 bg-luxury-dark">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center gap-6 text-center flex-wrap">
+                <span class="text-luxury-gold text-sm font-semibold uppercase tracking-widest">
+                    🎁 Código de Bienvenida
+                </span>
+                <span class="text-white text-2xl md:text-3xl font-heading font-bold">BIENVENIDA30</span>
+                <span class="text-white/80 text-sm font-light">30% de descuento exclusivo</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promociones Principales -->
+    <section id="promociones" class="py-24 luxury-gradient">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                    Promociones en Vigor
+                </h2>
+            </div>
+
+            <div class="max-w-7xl mx-auto space-y-6">
+
+                <!-- Tarjeta principal 3x2 -->
+                <div
+                    class="group max-w-6xl w-full bg-luxury-gray rounded-2xl overflow-hidden shadow-2xl hover-lift cursor-pointer">
+                    <div class="h-2 md:h-3 gold-gradient"></div>
+
+                    <div
+                        class="p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+
+                        <div class="flex-1 w-full md:w-auto">
+                            <span
+                                class="inline-block px-4 py-1.5 md:px-5 md:py-2 bg-luxury-gold text-luxury-dark text-xs md:text-sm font-bold rounded-full mb-4 md:mb-6 uppercase tracking-widest">
+                                OFERTA DESTACADA
+                            </span>
+
+                            <h2
+                                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black text-luxury-gold mb-3 md:mb-4 leading-none">
+                                3X2 EN<br>
+                                PRIMERAS<br>
+                                MARCAS
+                            </h2>
+
+                            <p
+                                class="text-luxury-cream/80 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-6 md:mb-8">
+                                NIKE, ADIDAS, PUMA, REEBOK<br>
+                                Y MUCHAS MARCAS MÁS
+                            </p>
+
+                            <div
+                                class="flex items-center text-luxury-gold text-base md:text-lg font-semibold cursor-pointer">
+                                <span class="mr-2">¡Compra 2 y llévate 3!</span>
+                                <svg class="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="flex-shrink-0 w-full md:w-auto flex justify-center">
+                            <img src="../imgs/zapatillas.png" alt="Zapatillas Deportivas"
+                                class="w-64 sm:w-72 md:w-80 lg:w-96 h-auto object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-300">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Grid con promociones adicionales -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Parking Gratis -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-luxury-gray hover-lift cursor-pointer">
+                        <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+                        <div class="p-6 sm:p-8 h-72 sm:h-80 flex flex-col justify-between">
+                            <div>
+                                <span
+                                    class="inline-block px-3 py-1 bg-luxury-gold text-luxury-dark text-xs font-bold rounded-full mb-4 sm:mb-6 uppercase tracking-wider">
+                                    Nueva
+                                </span>
+                                <h3
+                                    class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white mb-3 sm:mb-4 leading-tight">
+                                    2 Horas Parking Gratis
+                                </h3>
+                                <p class="text-white/70 text-sm font-light leading-relaxed">
+                                    Por compras superiores a $50.000 en tiendas participantes
+                                </p>
+                            </div>
+                            <div
+                                class="flex items-center text-luxury-gold text-sm font-semibold uppercase tracking-wide">
+                                Ver más
+                                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Descuento Extra -->
+                    <div class="group relative overflow-hidden rounded-2xl bg-luxury-gray hover-lift cursor-pointer">
+                        <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+                        <div class="p-6 sm:p-8 h-72 sm:h-80 flex flex-col justify-between">
+                            <div>
+                                <span
+                                    class="inline-block px-3 py-1 bg-luxury-gold text-luxury-dark text-xs font-bold rounded-full mb-4 sm:mb-6 uppercase tracking-wider">
+                                    Hot
+                                </span>
+                                <h3
+                                    class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white mb-3 sm:mb-4 leading-tight">
+                                    15% Descuento Extra
+                                </h3>
+                                <p class="text-white/70 text-sm font-light leading-relaxed">
+                                    En colección de invierno con tu tarjeta del centro comercial
+                                </p>
+                            </div>
+                            <div
+                                class="flex items-center text-luxury-gold text-sm font-semibold uppercase tracking-wide">
+                                Ver más
+                                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Promociones por Marca -->
+    <section class="py-24 bg-luxury-gray border-t border-luxury-gold/30">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span
+                    class="inline-block px-4 py-1.5 bg-luxury-gold text-luxury-dark text-xs font-semibold rounded-full uppercase tracking-widest mb-4 animate-pulse">
+                    Descuentos por Marca
+                </span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-luxury-gold mb-4">
+                    Ofertas Especiales
+                </h2>
+                <p class="text-white/60 text-lg font-light">Haz clic en cualquier marca para obtener tu código de
+                    descuento</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+                <!-- Tarjetas mejoradas con onclick para abrir modal individual -->
+                <!-- Marca 1: Nike -->
+                <div class="brand-card card-animate group bg-luxury-dark rounded-2xl overflow-hidden hover-card border border-luxury-gold/10 cursor-pointer relative"
+                    onclick="openBrandModal('nike', 'NIKE20', '20% Descuento', 'NIKE')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 80%);">
+                    </div>
+
+                    <div class="h-2 gold-gradient"></div>
+
+                    <div class="p-8 relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">NIKE</h3>
+                            <p class="text-luxury-gold text-sm font-semibold uppercase tracking-wider">20% Descuento</p>
+                        </div>
+                        <p class="text-white/70 text-sm font-light mb-6 leading-relaxed">
+                            En toda la línea de calzado deportivo y accesorios. Válido para compras en tienda.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-luxury-gold/60 uppercase tracking-widest">Ver Código</span>
+                            <svg class="w-5 h-5 text-luxury-gold group-hover:translate-x-2 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marca 2: Adidas -->
+                <div class="brand-card card-animate group bg-luxury-dark rounded-2xl overflow-hidden hover-card border border-luxury-gold/10 cursor-pointer relative"
+                    onclick="openBrandModal('adidas', 'ADIDAS25', '25% Descuento', 'ADIDAS')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 80%);">
+                    </div>
+
+                    <div class="h-2 gold-gradient"></div>
+
+                    <div class="p-8 relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">ADIDAS</h3>
+                            <p class="text-luxury-gold text-sm font-semibold uppercase tracking-wider">25% Descuento</p>
+                        </div>
+                        <p class="text-white/70 text-sm font-light mb-6 leading-relaxed">
+                            Colección seleccionada de indumentaria y zapatillas. Ofertas limitadas por stock.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-luxury-gold/60 uppercase tracking-widest">Ver Código</span>
+                            <svg class="w-5 h-5 text-luxury-gold group-hover:translate-x-2 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marca 3: Puma -->
+                <div class="brand-card card-animate group bg-luxury-dark rounded-2xl overflow-hidden hover-card border border-luxury-gold/10 cursor-pointer relative"
+                    onclick="openBrandModal('puma', 'PUMA18', '18% Descuento', 'PUMA')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 80%);">
+                    </div>
+
+                    <div class="h-2 gold-gradient"></div>
+
+                    <div class="p-8 relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">PUMA</h3>
+                            <p class="text-luxury-gold text-sm font-semibold uppercase tracking-wider">18% Descuento</p>
+                        </div>
+                        <p class="text-white/70 text-sm font-light mb-6 leading-relaxed">
+                            Línea completa de deportivos y casual wear. Aplica a modelos de temporada.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-luxury-gold/60 uppercase tracking-widest">Ver Código</span>
+                            <svg class="w-5 h-5 text-luxury-gold group-hover:translate-x-2 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marca 4: Reebok -->
+                <div class="brand-card card-animate group bg-luxury-dark rounded-2xl overflow-hidden hover-card border border-luxury-gold/10 cursor-pointer relative"
+                    onclick="openBrandModal('reebok', 'REEBOK30', '30% Descuento', 'REEBOK')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 80%);">
+                    </div>
+
+                    <div class="h-2 gold-gradient"></div>
+
+                    <div class="p-8 relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">REEBOK</h3>
+                            <p class="text-luxury-gold text-sm font-semibold uppercase tracking-wider">30% Descuento</p>
+                        </div>
+                        <p class="text-white/70 text-sm font-light mb-6 leading-relaxed">
+                            Oferta especial en zapatillas de running y crossfit. Modelos exclusivos con descuento.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-luxury-gold/60 uppercase tracking-widest">Ver Código</span>
+                            <svg class="w-5 h-5 text-luxury-gold group-hover:translate-x-2 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marca 5: Tommy Hilfiger -->
+                <div class="brand-card card-animate group bg-luxury-dark rounded-2xl overflow-hidden hover-card border border-luxury-gold/10 cursor-pointer relative"
+                    onclick="openBrandModal('tommy', 'TOMMY20', '20% Descuento', 'TOMMY HILFIGER')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 80%);">
+                    </div>
+
+                    <div class="h-2 gold-gradient"></div>
+
+                    <div class="p-8 relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">TOMMY HILFIGER</h3>
+                            <p class="text-luxury-gold text-sm font-semibold uppercase tracking-wider">20% Descuento</p>
+                        </div>
+                        <p class="text-white/70 text-sm font-light mb-6 leading-relaxed">
+                            Ropa casual y formal para hombre y mujer. Incluye accesorios y calzado.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-luxury-gold/60 uppercase tracking-widest">Ver Código</span>
+                            <svg class="w-5 h-5 text-luxury-gold group-hover:translate-x-2 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marca 6: Ralph Lauren -->
+                <div class="brand-card card-animate group bg-luxury-dark rounded-2xl overflow-hidden hover-card border border-luxury-gold/10 cursor-pointer relative"
+                    onclick="openBrandModal('ralph', 'RALPH15', '15% Descuento', 'RALPH LAUREN')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style="background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.15) 0%, transparent 80%);">
+                    </div>
+
+                    <div class="h-2 gold-gradient"></div>
+
+                    <div class="p-8 relative z-10">
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-heading font-bold text-white mb-2">RALPH LAUREN</h3>
+                            <p class="text-luxury-gold text-sm font-semibold uppercase tracking-wider">15% Descuento</p>
+                        </div>
+                        <p class="text-white/70 text-sm font-light mb-6 leading-relaxed">
+                            Colección seleccionada de indumentaria premium. Elegancia clásica con descuento.
+                        </p>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-luxury-gold/60 uppercase tracking-widest">Ver Código</span>
+                            <svg class="w-5 h-5 text-luxury-gold group-hover:translate-x-2 transition-transform duration-300"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Modal individual para códigos de descuento por marca -->
+    <div id="brandDiscountModal"
+        class="modal-overlay fixed inset-0 bg-luxury-dark/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div
+            class="modal-content bg-luxury-gray rounded-2xl max-w-md w-full p-8 md:p-12 border border-luxury-gold/30 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 gold-gradient"></div>
+
+            <!-- Botón Cerrar -->
+            <button onclick="closeBrandModal()"
+                class="close-btn absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-luxury-gold hover:bg-luxury-gold/10 rounded-full transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <div class="text-center mb-8">
+                <span
+                    class="inline-block px-4 py-2 bg-luxury-gold/20 border border-luxury-gold/30 text-luxury-gold text-xs font-bold rounded-full uppercase tracking-widest mb-4">
+                    Código Exclusivo
+                </span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-luxury-gold mb-1" id="brandName">
+                    MARCA
+                </h2>
+                <p id="brandDiscount" class="text-white/80 text-base font-semibold mb-3">
+                    20% Descuento
+                </p>
+            </div>
+
+            <!-- Código de Descuento -->
+            <div class="bg-luxury-dark/50 border border-luxury-gold/20 rounded-lg p-6 mb-8">
+                <p class="text-white/60 text-xs uppercase tracking-widest mb-3 font-semibold">
+                    Tu Código Exclusivo
+                </p>
+                <div class="flex items-center justify-between gap-3">
+                    <code class="text-luxury-gold text-2xl md:text-3xl font-bold tracking-widest select-all"
+                        id="brandCode">
+                        CODE123
+                    </code>
+                    <button onclick="copyBrandCode(this)"
+                        class="code-copy flex-shrink-0 p-3 bg-luxury-gold/20 hover:bg-luxury-gold/30 border border-luxury-gold/50 rounded-lg transition-all">
+                        <svg class="w-5 h-5 text-luxury-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Información -->
+            <div class="mb-6 bg-luxury-gold/5 border border-luxury-gold/10 rounded-lg p-4">
+                <p class="text-white/70 text-sm font-light">
+                    ✓ Válido para compras en tienda<br>
+                    ✓ Aplica en promoción vigente<br>
+                    ✓ No acumulable con otras promociones
+                </p>
+            </div>
+
+            <button onclick="closeBrandModal()"
+                class="btn-premium w-full py-3 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
+                Listo, ¡Voy a Comprar!
+            </button>
+        </div>
+    </div>
+
+    <!-- CTA Final -->
+    <section class="py-24 luxury-gradient">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <span
+                    class="inline-block px-4 py-1.5 bg-luxury-gold/20 border border-luxury-gold/30 text-luxury-gold text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
+                    No te lo Pierdas
+                </span>
+                <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
+                    Las Mejores Ofertas<br>
+                    te Esperan
+                </h2>
+                <p class="text-white/70 text-lg font-light mb-8">
+                    Obtén tu código de descuento del 30% y comienza a disfrutar de nuestras promociones exclusivas
+                </p>
+                <button onclick="openDiscountModal()"
+                    class="px-8 py-4 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
+                    Obtener Código de Descuento
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <script>
+        const brandCodes = {
+            nike: { code: 'NIKE20', discount: '20% Descuento', name: 'NIKE' },
+            adidas: { code: 'ADIDAS25', discount: '25% Descuento', name: 'ADIDAS' },
+            puma: { code: 'PUMA18', discount: '18% Descuento', name: 'PUMA' },
+            reebok: { code: 'REEBOK30', discount: '30% Descuento', name: 'REEBOK' },
+            tommy: { code: 'TOMMY20', discount: '20% Descuento', name: 'TOMMY HILFIGER' },
+            ralph: { code: 'RALPH15', discount: '15% Descuento', name: 'RALPH LAUREN' }
+        };
+
+        function openBrandModal(brand, code, discount, name) {
+            const modal = document.getElementById('brandDiscountModal');
+            document.getElementById('brandCode').textContent = code;
+            document.getElementById('brandDiscount').textContent = discount;
+            document.getElementById('brandName').textContent = name;
+
+            modal.classList.remove('hidden');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+        }
+
+        function closeBrandModal() {
+            const modal = document.getElementById('brandDiscountModal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function copyBrandCode(el) {
+            const code = document.getElementById('brandCode').textContent;
+            const toast = document.getElementById('copyToast');
+
+            navigator.clipboard.writeText(code).then(() => {
+                el.classList.add('copied');
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    el.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('brandDiscountModal').addEventListener('click', function (event) {
+            if (event.target === this) {
+                closeBrandModal();
+            }
+        });
+
+        document.querySelectorAll('.brand-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', `${x}%`);
+                card.style.setProperty('--mouse-y', `${y}%`);
+            });
+        });
+    </script>
+    <script>
+        // Modal Functions
+        function closeDiscountModal() {
+            const modal = document.getElementById('discountModal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function openDiscountModal() {
+            const modal = document.getElementById('discountModal');
+            modal.style.display = 'flex';
+            modal.style.opacity = '1';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('discountModal').addEventListener('click', function (event) {
+            if (event.target === this) {
+                closeDiscountModal();
+            }
+        });
+
+        // Copiar código al portapapeles
+        function copyToClipboard(text, el) {
+            navigator.clipboard.writeText(text).then(() => {
+                const button = el;
+                const toast = document.getElementById('copyToast');
+
+                button.classList.add('copied');
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        // Cargar header y footer
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
+
+        fetch('../componentes/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
+    </script>
+
+    <script>
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+
+                // ✅ ACTIVAR EL MENÚ MOBILE DESPUÉS DE CARGAR EL HEADER
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const header = document.getElementById('header');
+
+                if (mobileMenuBtn && mobileMenu) {
+                    mobileMenuBtn.addEventListener('click', () => {
+                        const isActive = mobileMenu.classList.toggle('active');
+                        mobileMenuBtn.classList.toggle('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', isActive);
+                    });
+
+                    // Cerrar al hacer click en links
+                    mobileMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        });
+                    });
+
+                    // Blur al hacer scroll
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 50) {
+                            header.classList.add('header-scrolled');
+                        } else {
+                            header.classList.remove('header-scrolled');
+                        }
+                    });
+
+                    // Reset en desktop
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 1024) {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+    </script>
+
+
+    <!-- Toast de copiado -->
+    <div id="copyToast" class="copy-toast">¡Copiado!</div>
+
+</body>
+
+</html>

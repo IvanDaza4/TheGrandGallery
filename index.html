@@ -116,7 +116,7 @@
 <body class="bg-luxury-light text-luxury-dark antialiased">
 
     <!-- Header Navigation -->
-   <div id="header-container"></div>
+    <div id="header-container"></div>
 
 
 
@@ -364,8 +364,7 @@
                 <!-- Servicio 2 -->
                 <div
                     class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
-                    <img src="/imgs/wifi_free.png" alt="Wi-Fi"
-                        class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/imgs/wifi_free.png" alt="Wi-Fi" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
                     </div>
                     <div class="relative h-full p-6 flex flex-col justify-end">
@@ -376,7 +375,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <!-- Servicio 4 -->
                 <div
@@ -396,8 +395,7 @@
                 <!-- Servicio 5 -->
                 <div
                     class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
-                    <img src="/imgs/cambiador.png" alt="Cambiador"
-                        class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/imgs/cambiador.png" alt="Cambiador" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
                     </div>
                     <div class="relative h-full p-6 flex flex-col justify-end">
@@ -426,8 +424,7 @@
                 <!-- Servicio 7 -->
                 <div
                     class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
-                    <img src="/imgs/medico.png" alt="Centro Médico"
-                        class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/imgs/medico.png" alt="Centro Médico" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
                     </div>
                     <div class="relative h-full p-6 flex flex-col justify-end">
@@ -441,8 +438,7 @@
                 <!-- Servicio 8 -->
                 <div
                     class="service-card group relative overflow-hidden rounded-sm cursor-pointer h-64 hover-lift fade-in">
-                    <img src="/imgs/cajero.png" alt="Cajeros"
-                        class="absolute inset-0 w-full h-full object-cover">
+                    <img src="/imgs/cajero.png" alt="Cajeros" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-luxury-dark/60 to-transparent">
                     </div>
                     <div class="relative h-full p-6 flex flex-col justify-end">
@@ -456,45 +452,7 @@
         </div>
     </section>
 
-    <!-- Locales Section -->
-    <section id="locales" class="py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12 items-center fade-in">
-                <div>
-                    <span
-                        class="inline-block px-4 py-1.5 bg-luxury-dark text-white text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
-                        Descubrí
-                    </span>
-                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-luxury-dark mb-6 leading-tight">
-                        Nuestros Locales
-                    </h2>
-                    <p class="text-luxury-dark/70 text-lg font-light mb-8 leading-relaxed">
-                        Explorá nuestro directorio con más de 100 marcas premium de moda, tecnología, gastronomía y
-                        entretenimiento.
-                    </p>
-                    <div class="flex flex-wrap gap-3 mb-8">
-                        <span
-                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Moda</span>
-                        <span
-                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Tecnología</span>
-                        <span
-                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Gastronomía</span>
-                        <span
-                            class="px-4 py-2 bg-luxury-light border border-luxury-dark/10 text-luxury-dark rounded-sm text-sm font-medium uppercase tracking-wide">Belleza</span>
-                    </div>
-                    <a href="#"
-                        class="inline-block px-8 py-3 bg-luxury-dark text-white text-sm font-bold rounded-sm hover:bg-luxury-gold hover:text-luxury-dark transition-all uppercase tracking-widest">
-                        Ver Directorio
-                    </a>
-                </div>
-                <div class="relative">
-                    <div class="absolute -inset-4 bg-luxury-gold/10 rounded-sm"></div>
-                    <img src="/placeholder.svg?height=500&width=600" alt="Mapa del shopping"
-                        class="relative rounded-sm shadow-2xl w-full">
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- CTA Section -->
     <section class="py-24 luxury-gradient relative overflow-hidden">
@@ -597,7 +555,7 @@
     </section>
 
     <!-- Footer -->
-   <div id =footer-container></div>>
+    <div id=footer-container></div>>
 
     <div id="chatbot-container"></div>
 
@@ -611,11 +569,61 @@
             });
     </script>
     <script>
-    // Cargar footer
-    fetch('./componentes/footer.html')
-        .then(res => res.text())
-        .then(html => document.getElementById('footer-container').innerHTML = html);
-</script>
+        // Cargar footer
+        fetch('./componentes/footer.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
+    <script>
+        fetch('./componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+
+                // ✅ ACTIVAR EL MENÚ MOBILE DESPUÉS DE CARGAR EL HEADER
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const header = document.getElementById('header');
+
+                if (mobileMenuBtn && mobileMenu) {
+                    mobileMenuBtn.addEventListener('click', () => {
+                        const isActive = mobileMenu.classList.toggle('active');
+                        mobileMenuBtn.classList.toggle('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', isActive);
+                    });
+
+                    // Cerrar al hacer click en links
+                    mobileMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        });
+                    });
+
+                    // Blur al hacer scroll
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 50) {
+                            header.classList.add('header-scrolled');
+                        } else {
+                            header.classList.remove('header-scrolled');
+                        }
+                    });
+
+                    // Reset en desktop
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 1024) {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+    </script>
+
 </body>
 
 </html>
