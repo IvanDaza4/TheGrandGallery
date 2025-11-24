@@ -377,18 +377,11 @@ function injectStyles() {
 
       /* Responsive */
       @media (max-width: 480px) {
-        #chatbot-window {
-          width: 100vw;
-          height: 100vh;
-          bottom: 0;
-          right: 0;
-          border-radius: 0;
-        }
-
         #chatbot-toggle {
           display: none;
         }
       }
+
     </style>
   `
 
@@ -420,6 +413,7 @@ class Chatbot {
       <div id="chatbot-window" class="hidden">
         <!-- Header -->
         <div class="chatbot-header">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <div>
             <h2 class="chatbot-header-title">Asistente Virtual</h2>
             <p class="chatbot-header-subtitle">Siempre a tu disposición</p>
