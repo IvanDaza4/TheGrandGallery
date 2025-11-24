@@ -270,7 +270,7 @@ class Chatbot {
       estacionamiento:
         "Sí, contamos con estacionamiento gratuito para clientes con más de 200 espacios disponibles. El acceso es por la calle principal. ¿Te gustaría saber más sobre nuestros servicios?",
       ubicacion:
-        'Estamos ubicados en el corazón de la ciudad, en Av. Principal 1234. Puedes llegar en transporte público (líneas 10, 25, 47) o en auto. <a href="locales.html#mapa" class="text-accent-gold hover:underline">Ver mapa</a>',
+        'Estamos ubicados en el corazón de la ciudad, en Av. Int. Bulrich 345. Puedes llegar en transporte público (líneas 10, 25, 47) o en auto. <a href="locales.html#mapa" class="text-accent-gold hover:underline">Ver mapa</a>',
       ofertas:
         'Tenemos ofertas increíbles esta semana. <a href="ofertas.html" class="text-accent-gold hover:underline">Ver todas las ofertas</a> o dime qué tipo de producto te interesa y te ayudo a encontrar descuentos.',
     }

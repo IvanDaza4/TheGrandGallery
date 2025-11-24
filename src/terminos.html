@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es-AR" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones - The Grand Gallery</title>
+    <meta name="description"
+        content="Términos y condiciones para usuarios y comercios de The Grand Gallery. Información sobre compras, devoluciones, privacidad y responsabilidades.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Términos y Condiciones - The Grand Gallery">
+    <meta property="og:description" content="Términos y condiciones de uso del sitio y del centro comercial virtual The Grand Gallery">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#0a0a0a',
+                        'surface-dark': '#1a1a1a',
+                        'surface-light': '#2a2a2a',
+                        'accent-gold': '#d4af37',
+                        'accent-gold-light': '#f0d878',
+                        'text-primary': '#f5f5f5',
+                        'text-secondary': '#a0a0a0',
+                        'luxury-gold': '#D4AF37',
+                        'luxury-bronze': '#CD7F32',
+                        'luxury-dark': '#0F0F0F',
+                        'luxury-gray': '#1A1A1A',
+                        'luxury-light': '#F8F8F8',
+                        'luxury-cream': '#FFF8E7',
+                    },
+                    fontFamily: {
+                        'heading': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif'],
+
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <style>
+        /* Advanced animations for terms page (kept from original) */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-fade-in-scale {
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in-up {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .team-card {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+
+        .team-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            padding: 2px;
+            background: linear-gradient(135deg, #d4af37, #f0d878, #d4af37);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            /* 🔥 ESTO ARREGLA LOS CLICKS */
+        }
+
+
+        .team-card:hover::before {
+            opacity: 1;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #f0d878, #d4af37, #f0d878);
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+            padding: 4px;
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1a1a1a;
+        }
+
+        .role-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(240, 216, 120, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-tag {
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .social-link {
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.2) rotate(5deg);
+            color: #d4af37;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(42, 42, 42, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .parallax-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            animation: float 8s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-bg-dark text-text-primary font-sans antialiased">
+    <!-- Skip to content -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
+        Saltar al contenido
+    </a>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="relative pt-32 pb-1 px-4 overflow-hidden">
+            <div class="parallax-bg"></div>
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-gradient-to-b from-accent-gold/5 via-bg-dark to-bg-dark"></div>
+                <div class="absolute top-20 left-10 w-96 h-96 bg-accent-gold/10 rounded-full blur-3xl animate-float">
+                </div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-gold/10 rounded-full blur-3xl animate-float"
+                    style="animation-delay: 2s;"></div>
+            </div>
+
+            <div class="container mx-auto max-w-6xl relative z-10">
+                <div class="text-center">
+                    <span
+                        class="inline-block px-6 py-2 bg-accent-gold/10 text-accent-gold rounded-full text-sm font-bold mb-8 border border-accent-gold/30 animate-fade-in-scale">
+                        TÉRMINOS Y CONDICIONES
+                    </span>
+                    <h1 class="text-2xl font-heading md:text-4xl font-bold mb-8 text-balance animate-slide-in-up">
+                        The Grand Gallery
+                        <span
+                            class="block font-heading  bg-gradient-to-r from-accent-gold via-accent-gold-light to-accent-gold bg-clip-text text-transparent">
+                            Uso del sitio y políticas generales
+                        </span>
+                    </h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms Content -->
+        <section class="py-24 px-4">
+            <div class="container mx-auto max-w-5xl">
+                <article class="p-10 rounded-3xl team-card">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-heading font-bold mb-4">1. Introducción</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Estos Términos y Condiciones regulan el acceso y uso del sitio web y de los servicios ofrecidos
+                            por The Grand Gallery (en adelante, "la Plataforma"). Al utilizar la Plataforma, usted acepta
+                            aceptar y cumplir estos términos. Si no está de acuerdo, no utilice la Plataforma.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">2. Uso del sitio</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            El usuario se compromete a utilizar la Plataforma de forma lícita, respetando la normativa
+                            vigente y los derechos de terceros. Queda prohibido introducir contenido falso, engañoso o que
+                            infrinja derechos de propiedad intelectual.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">3. Compras y pagos</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Las compras realizadas en la Plataforma son contratos directos entre el comprador y la tienda
+                            vendedora. The Grand Gallery facilita la conexión y los medios de pago but no actúa como
+                            vendedor directo, salvo que se indique expresamente. Los precios, impuestos y costos de envío
+                            se muestran en el momento de la compra.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">4. Devoluciones y reembolsos</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Las políticas de devoluciones y reembolsos varían según cada comercio. Antes de comprar, revise
+                            las condiciones del vendedor. The Grand Gallery puede ofrecer asistencia para gestionar
+                            reclamos, pero la resolución depende del comercio involucrado.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">5. Cuentas y seguridad</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Algunas funcionalidades requieren que el usuario cree una cuenta. El usuario es responsable de
+                            mantener la confidencialidad de sus credenciales y de las actividades realizadas con su cuenta.
+                            Notifique inmediatamente cualquier uso no autorizado.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">6. Propiedad intelectual</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Todo el contenido de la Plataforma (textos, imágenes, marcas, logotipos, diseño y código) es
+                            propiedad de The Grand Gallery o de terceros con licencia. Queda prohibida su reproducción,
+                            distribución o modificación sin autorización expresa.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">7. Responsabilidad</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            The Grand Gallery se esfuerza por mantener la Plataforma disponible y segura; sin embargo, no
+                            garantiza la ausencia de errores ni la continuidad ininterrumpida del servicio. En la medida
+                            permitida por la ley, no seremos responsables de daños indirectos, pérdidas de datos o lucro
+                            cesante.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">8. Privacidad y protección de datos</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            El tratamiento de datos personales se realiza conforme a nuestra Política de Privacidad.
+                            Al utilizar la Plataforma, usted autoriza el tratamiento de sus datos para las finalidades
+                            indicadas en dicha política. Revise la Política de Privacidad para más detalles.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">9. Modificaciones</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            The Grand Gallery se reserva el derecho de modificar estos Términos y Condiciones en cualquier
+                            momento. Las modificaciones serán publicadas en la Plataforma y entrarán en vigor según lo
+                            indicado en la publicación.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">10. Ley aplicable y jurisdicción</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Estos términos se rigen por la legislación aplicable en la jurisdicción donde opere The Grand
+                            Gallery. Para cualquier controversia, las partes se someten a los tribunales competentes, salvo
+                            que la ley establezca otra cosa.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-heading font-bold mb-4">11. Contacto</h2>
+                        <p class="text-text-secondary leading-relaxed">
+                            Para consultas relacionadas con estos Términos y Condiciones puede contactarnos a través de
+                            la página de contacto o mediante el correo soporte@thegrandgallery.example.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <a href="/index.html"
+                            class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-xl hover:bg-accent-gold-light transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50 shadow-lg shadow-accent-gold/20">
+                            Volver al inicio
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <!-- Chatbot -->
+    <div id="chatbot-container"></div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
+    <script>
+        // Cargar footer
+        fetch('/componentes/footer.html')
+            .then(res => res.text())
+            .then(html => document.getElementById('footer-container').innerHTML = html);
+    </script>
+    <script>
+        fetch('/componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
+    </script>
+    <script>
+        fetch('/componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+
+                // ✅ ACTIVAR EL MENÚ MOBILE DESPUÉS DE CARGAR EL HEADER
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const header = document.getElementById('header');
+
+                if (mobileMenuBtn && mobileMenu) {
+                    mobileMenuBtn.addEventListener('click', () => {
+                        const isActive = mobileMenu.classList.toggle('active');
+                        mobileMenuBtn.classList.toggle('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', isActive);
+                    });
+
+                    // Cerrar al hacer click en links
+                    mobileMenu.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        });
+                    });
+
+                    // Blur al hacer scroll
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 50) {
+                            header.classList.add('header-scrolled');
+                        } else {
+                            header.classList.remove('header-scrolled');
+                        }
+                    });
+
+                    // Reset en desktop
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 1024) {
+                            mobileMenu.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+    </script>
+</body>
+
+</html>
