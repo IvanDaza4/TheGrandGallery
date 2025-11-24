@@ -124,6 +124,27 @@
             background: rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Reduce el tamaño visual del sticky filter en mobile */
+        @media (max-width: 768px) {
+            .filter-btn {
+                min-height: 28px;
+            }
+
+            section.sticky {
+                padding-top: 8px !important;
+                padding-bottom: 8px !important;
+            }
+        }
     </style>
 </head>
 
@@ -205,30 +226,47 @@
                         <h2 class="text-xl font-bold">Filtrar por categoría</h2>
                     </div>
 
-                    <div class="flex flex-wrap items-center justify-center gap-3" id="filter-buttons">
-                        <button
-                            class="filter-btn active px-6 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/30"
-                            data-category="all">
+                    <div class="flex flex-nowrap overflow-x-auto gap-2 no-scrollbar py-1 md:flex-wrap md:justify-center"
+                        id="filter-buttons">
+
+                        <button class="filter-btn 
+                            px-3 py-1.5 text-[11px]
+                            md:px-6 md:py-3 md:text-sm
+                            rounded-full font-medium transition-all
+                            hover:scale-105 focus:outline-none focus:ring-1 
+                            focus:ring-accent-gold border border-accent-gold/20" data-category="all">
                             Todos
                         </button>
-                        <button
-                            class="filter-btn px-3 py-2 text-xsmd:px-6 md:py-3 md:text-sm rounded-full font-semibold transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20"
-                            data-category="rapida">
+                        <button class="filter-btn 
+                            px-3 py-1.5 text-[11px]
+                            md:px-6 md:py-3 md:text-sm
+                            rounded-full font-medium transition-all
+                            hover:scale-105 focus:outline-none focus:ring-1 
+                            focus:ring-accent-gold border border-accent-gold/20" data-category="rapida">
                             🍔 Comida Rápida
                         </button>
-                        <button
-                            class="filter-btn px-3 py-2 text-xsmd:px-6 md:py-3 md:text-sm rounded-full font-semibold transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20"
-                            data-category="saludable">
+                        <button class="filter-btn 
+                            px-3 py-1.5 text-[11px]
+                            md:px-6 md:py-3 md:text-sm
+                            rounded-full font-medium transition-all
+                            hover:scale-105 focus:outline-none focus:ring-1 
+                            focus:ring-accent-gold border border-accent-gold/20" data-category="saludable">
                             🥗 Saludable
                         </button>
-                        <button
-                            class="filter-btn px-3 py-2 text-xsmd:px-6 md:py-3 md:text-sm rounded-full font-semibold transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20"
-                            data-category="internacional">
+                        <button class="filter-btn 
+                            px-3 py-1.5 text-[11px]
+                            md:px-6 md:py-3 md:text-sm
+                            rounded-full font-medium transition-all
+                            hover:scale-105 focus:outline-none focus:ring-1 
+                            focus:ring-accent-gold border border-accent-gold/20" data-category="internacional">
                             🌍 Internacional
                         </button>
-                        <button
-                            class="filter-btn px-3 py-2 text-xsmd:px-6 md:py-3 md:text-sm rounded-full font-semibold transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold border border-accent-gold/20"
-                            data-category="sin-tacc">
+                        <button class="filter-btn 
+                            px-3 py-1.5 text-[11px]
+                            md:px-6 md:py-3 md:text-sm
+                            rounded-full font-medium transition-all
+                            hover:scale-105 focus:outline-none focus:ring-1 
+                            focus:ring-accent-gold border border-accent-gold/20" data-category="sin-tacc">
                             🌾 Sin TACC
                         </button>
                     </div>
@@ -349,8 +387,8 @@
                         data-categories="saludable sin-tacc">
                         <div class="p-8">
                             <div class="logo-container rounded-2xl mb-6 h-32 overflow-hidden border border-yellow-500">
-                                <img src="/imgs/green.png" alt="Logo de Green Garden"
-                                    class="w-full h-full object-cover" loading="lazy" />
+                                <img src="/imgs/green.png" alt="Logo de Green Garden" class="w-full h-full object-cover"
+                                    loading="lazy" />
                             </div>
 
                             <div class="flex items-center justify-between mb-4">
@@ -449,8 +487,8 @@
                         data-categories="internacional sin-tacc">
                         <div class="p-8">
                             <div class="logo-container rounded-2xl mb-6 h-32 overflow-hidden border border-yellow-500">
-                                <img src="/imgs/sushi.png" alt="Logo de Sushi Tokyo"
-                                    class="w-full h-full object-cover" loading="lazy" />
+                                <img src="/imgs/sushi.png" alt="Logo de Sushi Tokyo" class="w-full h-full object-cover"
+                                    loading="lazy" />
                             </div>
 
                             <div class="flex items-center justify-between mb-4">
@@ -1055,8 +1093,8 @@
                         data-categories="internacional">
                         <div class="p-8">
                             <div class="logo-container rounded-2xl mb-6 h-32 overflow-hidden border border-yellow-500">
-                                <img src="/imgs/lebistro.png" alt="Logo de Le Bistro"
-                                    class="w-full h-full object-cover" loading="lazy" />
+                                <img src="/imgs/lebistro.png" alt="Logo de Le Bistro" class="w-full h-full object-cover"
+                                    loading="lazy" />
                             </div>
 
                             <div class="flex items-center justify-between mb-4">
@@ -1201,10 +1239,10 @@
     <div id=footer-container></div>>
 
     <!-- Chatbot -->
-    
+
 
     <script src="/js/script.js"></script>
-    
+
     <script src="/js/gastronomia.js"></script>
     <script>
         // Cargar footer
