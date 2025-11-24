@@ -165,6 +165,11 @@
             transform: scale(1.2);
             filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
         }
+
+        button,
+        a {
+            display: block;
+        }
     </style>
 </head>
 
@@ -479,7 +484,7 @@
                                         <p class="font-semibold mb-1">Dirección</p>
                                         <p class="text-text-secondary">
                                             Av. Int. Bulrich 345<br>
-                                            Córdoba, Argentina
+                                            Buenos Aires, Argentina
                                         </p>
                                     </div>
                                 </div>
@@ -531,10 +536,9 @@
                                 </a>
                                 <a href="#"
                                     class="icon-wrapper w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                    aria-label="Twitter">
-                                    <svg class="w-5 h-5 text-accent-gold" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                                    aria-label="X-Twitter">
+                                    <svg class="w-5 h-5 text-accent-gold" width="24" height="24" fill="currentColor" viewBox="0 0 448 512">
+                                        <path d="M357.2 48L427.8 48 273.6 224.2 455 464 313 464 201.7 318.6 74.5 464 3.8 464 168.7 275.5-5.2 48 140.4 48 240.9 180.9 357.2 48zM332.4 421.8l39.1 0-252.4-333.8-42 0 255.3 333.8z"/>
                                     </svg>
                                 </a>
                             </div>
@@ -706,14 +710,26 @@
                         Cómo llegar
                     </h2>
                     <p class="text-xl text-text-secondary">
-                        Ubicación: Av. Int. Bulrich 345, Córdoba, Argentina
+                        Ubicación: Av. Int. Bulrich 345, Buenos Aires, Argentina
                     </p>
                 </div>
 
                 <div class="bg-surface-dark p-4 rounded-3xl border border-surface-light">
                     <div class="aspect-video rounded-2xl overflow-hidden">
-                        <img src="/imgs/ubicacion.png" alt="Mapa de ubicación de Galería Urbana"
-                            class="w-full h-full object-cover" loading="lazy" />
+                        <div class="relative h-96 md:h-full min-h-96">
+                            <div class="relative h-full">
+                                <iframe
+                                    title="Mapa de The Grand Gallery"
+                                    src="https://maps.google.com/maps?q=Av.%20Int.%20Bullrich%20345,%20C1425%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires&output=embed"
+                                    class="absolute inset-0 w-full h-full"
+                                    style="border:0;"
+                                    allowfullscreen
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <div class="absolute -inset-4 bg-luxury-gold/10 rounded-sm -z-10 pointer-events-none"></div>
+                        </div>
                     </div>
                 </div>
             </div>
