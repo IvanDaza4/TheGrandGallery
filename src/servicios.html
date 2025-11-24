@@ -45,57 +45,110 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(15, 15, 15, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 0;
+            overflow: visible !important;
+        }
+
+        .hero-section {
+            isolation: isolate;
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/styles.css">
+    
 </head>
 
 <body class="bg-bg-dark text-text-primary font-sans antialiased">
-    <!-- Skip to content -->
-    <a href="#main-content"
-        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent-gold focus:text-bg-dark focus:rounded">
-        Saltar al contenido
-    </a>
+
 
     <!-- Header -->
     <div id="header-container"></div>
     <!-- Main Content -->
-    <main id="main-content">
+    <main id="main-content" class="relative overflow-visible isolate">
         <!-- Hero Section -->
-        <section class="relative py-24 px-4 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-accent-gold/5 via-bg-dark to-bg-dark"></div>
-            <div class="container mx-auto max-w-6xl relative z-10">
+        <section class="hero-section relative py-24 px-4 mt-20 overflow-hidden">
+            <!-- Capa de refuerzo del fondo (suave, no interfiere con tu animación) -->
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-accent-gold/10 via-bg-dark to-bg-dark pointer-events-none">
+            </div>
+
+            <div class="container mx-auto max-w-6xl text-center relative z-10">
+
                 <div class="text-center mb-16">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 text-balance">
+                    <h1
+                        class="text-5xl md:text-6xl font-heading font-bold bg-gradient-to-r from-[#D4AF37] via-[#F0D878] to-[#D4AF37] bg-clip-text text-transparent leading-tight">
                         Servicios Premium
-                        <span class="block text-3xl md:text-4xl text-accent-gold mt-4">Para tu comodidad y
-                            disfrute</span>
+                        <span class="block text-2xl md:text-4xl text-accent-gold mt-4 tracking-wide">
+                            Para tu comodidad y disfrute
+                        </span>
                     </h1>
-                    <p class="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto text-pretty">
+
+                    <p class="mt-6 text-lg md:text-2xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
                         Diseñamos cada detalle pensando en vos. Descubrí todos los servicios que hacen de tu visita una
                         experiencia inolvidable.
                     </p>
                 </div>
 
-                <!-- Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                    <div class="bg-surface-light p-6 rounded-xl text-center">
+                <!-- Stats mejoradas -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+
+                    <div
+                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
                         <div class="text-4xl font-bold text-accent-gold mb-2">24/7</div>
-                        <div class="text-sm text-text-secondary">Seguridad</div>
+                        <div class="text-sm text-text-secondary uppercase tracking-wide">Seguridad</div>
                     </div>
-                    <div class="bg-surface-light p-6 rounded-xl text-center">
+
+                    <div
+                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
                         <div class="text-4xl font-bold text-accent-gold mb-2">500+</div>
-                        <div class="text-sm text-text-secondary">Espacios parking</div>
+                        <div class="text-sm text-text-secondary uppercase tracking-wide">Espacios parking</div>
                     </div>
-                    <div class="bg-surface-light p-6 rounded-xl text-center">
+
+                    <div
+                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
                         <div class="text-4xl font-bold text-accent-gold mb-2">Free</div>
-                        <div class="text-sm text-text-secondary">Wi-Fi Alta velocidad</div>
+                        <div class="text-sm text-text-secondary uppercase tracking-wide">Wi-Fi alta velocidad</div>
                     </div>
-                    <div class="bg-surface-light p-6 rounded-xl text-center">
+
+                    <div
+                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
                         <div class="text-4xl font-bold text-accent-gold mb-2">12+</div>
-                        <div class="text-sm text-text-secondary">Servicios premium</div>
+                        <div class="text-sm text-text-secondary uppercase tracking-wide">Servicios premium</div>
                     </div>
+
                 </div>
             </div>
         </section>
+
 
         <!-- Servicios Principales -->
         <section class="py-24 px-4 bg-surface-dark">
