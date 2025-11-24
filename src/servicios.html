@@ -8,13 +8,11 @@
     <meta name="description"
         content="Descubre todos los servicios premium de Galería Urbana: Wi-Fi gratuito, estacionamiento, asistencia al cliente, eventos exclusivos y mucho más.">
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Servicios - Galería Urbana">
     <meta property="og:description"
         content="Servicios premium para una experiencia de compra excepcional: Wi-Fi, estacionamiento, asistencia personalizada y eventos exclusivos.">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -39,7 +37,30 @@
                     fontFamily: {
                         'heading': ['Playfair Display', 'serif'],
                         'body': ['Inter', 'sans-serif'],
-
+                    },
+                    boxShadow: {
+                        'elevated': '0 28px 80px rgba(0,0,0,0.85)',
+                        'soft-gold': '0 0 0 1px rgba(212,175,55,0.18), 0 22px 60px rgba(0,0,0,0.9)',
+                    },
+                    keyframes: {
+                        'float-slow': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'fade-up': {
+                            '0%': { opacity: 0, transform: 'translateY(24px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        'glow-pulse': {
+                            '0%, 100%': { opacity: 0.5, boxShadow: '0 0 0 0 rgba(212,175,55,0.45)' },
+                            '50%': { opacity: 1, boxShadow: '0 0 40px 0 rgba(212,175,55,0.6)' },
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float-slow 10s ease-in-out infinite',
+                        'fade-up': 'fade-up 0.8s ease-out both',
+                        'fade-up-delayed': 'fade-up 1s ease-out both',
+                        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
                     }
                 }
             }
@@ -55,12 +76,26 @@
             height: 200%;
             background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
+            opacity: 0.8;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -40%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at bottom left, rgba(240, 216, 120, 0.15), transparent 65%);
+            opacity: 0.7;
+            filter: blur(2px);
         }
 
         .hero-section {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(15, 15, 15, 0.95) 100%);
+            background: radial-gradient(circle at top left, rgba(26, 26, 26, 0.98) 0%, rgba(10, 10, 10, 0.98) 55%, rgba(0, 0, 0, 1) 100%);
             position: relative;
             overflow: hidden;
+            isolation: isolate;
         }
 
         @keyframes rotate {
@@ -79,393 +114,481 @@
             overflow: visible !important;
         }
 
-        .hero-section {
-            isolation: isolate;
+        .section-decor {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-decor::before {
+            content: '';
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at top left, rgba(212, 175, 55, 0.08), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(240, 216, 120, 0.06), transparent 60%);
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card-spotlight {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-spotlight::before {
+            content: '';
+            position: absolute;
+            width: 260%;
+            height: 260%;
+            top: -80%;
+            left: -80%;
+            background: radial-gradient(circle at center, rgba(240, 216, 120, 0.18), transparent 55%);
+            opacity: 0;
+            transform: translate3d(-20%, 0, 0);
+            transition: opacity 0.5s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .card-spotlight:hover::before {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .stat-pill {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .stat-pill:hover::before {
+            opacity: 1;
+        }
+
+        .luxury-divider {
+            position: relative;
+        }
+
+        .luxury-divider::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -1.5rem;
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(212, 175, 55, 0.3) 15%,
+                    rgba(240, 216, 120, 0.8) 50%,
+                    rgba(212, 175, 55, 0.3) 85%,
+                    transparent 100%);
+            margin-bottom: 10px ;
+        }
+
+        .cta-glow {
+            position: relative;
+        }
+
+        .cta-glow::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg,
+                    rgba(212, 175, 55, 0.4),
+                    rgba(240, 216, 120, 0.05),
+                    rgba(212, 175, 55, 0.5));
+            opacity: 0.35;
+            z-index: -1;
         }
     </style>
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
-<body class="bg-bg-dark text-text-primary font-sans antialiased">
+<body class="bg-bg-dark text-text-primary font-body antialiased selection:bg-accent-gold/20 selection:text-text-primary">
 
-
-    <!-- Header -->
     <div id="header-container"></div>
-    <!-- Main Content -->
+
     <main id="main-content" class="relative overflow-visible isolate">
-        <!-- Hero Section -->
-        <section class="hero-section relative py-24 px-4 mt-20 overflow-hidden">
-            <!-- Capa de refuerzo del fondo (suave, no interfiere con tu animación) -->
+        <!-- HERO -->
+        <section class="hero-section relative py-24 lg:py-28 px-4 mt-20 overflow-hidden">
             <div
-                class="absolute inset-0 bg-gradient-to-br from-accent-gold/10 via-bg-dark to-bg-dark pointer-events-none">
+                class="absolute inset-0 bg-gradient-to-br from-accent-gold/10 via-bg-dark/90 to-bg-dark pointer-events-none mix-blend-screen">
             </div>
 
             <div class="container mx-auto max-w-6xl text-center relative z-10">
-
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 md:mb-20 motion-safe:animate-fade-up">
                     <h1
-                        class="text-5xl md:text-6xl font-heading font-bold bg-gradient-to-r from-[#D4AF37] via-[#F0D878] to-[#D4AF37] bg-clip-text text-transparent leading-tight">
+                        class="text-5xl md:text-6xl font-heading font-bold bg-gradient-to-r from-[#D4AF37] via-[#F0D878] to-[#D4AF37] bg-clip-text text-transparent leading-tight tracking-tight">
                         Servicios Premium
-                        <span class="block text-2xl md:text-4xl text-accent-gold mt-4 tracking-wide">
+                        <span
+                            class="block text-2xl md:text-4xl text-accent-gold mt-4 tracking-[0.2em] md:tracking-[0.35em] uppercase">
                             Para tu comodidad y disfrute
                         </span>
                     </h1>
 
-                    <p class="mt-6 text-lg md:text-2xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+                    <p
+                        class="mt-6 text-lg md:text-2xl text-text-secondary/90 max-w-3xl mx-auto leading-relaxed md:leading-relaxed">
                         Diseñamos cada detalle pensando en vos. Descubrí todos los servicios que hacen de tu visita una
                         experiencia inolvidable.
                     </p>
                 </div>
 
-                <!-- Stats mejoradas -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6 max-w-5xl mx-auto motion-safe:animate-fade-up-delayed">
                     <div
-                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
-                        <div class="text-4xl font-bold text-accent-gold mb-2">24/7</div>
-                        <div class="text-sm text-text-secondary uppercase tracking-wide">Seguridad</div>
+                        class="stat-pill bg-gradient-to-br from-surface-light/90 via-surface-light/40 to-bg-dark/70 backdrop-blur-lg border border-accent-gold/25 p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-soft-gold transition-all duration-500 ease-out">
+                        <div class="text-4xl font-bold text-accent-gold mb-1 md:mb-2 tracking-tight">24/7</div>
+                        <div class="text-xs md:text-sm text-text-secondary uppercase tracking-[0.2em]">Seguridad</div>
                     </div>
 
                     <div
-                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
-                        <div class="text-4xl font-bold text-accent-gold mb-2">500+</div>
-                        <div class="text-sm text-text-secondary uppercase tracking-wide">Espacios parking</div>
+                        class="stat-pill bg-gradient-to-br from-surface-light/90 via-surface-light/40 to-bg-dark/70 backdrop-blur-lg border border-accent-gold/25 p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-soft-gold transition-all duration-500 ease-out delay-75">
+                        <div class="text-4xl font-bold text-accent-gold mb-1 md:mb-2 tracking-tight">500+</div>
+                        <div class="text-xs md:text-sm text-text-secondary uppercase tracking-[0.2em]">Espacios parking
+                        </div>
                     </div>
 
                     <div
-                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
-                        <div class="text-4xl font-bold text-accent-gold mb-2">Free</div>
-                        <div class="text-sm text-text-secondary uppercase tracking-wide">Wi-Fi alta velocidad</div>
+                        class="stat-pill bg-gradient-to-br from-surface-light/90 via-surface-light/40 to-bg-dark/70 backdrop-blur-lg border border-accent-gold/25 p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-soft-gold transition-all duration-500 ease-out delay-150">
+                        <div class="text-4xl font-bold text-accent-gold mb-1 md:mb-2 tracking-tight">Free</div>
+                        <div class="text-xs md:text-sm text-text-secondary uppercase tracking-[0.2em]">Wi-Fi alta
+                            velocidad</div>
                     </div>
 
                     <div
-                        class="bg-surface-light/60 backdrop-blur-md border border-accent-gold/20 p-6 rounded-2xl text-center hover:scale-105 transition">
-                        <div class="text-4xl font-bold text-accent-gold mb-2">12+</div>
-                        <div class="text-sm text-text-secondary uppercase tracking-wide">Servicios premium</div>
+                        class="stat-pill bg-gradient-to-br from-surface-light/90 via-surface-light/40 to-bg-dark/70 backdrop-blur-lg border border-accent-gold/25 p-6 rounded-2xl text-center hover:-translate-y-2 hover:shadow-soft-gold transition-all duration-500 ease-out delay-200">
+                        <div class="text-4xl font-bold text-accent-gold mb-1 md:mb-2 tracking-tight">12+</div>
+                        <div class="text-xs md:text-sm text-text-secondary uppercase tracking-[0.2em]">Servicios
+                            premium</div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-
-        <!-- Servicios Principales -->
-        <section class="py-24 px-4 bg-surface-dark">
-            <div class="container mx-auto max-w-7xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Servicios Esenciales</h2>
+        <!-- SERVICIOS ESENCIALES -->
+        <section class="py-24 px-4 bg-surface-dark section-decor">
+            <div class="container mx-auto max-w-7xl relative z-10">
+                <h2
+                    class="text-4xl md:text-5xl font-heading font-bold text-center mb-4 luxury-divider tracking-tight">
+                    Servicios Esenciales
+                </h2>
                 <p class="text-center text-text-secondary mb-16 text-lg max-w-2xl mx-auto">
                     Todo lo que necesitás para disfrutar de una experiencia de compra sin preocupaciones
                 </p>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Servicio 1: Wi-Fi -->
-                    <div class="bg-surface-light p-8 rounded-xl card-hover group">
+                    <div
+                        class="bg-surface-light/95 p-8 rounded-2xl card-spotlight group border border-accent-gold/15 hover:border-accent-gold/45 shadow-lg hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:-rotate-[0.4deg]">
                         <div
-                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors">
-                            <svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500 group-hover:scale-105">
+                            <svg class="w-10 h-10 text-accent-gold motion-safe:animate-float-slow" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Wi-Fi Gratuito</h3>
-                        <p class="text-text-secondary mb-4">
-                            Conexión de alta velocidad en toda la galería. Mantente conectado mientras comprás, trabajás
-                            o te relajás.
+                        <h3 class="text-2xl font-semibold mb-3 tracking-tight">Wi-Fi Gratuito</h3>
+                        <p class="text-text-secondary mb-4 leading-relaxed">
+                            Conexión de alta velocidad en toda la galería. Mantente conectado mientras comprás,
+                            trabajás o te relajás.
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Velocidad hasta 100 Mbps
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Cobertura total
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Red segura y protegida
                             </li>
                         </ul>
-                        <div class="mt-6 pt-6 border-t border-surface-dark">
-                            <p class="text-sm text-accent-gold font-semibold">Red: GaleriaUrbana_Free</p>
+                        <div class="mt-6 pt-6 border-t border-surface-dark/60">
+                            <p class="text-sm text-accent-gold font-semibold tracking-wide">
+                                Red: GaleriaUrbana_Free
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Servicio 2: Estacionamiento -->
-                    <div class="bg-surface-light p-8 rounded-xl card-hover group">
+                    <div
+                        class="bg-surface-light/95 p-8 rounded-2xl card-spotlight group border border-accent-gold/15 hover:border-accent-gold/45 shadow-lg hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:rotate-[0.3deg]">
                         <div
-                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors">
-                            <svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500 group-hover:scale-105">
+                            <svg class="w-10 h-10 text-accent-gold motion-safe:animate-float-slow" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Estacionamiento Cubierto</h3>
-                        <p class="text-text-secondary mb-4">
+                        <h3 class="text-2xl font-semibold mb-3 tracking-tight">Estacionamiento Cubierto</h3>
+                        <p class="text-text-secondary mb-4 leading-relaxed">
                             Más de 500 espacios con seguridad 24/7, cámaras de vigilancia y acceso rápido a todos los
                             pisos de la galería.
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Primera hora gratis
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Espacios para discapacitados
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Estaciones de carga eléctrica
                             </li>
                         </ul>
-                        <div class="mt-6 pt-6 border-t border-surface-dark">
-                            <p class="text-sm text-accent-gold font-semibold">Tarifa: $200/hora después de 1ra hora</p>
+                        <div class="mt-6 pt-6 border-t border-surface-dark/60">
+                            <p class="text-sm text-accent-gold font-semibold tracking-wide">
+                                Tarifa: $200/hora después de 1ra hora
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Servicio 3: Información -->
-                    <div class="bg-surface-light p-8 rounded-xl card-hover group">
+                    <div
+                        class="bg-surface-light/95 p-8 rounded-2xl card-spotlight group border border-accent-gold/15 hover:border-accent-gold/45 shadow-lg hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3">
                         <div
-                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors">
-                            <svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500 group-hover:scale-105">
+                            <svg class="w-10 h-10 text-accent-gold motion-safe:animate-float-slow" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Centro de Información</h3>
-                        <p class="text-text-secondary mb-4">
+                        <h3 class="text-2xl font-semibold mb-3 tracking-tight">
+                            Centro de Información / Atención al Cliente
+                        </h3>
+                        <p class="text-text-secondary mb-4 leading-relaxed">
                             Nuestro equipo está disponible para ayudarte con cualquier consulta, desde ubicación de
                             locales hasta recomendaciones.
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Personal multilingüe
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Mapas interactivos digitales
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Asistencia especial disponible
                             </li>
                         </ul>
-                        <div class="mt-6 pt-6 border-t border-surface-dark">
-                            <p class="text-sm text-accent-gold font-semibold">Ubicación: Planta Baja - Hall Central</p>
+                        <div class="mt-6 pt-6 border-t border-surface-dark/60">
+                            <p class="text-sm text-accent-gold font-semibold tracking-wide">
+                                Ubicación: Planta Baja - Hall Central
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Servicio 4: Seguridad -->
-                    <div class="bg-surface-light p-8 rounded-xl card-hover group">
+                    <div
+                        class="bg-surface-light/95 p-8 rounded-2xl card-spotlight group border border-accent-gold/15 hover:border-accent-gold/45 shadow-lg hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:-rotate-[0.5deg]">
                         <div
-                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors">
-                            <svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500 group-hover:scale-105">
+                            <svg class="w-10 h-10 text-accent-gold motion-safe:animate-float-slow" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Seguridad 24/7</h3>
-                        <p class="text-text-secondary mb-4">
-                            Tu seguridad es nuestra prioridad. Contamos con personal de seguridad profesional y
-                            tecnología de vigilancia de última generación.
+                        <h3 class="text-2xl font-semibold mb-3 tracking-tight">Guardarropa</h3>
+                        <p class="text-text-secondary mb-4 leading-relaxed">
+                            Servicio de custodia para tus pertenencias y compras, para que disfrutes de tu visita sin
+                            cargas.
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Vigilancia permanente
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Cámaras en todas las áreas
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Respuesta inmediata
+                                Espacio seguro y climatizado
                             </li>
                         </ul>
-                        <div class="mt-6 pt-6 border-t border-surface-dark">
-                            <p class="text-sm text-accent-gold font-semibold">Emergencias: 0800-GALERIA (425-3742)</p>
+                        <div class="mt-6 pt-6 border-t border-surface-dark/60">
+                            <p class="text-sm text-accent-gold font-semibold tracking-wide">
+                                Ubicación: Hall Central - Nivel 1
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Servicio 5: Accesibilidad -->
-                    <div class="bg-surface-light p-8 rounded-xl card-hover group">
+                    <div
+                        class="bg-surface-light/95 p-8 rounded-2xl card-spotlight group border border-accent-gold/15 hover:border-accent-gold/45 shadow-lg hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:rotate-[0.4deg]">
                         <div
-                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors">
-                            <svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500 group-hover:scale-105">
+                            <svg class="w-10 h-10 text-accent-gold motion-safe:animate-float-slow" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6M7 11h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v2a2 2 0 002 2zm10 0v4a2 2 0 01-2 2h-6a2 2 0 01-2-2v-4">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Accesibilidad Universal</h3>
-                        <p class="text-text-secondary mb-4">
-                            Diseñado para todos. Rampas, ascensores adaptados, sanitarios especiales y asistencia
-                            personalizada para personas con movilidad reducida.
+                        <h3 class="text-2xl font-semibold mb-3 tracking-tight">Cambiador de Bebés</h3>
+                        <p class="text-text-secondary mb-4 leading-relaxed">
+                            Espacio privado y cómodo con cambiadores modernos en sanitarios familiares. Se prioriza la
+                            accesibilidad para todos.
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Rampas en todos los accesos
+                                Sanitarios familiares
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Ascensores adaptados
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Sanitarios adaptados
+                                Acceso rápido y limpio
                             </li>
                         </ul>
-                        <div class="mt-6 pt-6 border-t border-surface-dark">
-                            <p class="text-sm text-accent-gold font-semibold">Cumplimiento normas WCAG 2.1 AA</p>
+                        <div class="mt-6 pt-6 border-t border-surface-dark/60">
+                            <p class="text-sm text-accent-gold font-semibold tracking-wide">
+                                Ubicación: Todos los pisos
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Servicio 6: Guardería -->
-                    <div class="bg-surface-light p-8 rounded-xl card-hover group">
+                    <div
+                        class="bg-surface-light/95 p-8 rounded-2xl card-spotlight group border border-accent-gold/15 hover:border-accent-gold/45 shadow-lg hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3">
                         <div
-                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors">
-                            <svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            class="w-20 h-20 bg-accent-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500 group-hover:scale-105">
+                            <svg class="w-10 h-10 text-accent-gold motion-safe:animate-float-slow" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2V5a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
                                 </path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">Guardería Infantil</h3>
-                        <p class="text-text-secondary mb-4">
-                            Espacio seguro y divertido para que los más pequeños jueguen mientras vos disfrutás de tus
-                            compras. Personal capacitado y actividades recreativas.
+                        <h3 class="text-2xl font-semibold mb-3 tracking-tight">Cajeros Automáticos</h3>
+                        <p class="text-text-secondary mb-4 leading-relaxed">
+                            Cajeros automáticos de Red Link disponibles en todos los pisos para tu comodidad.
                         </p>
                         <ul class="space-y-2 text-sm text-text-secondary">
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Personal certificado
+                                Red Link disponible
                             </li>
                             <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-accent-gold mr-2 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Edades 3-10 años
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-accent-gold mr-2" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Actividades educativas
+                                Ubicación estratégica
                             </li>
                         </ul>
-                        <div class="mt-6 pt-6 border-t border-surface-dark">
-                            <p class="text-sm text-accent-gold font-semibold">Máximo 2 horas - Reserva previa</p>
+                        <div class="mt-6 pt-6 border-t border-surface-dark/60">
+                            <p class="text-sm text-accent-gold font-semibold tracking-wide">
+                                Ubicación: Planta Baja y Primer Piso
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Servicios Premium -->
-        <section class="py-24 px-4">
-            <div class="container mx-auto max-w-7xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Experiencias Premium</h2>
-                <p class="text-center text-text-secondary mb-16 text-lg max-w-2xl mx-auto">
+        <!-- EXPERIENCIAS PREMIUM -->
+        <section class="py-24 px-4 section-decor">
+            <div class="container mx-auto max-w-7xl relative z-10">
+                <h2
+                    class="text-4xl md:text-5xl font-heading font-bold text-center mb-4 luxury-divider tracking-tight">
+                    Experiencias Premium
+                </h2>
+                <p class="text-center text-text-secondary mt-3 mb-16 text-lg max-w-2xl mx-auto">
                     Servicios exclusivos que elevan tu experiencia al siguiente nivel
                 </p>
 
                 <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Personal Shopper -->
-                    <div class="relative bg-surface-light p-10 rounded-2xl overflow-hidden group">
+                    <div
+                        class="relative bg-surface-light/95 p-10 rounded-2xl overflow-hidden group border border-accent-gold/15 hover:border-accent-gold/45 hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:-rotate-[0.6deg]">
                         <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500">
+                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700 ease-out blur-[1px]">
                         </div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500">
                                 <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-bold mb-4">Personal Shopper</h3>
-                            <p class="text-text-secondary mb-6 text-lg">
+                            <h3 class="text-3xl font-semibold mb-4 tracking-tight">Personal Shopper</h3>
+                            <p class="text-text-secondary mb-6 text-lg leading-relaxed">
                                 Asesoramiento personalizado para encontrar exactamente lo que buscás. Nuestros expertos
                                 conocen cada local y tendencia.
                             </p>
@@ -496,10 +619,10 @@
                                 </li>
                             </ul>
                             <a href="contacto.html"
-                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors font-semibold text-lg group">
+                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-all duration-300 font-semibold text-lg group">
                                 Reservar ahora
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1.5 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7"></path>
                                 </svg>
@@ -507,13 +630,14 @@
                         </div>
                     </div>
 
-                    <!-- VIP Lounge -->
-                    <div class="relative bg-surface-light p-10 rounded-2xl overflow-hidden group">
+                    <div
+                        class="relative bg-surface-light/95 p-10 rounded-2xl overflow-hidden group border border-accent-gold/15 hover:border-accent-gold/45 hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:rotate-[0.4deg]">
                         <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500">
+                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700 ease-out blur-[1px]">
                         </div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500">
                                 <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -521,8 +645,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-bold mb-4">VIP Lounge</h3>
-                            <p class="text-text-secondary mb-6 text-lg">
+                            <h3 class="text-3xl font-semibold mb-4 tracking-tight">VIP Lounge</h3>
+                            <p class="text-text-secondary mb-6 text-lg leading-relaxed">
                                 Espacio exclusivo para relajarte con amenities premium, bebidas gourmet y conexión de
                                 alta velocidad.
                             </p>
@@ -553,24 +677,27 @@
                                 </li>
                             </ul>
                             <a href="contacto.html"
-                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors font-semibold text-lg group">
+                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-all duration-300 font-semibold text-lg group">
                                 Conocer más
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1.5 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Gift Cards -->
-                    <div class="relative bg-surface-light p-10 rounded-2xl overflow-hidden group">
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div
+                        class="relative bg-surface-light/95 p-10 rounded-2xl overflow-hidden group border border-accent-gold/15 hover:border-accent-gold/45 hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:-rotate-[0.3deg]">
                         <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500">
+                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700 ease-out blur-[1px]">
                         </div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500">
                                 <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -578,8 +705,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-bold mb-4">Gift Cards</h3>
-                            <p class="text-text-secondary mb-6 text-lg">
+                            <h3 class="text-3xl font-semibold mb-4 tracking-tight">Gift Cards</h3>
+                            <p class="text-text-secondary mb-6 text-lg leading-relaxed">
                                 El regalo perfecto para cualquier ocasión. Válidas en más de 50 locales de la galería.
                             </p>
                             <ul class="space-y-3 mb-8">
@@ -609,10 +736,10 @@
                                 </li>
                             </ul>
                             <a href="contacto.html"
-                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors font-semibold text-lg group">
+                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-all duration-300 font-semibold text-lg group">
                                 Comprar ahora
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1.5 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7"></path>
                                 </svg>
@@ -620,13 +747,14 @@
                         </div>
                     </div>
 
-                    <!-- Eventos Privados -->
-                    <div class="relative bg-surface-light p-10 rounded-2xl overflow-hidden group">
+                    <div
+                        class="relative bg-surface-light/95 p-10 rounded-2xl overflow-hidden group border border-accent-gold/15 hover:border-accent-gold/45 hover:shadow-elevated transition-all duration-500 ease-out hover:-translate-y-3 hover:rotate-[0.5deg]">
                         <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500">
+                            class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700 ease-out blur-[1px]">
                         </div>
                         <div class="relative z-10">
-                            <div class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-accent-gold/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent-gold/20 transition-colors duration-500">
                                 <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -634,8 +762,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-3xl font-bold mb-4">Eventos Privados</h3>
-                            <p class="text-text-secondary mb-6 text-lg">
+                            <h3 class="text-3xl font-semibold mb-4 tracking-tight">Eventos Privados</h3>
+                            <p class="text-text-secondary mb-6 text-lg leading-relaxed">
                                 Organiza tu evento corporativo, lanzamiento de producto o celebración en nuestros
                                 espacios premium.
                             </p>
@@ -666,10 +794,10 @@
                                 </li>
                             </ul>
                             <a href="contacto.html"
-                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-colors font-semibold text-lg group">
+                                class="inline-flex items-center text-accent-gold hover:text-accent-gold-light transition-all duration-300 font-semibold text-lg group">
                                 Solicitar cotización
-                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1.5 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7"></path>
                                 </svg>
@@ -680,154 +808,159 @@
             </div>
         </section>
 
-        <!-- Servicios Adicionales -->
-        <section class="py-24 px-4 bg-surface-dark">
-            <div class="container mx-auto max-w-6xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Servicios Adicionales</h2>
+        <!-- SERVICIOS ADICIONALES -->
+        <section class="py-24 px-4 bg-surface-dark section-decor">
+            <div class="container mx-auto max-w-6xl relative z-10">
+                <h2
+                    class="text-4xl md:text-5xl font-heading font-bold text-center mb-4 luxury-divider tracking-tight">
+                    Servicios Adicionales
+                </h2>
                 <p class="text-center text-text-secondary mb-16 text-lg max-w-2xl mx-auto">
                     Más comodidades que hacen de tu visita algo especial
                 </p>
 
                 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- ATM -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2V5a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Cajeros Automáticos</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Cajeros Automáticos</h4>
                         <p class="text-sm text-text-secondary">Red Link en todos los pisos</p>
                     </div>
 
-                    <!-- Sanitarios -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Sanitarios Premium</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Sanitarios Premium</h4>
                         <p class="text-sm text-text-secondary">Limpios y modernos en cada piso</p>
                     </div>
 
-                    <!-- Cambiadores -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Cambiadores</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Cambiadores</h4>
                         <p class="text-sm text-text-secondary">En sanitarios familiares</p>
                     </div>
 
-                    <!-- Lactario -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Sala de Lactancia</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Sala de Lectura</h4>
                         <p class="text-sm text-text-secondary">Espacio privado y cómodo</p>
                     </div>
 
-                    <!-- Carga Móvil -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Estaciones de Carga</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Estaciones de Carga</h4>
                         <p class="text-sm text-text-secondary">USB y wireless gratuitos</p>
                     </div>
 
-                    <!-- Correo -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Correo Argentino</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Correo Argentino</h4>
                         <p class="text-sm text-text-secondary">Envíos y pagos</p>
                     </div>
 
-                    <!-- Farmacia -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Farmacia</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Farmacia</h4>
                         <p class="text-sm text-text-secondary">Atención 10:00 - 22:00</p>
                     </div>
 
-                    <!-- Pet Friendly -->
                     <div
-                        class="bg-surface-light p-6 rounded-xl text-center hover:bg-surface-light/80 transition-colors">
+                        class="bg-surface-light/95 p-6 rounded-xl text-center border border-accent-gold/10 hover:border-accent-gold/40 hover:shadow-soft-gold transition-all duration-400 hover:-translate-y-2 card-spotlight">
                         <div
                             class="w-14 h-14 bg-accent-gold/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-7 h-7 text-accent-gold" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5">
                                 </path>
                             </svg>
                         </div>
-                        <h4 class="font-semibold mb-2">Pet Friendly</h4>
+                        <h4 class="font-semibold mb-1 tracking-tight">Pet Friendly</h4>
                         <p class="text-sm text-text-secondary">Mascotas bienvenidas con correa</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
+        <!-- CTA FINAL -->
         <section class="py-24 px-4">
             <div class="container mx-auto max-w-4xl">
                 <div
-                    class="bg-gradient-to-br from-accent-gold/10 via-surface-light to-surface-dark p-12 md:p-16 rounded-2xl text-center border border-accent-gold/20">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">¿Tenés alguna consulta?</h2>
-                    <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
+                    class="bg-gradient-to-br from-accent-gold/12 via-surface-light/95 to-surface-dark/95 p-12 md:p-16 rounded-2xl text-center border border-accent-gold/30 shadow-soft-gold cta-glow">
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight">
+                        ¿Tenés alguna consulta?
+                    </h2>
+                    <p class="text-xl text-text-secondary mb-8 max-w-2xl mx-auto leading-relaxed">
                         Nuestro equipo está disponible para ayudarte con cualquier pregunta sobre nuestros servicios
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="contacto.html"
-                            class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-lg hover:bg-accent-gold-light transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
+                            class="inline-block px-8 py-4 bg-accent-gold text-bg-dark font-semibold rounded-lg hover:bg-accent-gold-light transition-all transform hover:-translate-y-1 hover:shadow-soft-gold focus:outline-none focus:ring-4 focus:ring-accent-gold/50 motion-safe:animate-glow-pulse">
                             Contactanos
                         </a>
                         <a href="locales.html"
-                            class="inline-block px-8 py-4 bg-surface-dark text-text-primary font-semibold rounded-lg hover:bg-surface-light transition-all border border-accent-gold/30 focus:outline-none focus:ring-4 focus:ring-accent-gold/50">
+                            class="inline-block px-8 py-4 bg-surface-dark text-text-primary font-semibold rounded-lg hover:bg-surface-light transition-all transform hover:-translate-y-1 hover:shadow-soft-gold border border-accent-gold/40 focus:outline-none focus:ring-4 focus:ring-accent-gold/40">
                             Ver locales
                         </a>
                     </div>
@@ -836,25 +969,15 @@
         </section>
     </main>
 
-    <div id=footer-container></div>>
+    <div id=footer-container></div>
 
-    <!-- Chatbot -->
-    <div id="chatbot-container"></div>
 
     <script src="/js/script.js"></script>
-    <script src="/js/chatbot.js"></script>
     <script>
         // Cargar footer
         fetch('/componentes/footer.html')
             .then(res => res.text())
             .then(html => document.getElementById('footer-container').innerHTML = html);
-    </script>
-    <script>
-        fetch('/componentes/header.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('header-container').innerHTML = html;
-            });
     </script>
     <script>
         fetch('/componentes/header.html')
