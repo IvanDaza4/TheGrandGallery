@@ -148,7 +148,7 @@
                     class="inline-block px-8 py-4 bg-luxury-gold text-luxury-dark text-sm font-bold rounded-sm hover:bg-white transition-all uppercase tracking-widest">
                     Explorar Promociones
                 </a>
-                <a href="#locales"
+                <a href="/src/locales.html"
                     class="inline-block px-8 py-4 bg-transparent border-2 border-white text-white text-sm font-bold rounded-sm hover:bg-white hover:text-luxury-dark transition-all uppercase tracking-widest">
                     Ver Locales
                 </a>
@@ -503,7 +503,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold text-lg text-luxury-dark mb-1">Dirección</h4>
-                                <p class="text-luxury-dark/70">Av. Principal 1234, Buenos Aires</p>
+                                <p class="text-luxury-dark/70">Av. Int. Bulrich 345, Buenos Aires</p>
                             </div>
                         </div>
 
@@ -539,23 +539,33 @@
                         </div>
                     </div>
 
-                    <a href="#"
+                    <a href="https://maps.app.goo.gl/nKrsqnoFcpfM7jEf8"
+                        target="_blank"
                         class="inline-block px-8 py-3 bg-luxury-dark text-white text-sm font-bold rounded-sm hover:bg-luxury-gold hover:text-luxury-dark transition-all uppercase tracking-widest">
                         Ver en Google Maps
                     </a>
                 </div>
 
                 <div class="relative h-96 md:h-full min-h-96">
-                    <div class="absolute -inset-4 bg-luxury-gold/10 rounded-sm"></div>
-                    <img src="/imgs/ubicacion.png" alt="Mapa de ubicación"
-                        class="relative rounded-sm shadow-2xl w-full h-full object-cover">
+                    <div class="relative h-full">
+                        <iframe
+                            title="Mapa de The Grand Gallery"
+                            src="https://maps.google.com/maps?q=Av.%20Int.%20Bullrich%20345,%20C1425%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires&output=embed"
+                            class="absolute inset-0 w-full h-full"
+                            style="border:0;"
+                            allowfullscreen
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                <div class="absolute -inset-4 bg-luxury-gold/10 rounded-sm -z-10 pointer-events-none"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <div id=footer-container></div>>
+    <div id="footer-container"></div>
 
     <div id="chatbot-container"></div>
 

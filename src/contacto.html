@@ -44,7 +44,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
     <style>
         @keyframes fadeInUp {
             from {
@@ -478,7 +478,7 @@
                                     <div>
                                         <p class="font-semibold mb-1">Dirección</p>
                                         <p class="text-text-secondary">
-                                            Av. Principal 1234<br>
+                                            Av. Int. Bulrich 345<br>
                                             Córdoba, Argentina
                                         </p>
                                     </div>
@@ -706,13 +706,13 @@
                         Cómo llegar
                     </h2>
                     <p class="text-xl text-text-secondary">
-                        Ubicación: Av. Principal 1234, Córdoba, Argentina
+                        Ubicación: Av. Int. Bulrich 345, Córdoba, Argentina
                     </p>
                 </div>
 
                 <div class="bg-surface-dark p-4 rounded-3xl border border-surface-light">
                     <div class="aspect-video rounded-2xl overflow-hidden">
-                        <img src="../imgs/ubicacion.png" alt="Mapa de ubicación de Galería Urbana"
+                        <img src="/imgs/ubicacion.png" alt="Mapa de ubicación de Galería Urbana"
                             class="w-full h-full object-cover" loading="lazy" />
                     </div>
                 </div>
@@ -725,8 +725,8 @@
     <!-- Chatbot -->
     <div id="chatbot-container"></div>
 
-    <script src="script.js"></script>
-    <script src="chatbot.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
     <script>
         // Cargar footer
         fetch('/componentes/footer.html')
@@ -814,14 +814,14 @@
         document.getElementById('fecha-perdida').setAttribute('max', today);
     </script>
     <script>
-        fetch('../componentes/header.html')
+        fetch('/componentes/header.html')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-container').innerHTML = html;
             });
     </script>
     <script>
-        fetch('../componentes/header.html')
+        fetch('/componentes/header.html')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-container').innerHTML = html;

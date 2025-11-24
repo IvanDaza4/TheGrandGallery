@@ -647,6 +647,44 @@
 
                         </div>
                     </a>
+
+                    <!-- Coffeee - Café Literario -->
+                    <a href="https://maxipe.github.io/coffeee/" target="_blank"
+                        rel="noopener noreferrer" class="dev-card rounded-2xl p-8 block group">
+                        <div class="relative z-10">
+                            <svg class="w-12 h-12 mb-4 text-[#D4AF37] group-hover:scale-110 transition-transform"
+                                fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="8" stroke-linecap="round" stroke-linejoin="round"></circle>
+
+                                <path d="M12 7v9.5"></path>
+                                <path d="M15 10.5 A 5 6 0 0 1 9 10.5"></path>
+                                <path d="M16.5 12 A 7 8 0 0 1 7.5 12"></path>
+                                <path d="M17 14.5 A 5.9 5 0 0 1 7 14.5"></path>
+                                <path d="M21.45 12 23.2 12"></path>
+                                <path d="M10 6.49228C11.4641 3.87207 16.5 4.78701 16.5 8.57245C16.5 11.1012 14.3333 13.4103 10 15.5C5.66667 13.4103 3.5 11.1012 3.5 8.57245C3.5 4.78701 8.5359 3.87207 10 6.49228Z"
+                                    transform="translate(7.8 3.8) scale(0.42)" fill="currentColor"
+                                />
+                            </svg>
+                            <h3
+                                class="text-2xl font-heading font-bold mb-3 group-hover:text-[#D4AF37] transition-colors">
+                                Coffeee
+                            </h3>
+
+                            <p class="text-gray-400 text-sm mb-2">Desarrollado por</p>
+                            <p class="text-lg font-semibold mb-6">Maximiliano Peña</p>
+
+                            <span
+                                class="inline-flex items-center text-[#D4AF37] font-semibold group-hover:gap-3 gap-2 transition-all">
+                                Ver sitio web
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+
+                        </div>
+                    </a>
                 </div>
 
             </div>
@@ -659,11 +697,9 @@
 
     <script>
         const stores = [
-            // ==== SIN PISO ESPECÍFICO ====
-            { id: 1, name: "RaceMax", category: "deportes", floor: "PB", status: "open", description: "Tienda especializada en deportes de motor" },
-            { id: 2, name: "El Templo", category: "moda", floor: "PB", status: "open", description: "Camisetas retro y actuales de la historia de futbol" },
-
             // ==== PLANTA BAJA (PB) - 10 LOCALES ====
+            { id: 1, name: "RaceMax", category: "deportes", floor: "PB", status: "open", description: "Tienda especializada en deportes de motor", link: "https://ivandaza4.github.io/Local_Comercial/" },
+            { id: 2, name: "El Templo", category: "moda", floor: "PB", status: "open", description: "Camisetas retro y actuales de la historia de futbol", link: "https://agustinm9.github.io/Trabajo-pr-ctico-Obligatorio-2-Enetraga/" },
             { id: 3, name: "Zara", category: "moda", floor: "PB", status: "open", description: "Ropa y accesorios de moda" },
             { id: 4, name: "Nike Store", category: "deportes", floor: "PB", status: "open", description: "Indumentaria y calzado deportivo" },
             { id: 5, name: "Adidas", category: "deportes", floor: "PB", status: "open", description: "Ropa y zapatillas deportivas" },
@@ -686,18 +722,16 @@
             { id: 22, name: "The North Face", category: "deportes", floor: "1", status: "open", description: "Ropa y equipamiento outdoor" },
 
             // ==== SEGUNDO PISO (2) - 10 LOCALES (COMIDA + EXTRAS) ====
-            { id: 23, name: "BurgerKing", category: "comida", floor: "2", status: "open", description: "Hamburguesas y combos" },
+            { id: 23, name: "Coffeee", category: "comida", floor: "2", status: "open", description: "Café Literario", link: "https://maxipe.github.io/coffeee/" },
             { id: 24, name: "Green Garden", category: "comida", floor: "2", status: "open", description: "Comida saludable y ensaladas" },
             { id: 25, name: "Sushi Tokyo", category: "comida", floor: "2", status: "open", description: "Sushi y comida japonesa" },
             { id: 26, name: "Pizzeria Napolitana", category: "comida", floor: "2", status: "open", description: "Pizzas artesanales" },
             { id: 27, name: "Taco Loco", category: "comida", floor: "2", status: "open", description: "Comida mexicana" },
             { id: 28, name: "Parrilla Don Juan", category: "comida", floor: "2", status: "open", description: "Carnes a la parrilla" },
-            { id: 29, name: "Coffee & Co", category: "comida", floor: "2", status: "open", description: "Café de especialidad y pastelería" },
+            { id: 29, name: "Flat & White", category: "comida", floor: "2", status: "open", description: "Café de especialidad y pastelería" },
             { id: 30, name: "Thai House", category: "comida", floor: "2", status: "open", description: "Comida tailandesa" },
             { id: 31, name: "Le Bistro", category: "comida", floor: "2", status: "open", description: "Cocina francesa" },
-
-            // Local extra para completar los 10 en el piso 2
-            { id: 32, name: "Starbucks", category: "comida", floor: "2", status: "open", description: "Café y bebidas especiales" }
+            { id: 32, name: "BurgerKing", category: "comida", floor: "2", status: "open", description: "Hamburguesas y combos" },
         ];
 
         const categoryColors = {
@@ -896,8 +930,8 @@
 
                 <div class="relative" style="width: 200px; border: 3px dashed #D4AF37; border-radius: 8px; background: rgba(212, 175, 55, 0.05); display: flex; align-items: center; justify-content: center;">
                     <div class="text-center">
-                        <div class="text-[#D4AF37] font-bold text-lg" style="writing-mode: vertical-rl; transform: rotate(180deg);">PASILLO</div>
-                        <div class="text-[#D4AF37] font-bold text-lg mt-4" style="writing-mode: vertical-rl; transform: rotate(180deg);">CENTRAL</div>
+                        <div class="text-[#D4AF37] font-bold text-lg" style="writing-mode: vertical-rl; transform: rotate(180deg);">CENTRAL</div>
+                        <div class="text-[#D4AF37] font-bold text-lg mt-4" style="writing-mode: vertical-rl; transform: rotate(180deg);">PASILLO</div>
                     </div>
                 </div>
 
@@ -918,21 +952,29 @@
     `;
 
             container.querySelectorAll('.map-hotspot').forEach(hotspot => {
+                hotspot.addEventListener('click', function () {
+                    const storeId = parseInt(this.dataset.storeId);
+                    const store = stores.find(s => s.id === storeId);
+                    if (store.link) {
+                        window.open(store.link, '_blank');
+                    }
+                });
+
                 hotspot.addEventListener('mouseenter', function (e) {
                     const storeId = parseInt(this.dataset.storeId);
                     const store = stores.find(s => s.id === storeId);
 
                     tooltipContent.innerHTML = `
-                <h4 class="text-lg font-bold mb-2 text-[#D4AF37]">${store.name}</h4>
-                <p class="text-sm text-gray-300 mb-2">${store.description}</p>
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="category-badge cat-${store.category}">${store.category}</span>
-                    <span class="text-xs text-gray-400">Piso ${store.floor}</span>
-                </div>
-                <span class="status-badge ${store.status === 'open' ? 'status-open' : 'status-closed'}">
-                    ${store.status === 'open' ? '● Abierto' : '● Cerrado'}
-                </span>
-            `;
+                        <h4 class="text-lg font-bold mb-2 text-[#D4AF37]">${store.name}</h4>
+                        <p class="text-sm text-gray-300 mb-2">${store.description}</p>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="category-badge cat-${store.category}">${store.category}</span>
+                            <span class="text-xs text-gray-400">Piso ${store.floor}</span>
+                        </div>
+                        <span class="status-badge ${store.status === 'open' ? 'status-open' : 'status-closed'}">
+                            ${store.status === 'open' ? '● Abierto' : '● Cerrado'}
+                        </span>
+                    `;
 
                     tooltip.classList.remove('hidden');
                 });
@@ -987,6 +1029,7 @@
 
         // Add hover events
         container.querySelectorAll('.map-hotspot').forEach(hotspot => {
+
             hotspot.addEventListener('mouseenter', function (e) {
                 const storeId = parseInt(this.dataset.storeId);
                 const store = stores.find(s => s.id === storeId);
@@ -1021,10 +1064,10 @@
     </script>
 
 
-    <script src="../script.js"></script>
-    <script src="../chatbot.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
     <script>
-        fetch('../componentes/header.html')
+        fetch('/componentes/header.html')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-container').innerHTML = html;
@@ -1038,7 +1081,7 @@
     </script>
 
     <script>
-        fetch('../componentes/header.html')
+        fetch('/componentes/header.html')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-container').innerHTML = html;

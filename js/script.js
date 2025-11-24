@@ -1,3 +1,4 @@
+
 // Mobile menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -10,10 +11,12 @@ if (mobileMenuBtn && mobileMenu) {
     });
 }
 
-const header = document.getElementById('header');
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (!header) return;
+
     const currentScroll = window.pageYOffset;
     
     if (currentScroll > 100) {

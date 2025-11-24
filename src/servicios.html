@@ -83,8 +83,7 @@
             isolation: isolate;
         }
     </style>
-    <link rel="stylesheet" href="../styles/styles.css">
-    
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
 <body class="bg-bg-dark text-text-primary font-sans antialiased">
@@ -842,8 +841,8 @@
     <!-- Chatbot -->
     <div id="chatbot-container"></div>
 
-    <script src="script.js"></script>
-    <script src="chatbot.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/chatbot.js"></script>
     <script>
         // Cargar footer
         fetch('/componentes/footer.html')
@@ -851,14 +850,14 @@
             .then(html => document.getElementById('footer-container').innerHTML = html);
     </script>
     <script>
-        fetch('../componentes/header.html')
+        fetch('/componentes/header.html')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-container').innerHTML = html;
             });
     </script>
     <script>
-        fetch('../componentes/header.html')
+        fetch('/componentes/header.html')
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-container').innerHTML = html;
