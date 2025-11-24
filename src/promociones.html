@@ -691,7 +691,13 @@
 
     <!-- Footer -->
     <div id="footer-container"></div>
-
+    <script>
+        fetch('../componentes/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-container').innerHTML = html;
+            });
+    </script>
     <script>
         const brandCodes = {
             nike: { code: 'NIKE20', discount: '20% Descuento', name: 'NIKE' },
